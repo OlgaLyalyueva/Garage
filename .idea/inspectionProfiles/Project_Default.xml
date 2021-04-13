@@ -1,0 +1,36 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="14">
+            <item index="0" class="java.lang.String" itemvalue="psycopg2-binary" />
+            <item index="1" class="java.lang.String" itemvalue="flake8" />
+            <item index="2" class="java.lang.String" itemvalue="pytest" />
+            <item index="3" class="java.lang.String" itemvalue="atomicwrites" />
+            <item index="4" class="java.lang.String" itemvalue="more-itertools" />
+            <item index="5" class="java.lang.String" itemvalue="pluggy" />
+            <item index="6" class="java.lang.String" itemvalue="py" />
+            <item index="7" class="java.lang.String" itemvalue="wcwidth" />
+            <item index="8" class="java.lang.String" itemvalue="packaging" />
+            <item index="9" class="java.lang.String" itemvalue="chromedriver" />
+            <item index="10" class="java.lang.String" itemvalue="attrs" />
+            <item index="11" class="java.lang.String" itemvalue="selenium" />
+            <item index="12" class="java.lang.String" itemvalue="urllib3" />
+            <item index="13" class="java.lang.String" itemvalue="pyparsing" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="dz14.hw14.Fractions.__truediv__" />
+          <option value="models.User.query" />
+          <option value="apprestapi.serializers.__all__" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
