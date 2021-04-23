@@ -23,7 +23,7 @@ class TestCarModel(TestCase):
             email='test@test.test'
             )
         Car.objects.create(
-            producer='Марка',
+            producer='Suzuki',
             model='Модель',
             year=2006,
             transmission='автомат',
@@ -38,13 +38,12 @@ class TestCarModel(TestCase):
 
     def test_name_label(self):
         car = Car.objects.get(id=1)
-        producer_label = car._meta.get_field('producer').verbose_name
-        model_labl = car._meta.get_field('model').verbose_name
-        self.assertEqual(car.__str__(), str(producer_label + ', ' + model_labl))
+        name_label = car._meta.verbose_name
+        self.assertEqual(name_label, 'Автомобиль')
 
     def test_check_save_date_in_db(self):
         car = Car.objects.get(id=1)
-        self.assertEqual(car.producer, 'Марка')
+        self.assertEqual(car.producer, 'Suzuki')
         self.assertEqual(car.model, 'Модель')
         self.assertEqual(car.year, 2006)
         self.assertEqual(car.transmission, 'автомат')
@@ -68,3 +67,25 @@ class TestCarModel(TestCase):
         self.assertTrue(car.body, 'Седан')
         self.assertTrue(car.engine, '2.2')
         self.assertTrue(car.price, 9300)
+
+
+class TestBody(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        Body.objects.create(
+            name='Купе'
+        )
+
+    def test_check_body_instance(self):
+        body = Body.objects.get(name='Купе')
+        self.assertTrue(isinstance(body, Body))
+
+    def test_name_label(self):
+        body = Body.objects.get(id=1)
+        name_label = body._meta.verbose_name
+        self.assertEqual(name_label, 'Тип кузова')
+
+    def test_check_save_date_in_db(self):
+        body = Body.objects.get(id=1)
+        self.assertEqual(body.name, 'Купе')
