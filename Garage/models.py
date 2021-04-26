@@ -64,7 +64,7 @@ class Engine(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Двигатель'
+        verbose_name = 'Тип двигателя'
         verbose_name_plural = 'Типы двигателей'
 
 
@@ -72,7 +72,7 @@ class Insurance(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
     type = models.CharField(max_length=255, verbose_name='Тип страховки')
     description = models.CharField(blank=True, max_length=500, verbose_name='Описание')
-    policy_number = models.IntegerField(blank=True, verbose_name='Номер страховки')
+    policy_number = models.CharField(blank=True, max_length=30, verbose_name='Номер страховки')
     start_date = models.DateField(verbose_name='Дата начала')
     end_date = models.DateField(verbose_name='Дата окончания')
     price = models.IntegerField(verbose_name='Стоимость страховки')
