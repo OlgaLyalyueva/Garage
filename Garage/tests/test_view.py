@@ -106,3 +106,8 @@ class TestCarsView(TestCase):
         c.login(username='second-testuser', password='1234567890')
         response = c.get('/cars/')
         self.assertEqual(response.context['engine_name'], 'Test engine name')
+
+    def test_not_logged_in_user_redirects_to_login_page(self):
+        c = Client()
+        response = c.get('/cars/')
+        self.assertRedirects(response, '/accounts/login/', 302)
