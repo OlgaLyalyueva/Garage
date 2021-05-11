@@ -79,7 +79,7 @@ class Insurance(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.type + ', ' + self.car_id)
+        return self.type
 
     class Meta:
         verbose_name = 'Страховка'
@@ -95,7 +95,7 @@ class CarProblem(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name + ', ' + self.car_id
+        return self.name
 
     class Meta:
         verbose_name = 'Тип неполадки'
@@ -112,7 +112,7 @@ class Improvement(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name + ', ' + self.car_id
+        return self.name
 
     class Meta:
         verbose_name = 'Улучшение'
@@ -135,7 +135,7 @@ class Repair(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name + ', ' + self.car_id
+        return self.name
 
     class Meta:
         verbose_name = 'Ремонт'
