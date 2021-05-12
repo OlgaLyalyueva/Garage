@@ -12,7 +12,7 @@ def cars(request):
     user = request.user
     if user.is_authenticated:
         cars = Car.objects.filter(user_id=user.id)
-        content = {
+        context = {
             'cars': cars,
             'user': user.username
         }
@@ -20,16 +20,16 @@ def cars(request):
             for car in cars:
                 if car.body_id:
                     body_name = get_name_of_body(car.body_id)
-                    content['body_name'] = body_name
+                    context['body_name'] = body_name
                 if car.engine_id:
                     engine_name = get_name_of_engine(car.engine_id)
-                    content['engine_name'] = engine_name
+                    context['engine_name'] = engine_name
         else:
             message = 'У вас нет добавленных автомобилей'
-            content = {
+            context = {
                 'message': message
             }
-        return render(request, 'Garage/cars.html', content)
+        return render(request, 'Garage/cars.html', context)
     return redirect('login')
 
 
@@ -49,26 +49,26 @@ def car(request, car_id):
         car = Car.objects.get(id=car_id, user_id=user.id)
         if car:
             try:
-                insurance = Insurance.objects.get(id=car.id)
+                insurance = Insurance.objects.filter(car_id=car.id)
             except ObjectDoesNotExist:
                 insurance = None
 
             try:
-                repair = Repair.objects.get(id=car.id)
+                repair = Repair.objects.filter(car_id=car.id)
             except ObjectDoesNotExist:
                 repair = None
 
             try:
-                car_problem = CarProblem.objects.get(id=car.id)
+                car_problem = CarProblem.objects.filter(car_id=car.id)
             except ObjectDoesNotExist:
                 car_problem = None
 
             try:
-                improvement = Improvement.objects.get(id=car.id)
+                improvement = Improvement.objects.filter(car_id=car.id)
             except ObjectDoesNotExist:
                 improvement = None
 
-            content = {
+            context = {
                 'user': user,
                 'car': car,
                 'insurance': insurance,
@@ -76,11 +76,11 @@ def car(request, car_id):
                 'car_problem': car_problem,
                 'improvement': improvement
             }
-            return render(request, 'Garage/car.html', content)
+            return render(request, 'Garage/car.html', context)
         else:
-            content = {
+            context = {
                 'user': user
             }
-            return render(request, 'Garage/add_car.html', content)
+            return render(request, 'Garage/add_car.html', context)
     else:
         return redirect('login')
