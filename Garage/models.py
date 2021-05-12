@@ -33,7 +33,7 @@ class Car(models.Model):
         (3, 'Задний')
     ], verbose_name='Тип привода')
     mileage = models.IntegerField(blank=True, null=True, verbose_name='Пробег')
-    price = models.IntegerField(blank=True, null=True, verbose_name='Стоимость')
+    price = models.FloatField(blank=True, null=True, verbose_name='Стоимость')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -75,7 +75,7 @@ class Insurance(models.Model):
     policy_number = models.CharField(blank=True, max_length=30, verbose_name='Номер страховки')
     start_date = models.DateField(verbose_name='Дата начала')
     end_date = models.DateField(verbose_name='Дата окончания')
-    price = models.IntegerField(verbose_name='Стоимость страховки')
+    price = models.FloatField(verbose_name='Стоимость страховки')
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -108,7 +108,7 @@ class Improvement(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название проблемы')
     description = models.CharField(blank=True, null=True, max_length=1000, verbose_name='Описание')
     state = models.BooleanField(default=True, verbose_name='Состояние')
-    price = models.IntegerField(blank=True, null=True, verbose_name='Стоимость')
+    price = models.FloatField(blank=True, null=True, verbose_name='Стоимость')
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -130,7 +130,7 @@ class Repair(models.Model):
     description = models.CharField(blank=True, null=True, max_length=2000, verbose_name='Описание')
     note = models.CharField(blank=True, null=True, max_length=500, verbose_name='Примечание')
     mileage = models.IntegerField(blank=True, null=True, verbose_name='Пробег')
-    price = models.IntegerField(blank=True, null=True, verbose_name='Стоимость')
+    price = models.FloatField(blank=True, null=True, verbose_name='Стоимость')
     date = models.DateField(blank=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
