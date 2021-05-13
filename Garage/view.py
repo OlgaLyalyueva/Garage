@@ -47,7 +47,7 @@ def get_name_of_engine(engine_id):
 def car(request, car_id):
     user = request.user
     if user.is_authenticated:
-        car = get_object_or_404(Car.objects.get(id=car_id, user_id=user.id))
+        car = get_object_or_404(Car, id=car_id, user_id=user.id)
         try:
             insurance = Insurance.objects.filter(car_id=car.id)
         except ObjectDoesNotExist:
