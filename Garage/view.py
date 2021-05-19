@@ -14,29 +14,28 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 
 
+@login_required()
 def cars(request):
     user = request.user
-    if user.is_authenticated:
-        cars = Car.objects.filter(user_id=user.id)
+    cars = Car.objects.filter(user_id=user.id)
+    context = {
+        'cars': cars,
+        'user': user.username
+    }
+    if len(cars) > 0:
+        for car in cars:
+            if car.body_id:
+                body_name = get_name_of_body(car.body_id)
+                context['body_name'] = body_name
+            if car.engine_id:
+                engine_name = get_name_of_engine(car.engine_id)
+                context['engine_name'] = engine_name
+    else:
+        message = 'У вас нет добавленных автомобилей'
         context = {
-            'cars': cars,
-            'user': user.username
+            'message': message
         }
-        if len(cars) > 0:
-            for car in cars:
-                if car.body_id:
-                    body_name = get_name_of_body(car.body_id)
-                    context['body_name'] = body_name
-                if car.engine_id:
-                    engine_name = get_name_of_engine(car.engine_id)
-                    context['engine_name'] = engine_name
-        else:
-            message = 'У вас нет добавленных автомобилей'
-            context = {
-                'message': message
-            }
-        return render(request, 'Garage/cars.html', context)
-    return redirect('login')
+    return render(request, 'Garage/cars.html', context)
 
 
 def get_name_of_body(body_id):
@@ -90,7 +89,6 @@ def add_car(request):
         form_car = CarForm(request.POST)
         if form_car.is_valid():
             car = form_car.save(commit=False)
-
             if form_car.data['body']:
                 body = add_body(form_car.data['body'])
                 car.body_id = body.id
