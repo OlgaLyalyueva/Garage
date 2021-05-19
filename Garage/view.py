@@ -1,3 +1,6 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 from Garage.models import Car, \
     Body, \
     Engine, \
@@ -5,6 +8,7 @@ from Garage.models import Car, \
     Repair, \
     CarProblem, \
     Improvement
+from Garage.forms import CarForm, BodyForm, EngineForm, InsuranceForm
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
@@ -79,3 +83,54 @@ def car(request, car_id):
         return render(request, 'Garage/car.html', context)
     else:
         return redirect('login')
+
+
+@login_required
+def add_car(request):
+    if request.method == 'POST':
+        form_car = CarForm(request.POST)
+        if form_car.is_valid():
+            car = form_car.save(commit=False)
+
+            if form_car.data['body']:
+                body = add_body(form_car.data['body'])
+                car.body_id = body.id
+
+            if form_car.data['engine']:
+                engine = add_engine(form_car.data['engine'])
+                car.engine_id = engine.id
+
+            car.user = request.user
+            car.save()
+
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'{car.producer} {car.model}, была успешно создана!'
+            )
+            return redirect(f'/car/{car.id}')
+        else:
+            errors = form_car.errors
+            context = {'errors': errors}
+            return render(request, 'Garage/add_car.html', context)
+    form_car = CarForm()
+    context = {
+        'form_car': form_car
+               }
+    return render(request, 'Garage/add_car.html', context)
+
+
+def add_body(body_name):
+    try:
+        body = Body.objects.get(name=body_name)
+    except ObjectDoesNotExist:
+        body = Body.objects.create(name=body_name)
+    return body
+
+
+def add_engine(engine_name):
+    try:
+        engine = Engine.objects.get(name=engine_name)
+    except ObjectDoesNotExist:
+        engine = Engine.objects.create(name=engine_name)
+    return engine
