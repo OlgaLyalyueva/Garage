@@ -13,6 +13,7 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 
+
 def cars(request):
     user = request.user
     if user.is_authenticated:
@@ -48,41 +49,39 @@ def get_name_of_engine(engine_id):
     return engine.name
 
 
+@login_required
 def car(request, car_id):
     user = request.user
-    if user.is_authenticated:
-        car = get_object_or_404(Car, id=car_id, user_id=user.id)
-        try:
-            insurance = Insurance.objects.filter(car_id=car.id)
-        except ObjectDoesNotExist:
-            insurance = None
+    car = get_object_or_404(Car, id=car_id, user_id=user.id)
+    try:
+        insurance = Insurance.objects.filter(car_id=car.id)
+    except ObjectDoesNotExist:
+        insurance = None
 
-        try:
-            repair = Repair.objects.filter(car_id=car.id)
-        except ObjectDoesNotExist:
-            repair = None
+    try:
+        repair = Repair.objects.filter(car_id=car.id)
+    except ObjectDoesNotExist:
+        repair = None
 
-        try:
-            car_problem = CarProblem.objects.filter(car_id=car.id)
-        except ObjectDoesNotExist:
-            car_problem = None
+    try:
+        car_problem = CarProblem.objects.filter(car_id=car.id)
+    except ObjectDoesNotExist:
+        car_problem = None
 
-        try:
-            improvement = Improvement.objects.filter(car_id=car.id)
-        except ObjectDoesNotExist:
-            improvement = None
+    try:
+        improvement = Improvement.objects.filter(car_id=car.id)
+    except ObjectDoesNotExist:
+        improvement = None
 
-        context = {
-            'user': user,
-            'car': car,
-            'insurance': insurance,
-            'repair': repair,
-            'car_problem': car_problem,
-            'improvement': improvement
-        }
-        return render(request, 'Garage/car.html', context)
-    else:
-        return redirect('login')
+    context = {
+        'user': user,
+        'car': car,
+        'insurance': insurance,
+        'repair': repair,
+        'car_problem': car_problem,
+        'improvement': improvement
+    }
+    return render(request, 'Garage/car.html', context)
 
 
 @login_required

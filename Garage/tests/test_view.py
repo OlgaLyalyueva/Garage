@@ -191,8 +191,8 @@ class TestCarView(TestCase):
 
     def test_not_logged_in_user_redirects_to_login_page(self):
         c = Client()
-        response = c.get(f'/car/2')
-        self.assertRedirects(response, '/accounts/login/', 302)
+        response = c.get('/car/2')
+        self.assertRedirects(response, '/accounts/login/?next=/car/2', 302)
 
     def test_login(self):
         c = Client()

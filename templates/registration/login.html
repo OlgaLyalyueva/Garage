@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="hidden" name="next" value="{{ next }}">
+        <input type="submit" class="btn btn-primary" id="update" value="Sign In">
+        <a href="{% url 'password_reset' %}" class="btn-link">Forgot Password?</a>
+    </form>
+</body>
+</html>
