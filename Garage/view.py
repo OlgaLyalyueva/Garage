@@ -131,3 +131,44 @@ def add_engine(engine_name):
     except ObjectDoesNotExist:
         engine = Engine.objects.create(name=engine_name)
     return engine
+
+
+@login_required()
+def update_car(request, car_id=None):
+    user = request.user
+    car = get_object_or_404(Car, id=car_id, user_id=user.id)
+    if request.method == 'POST':
+        form_car = CarForm(request.POST, instance=car)
+        # print(form_car.data)
+        if form_car.is_valid():
+            car = form_car.save(commit=False)
+            if form_car.data['body']:
+                body = add_body(form_car.data['body'])
+                car.body_id = body.id
+
+            if form_car.data['engine']:
+                engine = add_engine(form_car.data['engine'])
+                car.engine_id = engine.id
+            car.user = user
+            print('Trueeeeeee')
+            car.save()
+
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'{car.producer} {car.model}, была успешно обновлена!'
+            )
+
+            return redirect(f'/car/{car.id}')
+        else:
+            errors = form_car.errors
+            context = {
+                'car': car,
+                'errors': errors}
+            return render(request, 'Garage/update_car.html', context)
+    form_car = CarForm()
+    context = {
+        'form_car': form_car,
+        'car': car
+               }
+    return render(request, 'Garage/update_car.html', context)
