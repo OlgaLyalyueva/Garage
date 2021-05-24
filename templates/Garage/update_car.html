@@ -1,0 +1,53 @@
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add_car</title>
+</head>
+<body>
+    <form action="{% url 'update_car' car_id=car.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="form-control" type="text" placeholder="Марка" value="{{ car.producer }}" name="producer">
+        <input class="form-control" type="text" placeholder="Модель" value="{{ car.model }}" name="model">
+        <input class="form-control" type="number" placeholder="Год" value="{{ car.year }}" name="year">
+
+        <label for="transmission">Выбери тип КПП:</label>
+        <select name="transmission" value="{{ car.transmission }}" id="transmission">
+          <option value="ручная/механика">Ручная/Механика</option>
+          <option value="автомат">Автомат</option>
+          <option value="типтроник">Типтроник</option>
+          <option value="робот">Робот</option>
+          <option value="вариатор">Вариатор</option>
+        </select>
+
+        <label for="fuel">Выбери тип топлива:</label>
+        <select name="fuel" value="{{ car.fuel }}" id="fuel">
+          <option value=1>Бензин</option>
+          <option value=2>Дизель</option>
+          <option value=3>Газ</option>
+          <option value=4>Газ/Бензин</option>
+          <option value=5>Гибрид</option>
+          <option value=6>Электро</option>
+          <option value=7>Газ метан</option>
+          <option value=8>Газ пропан-бутан</option>
+          <option value=9>Другое</option>
+        </select>
+
+        <label for="drive_system">Выбери тип привода:</label>
+        <select name="drive_system" id="drive_system">
+          <option value=1>Полный</option>
+          <option value=2>Передний</option>
+          <option value=3>Задний</option>
+        </select>
+        <input class="form-control" type="text" placeholder="Пробег" value="{{ car.mileage }}" name="mileage">
+        <input class="form-control" type="text" placeholder="Стоимость" value="{{ car.price }}" name="price">
+
+        <input class="form-control" type="text" placeholder="Тип кузова" value="{{ car.body }}" name="body">
+        <input class="form-control" type="text" placeholder="Тип топлива" value="{{ car.engine }}" name="engine">
+        <input type="submit" value="Save" class="btn-default">
+    </form>
+</body>
+</html>
