@@ -8,7 +8,7 @@ from Garage.models import Car, \
     Repair, \
     CarProblem, \
     Improvement
-from Garage.forms import CarForm, BodyForm, EngineForm, InsuranceForm
+from Garage.forms import CarForm
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
@@ -182,3 +182,18 @@ def delete_car(request, car_id=None):
 
     context = {'car': car}
     return render(request, 'Garage/delete_car.html', context)
+
+
+@login_required()
+def get_insurances(request):
+    insurances = {}
+    user = request.user
+    cars = Car.objects.filter(user_id=user.id)
+    for car in cars:
+        insurances[car.id] = Insurance.objects.filter(car_id=car.id)
+    context = {
+        'user': user,
+        'cars': cars,
+        'insurances': insurances
+    }
+    return render(request, 'Garage/insurances.html', context)
