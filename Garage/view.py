@@ -164,3 +164,21 @@ def update_car(request, car_id=None):
         'car': car
                }
     return render(request, 'Garage/update_car.html', context)
+
+
+@login_required()
+def delete_car(request, car_id=None):
+    user = request.user
+    car = get_object_or_404(Car, id=car_id, user_id=user.id)
+    if request.method == 'POST':
+        car.delete()
+
+        messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'{car.producer} {car.model}, была успешно удалена!'
+            )
+        return redirect('cars')
+
+    context = {'car': car}
+    return render(request, 'Garage/delete_car.html', context)
