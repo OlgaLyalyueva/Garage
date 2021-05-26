@@ -189,11 +189,17 @@ def get_insurances(request):
     insurances = {}
     user = request.user
     cars = Car.objects.filter(user_id=user.id)
-    for car in cars:
-        insurances[car.id] = Insurance.objects.filter(car_id=car.id)
+    if cars:
+        for car in cars:
+            insurances[car.id] = Insurance.objects.filter(car_id=car.id)
+
+        context = {
+            'user': user,
+            'cars': cars,
+            'insurances': insurances
+        }
+        return render(request, 'Garage/insurances.html', context)
     context = {
-        'user': user,
-        'cars': cars,
-        'insurances': insurances
+        'user': user
     }
     return render(request, 'Garage/insurances.html', context)
