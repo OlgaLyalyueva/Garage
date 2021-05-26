@@ -6,7 +6,7 @@ from Garage.models import Car, \
     Engine, \
     Insurance, \
     Repair, \
-    CarProblem, \
+    CarIssue, \
     Improvement
 from Garage.forms import CarForm
 from django.shortcuts import render, redirect
@@ -63,9 +63,9 @@ def get_car(request, car_id):
         repair = None
 
     try:
-        car_problem = CarProblem.objects.filter(car_id=car.id)
+        car_issue = CarIssue.objects.filter(car_id=car.id)
     except ObjectDoesNotExist:
-        car_problem = None
+        car_issue = None
 
     try:
         improvement = Improvement.objects.filter(car_id=car.id)
@@ -77,7 +77,7 @@ def get_car(request, car_id):
         'car': car,
         'insurance': insurance,
         'repair': repair,
-        'car_problem': car_problem,
+        'car_issue': car_issue,
         'improvement': improvement
     }
     return render(request, 'Garage/car.html', context)

@@ -5,7 +5,7 @@ from django.test import TestCase, Client
 from Garage.models import (
     Car,
     User,
-    CarProblem,
+    CarIssue,
     Insurance,
     Improvement,
     Repair
@@ -46,7 +46,7 @@ class TestCarView(TestCase):
             user=user
         )
 
-        CarProblem.objects.create(
+        CarIssue.objects.create(
             name='Test car problem',
             description='Test description',
             state=False,
@@ -108,14 +108,14 @@ class TestCarView(TestCase):
         response = c.get('/car/2')
         self.assertEqual(response.status_code, 200)
 
-    def test_logged_in_user_receives_car_problem_for_car(self):
+    def test_logged_in_user_receives_car_issue_for_car(self):
         c = Client()
         c.login(username='testuser', password='1234567890')
         response = c.get('/car/1')
-        self.assertEqual(response.context['car_problem'][0].name, 'Test car problem')
-        self.assertEqual(response.context['car_problem'][0].description, 'Test description')
-        self.assertEqual(response.context['car_problem'][0].state, False)
-        self.assertEqual(response.context['car_problem'][0].date, date.today())
+        self.assertEqual(response.context['car_issue'][0].name, 'Test car problem')
+        self.assertEqual(response.context['car_issue'][0].description, 'Test description')
+        self.assertEqual(response.context['car_issue'][0].state, False)
+        self.assertEqual(response.context['car_issue'][0].date, date.today())
 
     def test_logged_in_user_receives_insurance_for_car(self):
         c = Client()

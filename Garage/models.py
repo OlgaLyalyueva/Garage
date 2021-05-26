@@ -86,7 +86,7 @@ class Insurance(models.Model):
         verbose_name_plural = 'Страховки'
 
 
-class CarProblem(models.Model):
+class CarIssue(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
     date = models.DateField(auto_now=True, blank=True)
     name = models.CharField(max_length=255, verbose_name='Название проблемы')
