@@ -15,7 +15,7 @@ from django.shortcuts import get_object_or_404
 
 
 @login_required()
-def cars(request):
+def get_cars(request):
     user = request.user
     cars = Car.objects.filter(user_id=user.id)
     context = {
@@ -49,7 +49,7 @@ def get_name_of_engine(engine_id):
 
 
 @login_required
-def car(request, car_id):
+def get_car(request, car_id):
     user = request.user
     car = get_object_or_404(Car, id=car_id, user_id=user.id)
     try:
