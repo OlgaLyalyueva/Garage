@@ -182,24 +182,3 @@ def delete_car(request, car_id=None):
 
     context = {'car': car}
     return render(request, 'Garage/delete_car.html', context)
-
-
-@login_required()
-def get_insurances(request):
-    insurances = {}
-    user = request.user
-    cars = Car.objects.filter(user_id=user.id)
-    if cars:
-        for car in cars:
-            insurances[car.id] = Insurance.objects.filter(car_id=car.id)
-
-        context = {
-            'user': user,
-            'cars': cars,
-            'insurances': insurances
-        }
-        return render(request, 'Garage/insurances.html', context)
-    context = {
-        'user': user
-    }
-    return render(request, 'Garage/insurances.html', context)
