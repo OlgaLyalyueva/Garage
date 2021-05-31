@@ -53,6 +53,7 @@ def add_insurances(request):
     return render(request, 'Garage/add_insurance.html', context)
 
 
+@login_required()
 def update_insurance(request, insrc_id=None):
     user = request.user
     insrc = get_object_or_404(Insurance, id=insrc_id)
