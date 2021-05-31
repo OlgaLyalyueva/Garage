@@ -7,9 +7,9 @@
 </head>
 <body>
     <p>{{ car.id }} {{ user.id }}</p>
-    <form action="{% url 'update_insurance' insrc_id=insurance.id %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'update_insurance' insrnc_id=insurance.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form_insrc|crispy }}
+        {{ form_insrnc|crispy }}
         {% if errors %}
             {% for error in errors %}
                 <p>{{ error }}</p>

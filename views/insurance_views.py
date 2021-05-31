@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from Garage.models import Car, Insurance
@@ -54,22 +55,22 @@ def add_insurances(request):
 
 
 @login_required()
-def update_insurance(request, insrc_id=None):
+def update_insurance(request, insrnc_id=None):
     user = request.user
-    insrc = get_object_or_404(Insurance, id=insrc_id)
-    car = get_object_or_404(Car, id=insrc.car_id, user_id=user.id)
+    insrnc = get_object_or_404(Insurance, id=insrnc_id)
+    car = get_object_or_404(Car, id=insrnc.car_id, user_id=user.id)
     cars = Car.objects.filter(user_id=user.id)
     if request.method == 'POST':
-        form_insrc = InsuranceForm(request.POST, instance=insrc)
-        datetime.datetime.strptime(form_insrc.data['start_date'], "%Y-%m-%d").date()
-        datetime.datetime.strptime(form_insrc.data['end_date'], "%Y-%m-%d").date()
-        if form_insrc.is_valid():
-            form_insrc.save()
+        form_insrnc = InsuranceForm(request.POST, instance=insrnc)
+        datetime.datetime.strptime(form_insrnc.data['start_date'], "%Y-%m-%d").date()
+        datetime.datetime.strptime(form_insrnc.data['end_date'], "%Y-%m-%d").date()
+        if form_insrnc.is_valid():
+            form_insrnc.save()
             return redirect('insurances')
         else:
-            errors = form_insrc.errors
+            errors = form_insrnc.errors
             context = {
-                'insurance': insrc,
+                'insurance': insrnc,
                 'car': car,
                 'cars': cars,
                 'errors': errors}
@@ -78,7 +79,7 @@ def update_insurance(request, insrc_id=None):
     context = {
         'cars': cars,
         'car': car,
-        'insurance': insrc,
+        'insurance': insrnc,
         'form': form_insrc
     }
     return render(request, 'Garage/update_insurance.html', context)
