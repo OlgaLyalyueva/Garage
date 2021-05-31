@@ -1,0 +1,36 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update_insurance</title>
+</head>
+<body>
+    <p>{{ car.id }} {{ user.id }}</p>
+    <form action="{% url 'update_insurance' insrc_id=insurance.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form_insrc|crispy }}
+        {% if errors %}
+            {% for error in errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+        <input class="form-control" type="text" placeholder="Тип" value="{{ insurance.type }}" name="type">
+        <input class="form-control" type="text" placeholder="Описание" value="{{ insurance.description }}" name="description">
+        <input class="form-control" type="text" placeholder="Номер страхового полиса" value="{{ insurance.policy_number }}" name="policy_number">
+        <input class="form-control" placeholder="Дата начала" value="{{ insurance.start_date|date:"Y-m-d" }}" name="start_date">
+        <input class="form-control" placeholder="Дата окончания" value="{{ insurance.end_date|date:"Y-m-d" }}" name="end_date">
+        <input class="form-control" type="number" placeholder="Стоимость" value="{{ insurance.price }}" name="price">
+
+        <label for="{{ car.id }}">Автомобиль</label>
+        <select name="car" id="{{ car.id }}">
+            {% for car in cars %}
+                <option value={{ car.id }}>{{ car.producer }}, {{ car.model }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Save" class="btn-default">
+    </form>
+</body>
+</html>
+

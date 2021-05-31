@@ -13,6 +13,7 @@ urlpatterns = [
     path('delete_car/<int:car_id>', car_views.delete_car, name='delete_car'),
 
     path('insurances/', insurance_views.get_insurances, name='insurances'),
+    path('update_insurance/<int:insrc_id>', insurance_views.update_insurance, name='update_insurance'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 
