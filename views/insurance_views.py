@@ -34,22 +34,22 @@ def add_insurances(request):
     user = request.user
     cars = Car.objects.filter(user_id=user.id)
     if request.method == 'POST':
-        form = InsuranceForm(request.POST)
-        if form.is_valid():
-            form.save()
+        form_insrnc = InsuranceForm(request.POST)
+        if form_insrnc.is_valid():
+            form_insrnc.save()
             return redirect('insurances')
         else:
-            error_mes = form.errors
+            error_mes = form_insrnc.errors
             context = {
                 'errors': error_mes,
                 'user': user
             }
             return render(request, 'Garage/add_insurance.html', context)
-    form = InsuranceForm()
+    form_insrnc = InsuranceForm()
     context = {
         'user': user,
         'cars': cars,
-        'form': form
+        'form_insrnc': form_insrnc
     }
     return render(request, 'Garage/add_insurance.html', context)
 

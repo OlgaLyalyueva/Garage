@@ -1,0 +1,41 @@
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add_insurance</title>
+</head>
+<body>
+    <form action="{% url 'add_insurance' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="form-control" type="text" placeholder="Тип страховки" name="type">
+        <input class="form-control" type="text" placeholder="Описание" name="description">
+        <input class="form-control" type="text" placeholder="Номер страхового полиса" name="policy_number">
+
+        <label for="start_date">Дата начала</label>
+
+        <input type="date" id="start_date" name="start_date"
+               value="-----------"
+               min="2020-05-30">
+
+        <label for="start_date">Дата начала</label>
+
+        <input type="date" id="end_date" name="end_date"
+               value="-----------"
+               min="2020-05-31">
+
+        <input class="form-control" type="text" placeholder="Стоимость" name="price">
+
+        <label for="{{ car.id }}">Автомобиль</label>
+        <select name="car" id="{{ car.id }}">
+            {% for car in cars %}
+                <option value={{ car.id }}>{{ car.producer }}, {{ car.model }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Save" class="btn-default">
+    </form>
+</body>
+</html>
