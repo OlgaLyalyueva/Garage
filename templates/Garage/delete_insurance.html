@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete insurance</title>
+</head>
+<body>
+    <form action="{% url 'delete_insurance' insrnc_id=insurance.id %}" method="POST">
+    {% csrf_token %}
+    <a href="{% url 'insurances' %}" class="btn btn-primary">No</a>
+    <input type="submit" action="" class="btn btn-danger" value="Yes, delete" />
+  </form>
+</body>
+</html>
