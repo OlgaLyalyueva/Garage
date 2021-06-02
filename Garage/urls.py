@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib import admin
 
-from views import car_views, insurance_views
+from views import car_views, insurance_views, carissue_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,6 +16,8 @@ urlpatterns = [
     path('add_insurance/', insurance_views.add_insurances, name='add_insurance'),
     path('update_insurance/<int:insrnc_id>', insurance_views.update_insurance, name='update_insurance'),
     path('delete_insurance/<int:insrnc_id>', insurance_views.delete_insurance, name='delete_insurance'),
+
+    path('car/issues/', carissue_views.get_carissues, name='car_issues'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 
