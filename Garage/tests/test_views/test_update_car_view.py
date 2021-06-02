@@ -36,13 +36,13 @@ class TestUpdateCar(TestCase):
 
     def test_not_logged_in_user_redirects_to_login_page(self):
         c = Client()
-        response = c.get('/update_car/1')
-        self.assertRedirects(response, '/accounts/login/?next=/update_car/1', 302)
+        response = c.get('/car/update/1')
+        self.assertRedirects(response, '/accounts/login/?next=/car/update/1', 302)
 
     def test_render_template_for_logged_in_user(self):
         c = Client()
         c.login(username='testuser', password='1234567890')
-        response = c.get('/update_car/1')
+        response = c.get('/car/update/1')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'Garage/update_car.html')
 
@@ -50,7 +50,7 @@ class TestUpdateCar(TestCase):
         c = Client()
         car_id = 1
         c.login(username='testuser', password='1234567890')
-        response = c.get(f'/update_car/{car_id}')
+        response = c.get(f'/car/update/{car_id}')
         self.assertEqual(response.status_code, 200)
         car = Car.objects.get(id=car_id)
         body = Body.objects.get(name='Test body name')
