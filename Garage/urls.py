@@ -7,7 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('cars/', car_views.get_cars, name='cars'),
-    path('car/<int:car_id>', car_views.get_car, name='car'),
+    path('car/<int:car_id>', car_views.get_car, name='car_profile'),
     path('car/add', car_views.add_car, name='add_car'),
     path('car/update/<int:car_id>', car_views.update_car, name='update_car'),
     path('car/delete/<int:car_id>', car_views.delete_car, name='delete_car'),

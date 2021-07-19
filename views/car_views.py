@@ -13,6 +13,7 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 
+from views import insurance_views
 
 @login_required()
 def get_cars(request):
@@ -71,7 +72,6 @@ def get_car(request, car_id):
         improvement = Improvement.objects.filter(car_id=car.id)
     except ObjectDoesNotExist:
         improvement = None
-
     context = {
         'user': user,
         'car': car,
@@ -80,7 +80,7 @@ def get_car(request, car_id):
         'car_issue': car_issue,
         'improvement': improvement
     }
-    return render(request, 'Garage/car.html', context)
+    return render(request, 'Garage/car_profile.html', context)
 
 
 @login_required
