@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<title>Visual Builder Docs</title>
+	<meta charset="utf-8">
+	<!--[if IE]>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<![endif]-->
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css" id="color-switcher-link">
+	<link rel="stylesheet" href="css/animations.css">
+	<link rel="stylesheet" href="css/fonts.css">
+	<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+	<!--[if lt IE 9]>
+		<script src="js/vendor/html5shiv.min.js"></script>
+		<script src="js/vendor/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body class="docs">
+	<!--[if lt IE 9]>
+		<div class="bg-danger text-center">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" class="highlight">upgrade your browser</a> to improve your experience.</div>
+	<![endif]-->
+
+<!-- search modal -->
+<div class="modal" tabindex="-1" role="dialog" aria-labelledby="search_modal" id="search_modal">
+	<div class="widget widget_search">
+		<form role="search" method="get" class="searchform form-inline" action="/">
+			<div class="form-group">
+				<input type="text" value="" name="search" class="form-control" placeholder="Search keyword" id="modal-search-input">
+			</div>
+			<button type="submit" class="theme_button">Search</button>
+		</form>
+	</div>
+</div>
+
+<!-- wrappers for visual page editor and boxed version of template -->
+<div id="canvas">
+<div id="box_wrapper">
+
+<!-- template sections -->
+
+<header class="table_section page_header header_darkgrey">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4">
+				<h4 class="highlight margin_0 padding_20"><strong>Visual Builder</strong> Docs</h4>
+				<!-- eof main nav -->
+				<span class="toggle_menu"><span></span></span>
+			</div>
+			<div class="col-md-8 text-right hidden-sm hidden-xs">
+				<!-- main nav start -->
+				<nav class="mainmenu_wrapper">
+					<ul class="mainmenu nav sf-menu">
+						<li><a href="!documentation.html">Template Docs</a></li>
+						<li class="active"><a href="!documentation_builder.html">Builder Docs</a></li>
+					</ul>
+				</nav>
+			</div>
+			
+		</div>
+	</div>
+</header>
+
+
+<section class="ls section_padding_top_50 section_padding_bottom_30 columns_padding_25">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-sm-7 col-md-8 col-lg-8">
+					<h1 class="text-center"><strong class="highlight">Visual Builder</strong> for ClearView HTML template</h1>
+					<p>Created: 13.02.2018<br>
+						<strong>By:</strong> <a href="http://modernwebtemplates.com">MWTemplates</a><br>
+						<strong>Email:</strong> support@modernwebtemplates.com
+					</p>
+
+					<p>Thank you for purchasing our HTML template with Visual Builder. If you have any questions that are beyond the scope of this help file, please feel free to email us via my user page contact form. Thanks so much!</p>
+
+					<hr id="builderFiles" class="divider_40">
+					<h2 class="section_header text-center">Visual Builder files</h2>
+
+					<p>There are two HTML files and one folder that is related to Visual Builder. These are</p>
+					<p class="divider_40 text-center">
+						<img src="images/documentation/content_builder.jpg">
+					</p>
+					<ul>
+						<li><strong>"builder"</strong> folder, that contains all of the builder scripts, styles, images, PHP files etc.</li>
+						<li><strong>"_builder.html"</strong> file is the actual Visual Builder. You should open it in your browser to start building your new HTML pages.</li>
+						<li><strong>"_template.html"</strong> file is a service file which is used for the preview of your pages while creating them in Visual Builder.</li>
+					</ul>
+
+					<div class="alert alert-warning" role="alert">
+						<strong>Warning!</strong> You should not upload these files and the folder onto your production server for security purposes!
+					</div>
+
+
+					<hr id="builderFeatures" class="divider_40">
+					<h2 class="section_header text-center">Visual Builder features</h2>
+					<p>You can use the builder to create singlepage or multipage websites without coding!</p>
+					<h3>Main features:</h3>
+					<ul>
+						<li>Drag'n'drop layout building and editing.</li>
+						<li>Easy-to-create multipage and single page sites.</li>
+						<li>Create other pages based on the existing saved page.</li>
+						<li>Inline content editing.</li>
+						<li>Easy edit and customize predefined building blocks.</li>
+						<li>Highlighted HTML source code editing.</li>
+						<li>Project import and export.</li>
+						<li>Drag'n'drop images upload.</li>
+						<li>Easy preview of your page.</li>
+						<li>Generating HTML files into your siteroot directory.</li>
+						<li>Creating ZIP archive with all the files needed for uploading onto production server.</li>
+					</ul>
+
+					<div class="alert alert-warning darklinks" role="alert">
+						<strong>Warning!</strong> Some features require launching your builder on the working webserver with PHP support! <a href="#builderRequirements">See section below</a>.
+					</div>
+
+					<div class="alert alert-info darklinks" role="alert">
+						<strong>Please NOTE:</strong> Visual Builder is not an actual HTML editor. It also cannot modify existing HTML pages. Its main purpose is creating new pages with predefined building blocks.
+					</div>
+
+
+					<hr id="builderRequirements" class="divider_40">
+					<h2 class="section_header text-center">Visual Builder requirements</h2>
+					<p>You can launch and use Visual Builder as local file, even without webserver at all!</p>
+					<p>But for the best user experiance before using the builder you need to upload your files on webserver with PHP support.</p>
+					<h4 class="divider_20">Features that requires webserver with PHP:</h4>
+					<ul>
+						<li>Drag'n'drop image upload into <strong>images/!uploads</strong> folder.</li>
+						<li>Displaying links list and images list in inline text editor in <strong>Content Edit</strong> mode.</li>
+						<li>Highlighted source code editing in the inline text editor in <strong>Content Edit</strong> mode.</li>
+						<li>Preview of the page that you are building in a new tab.</li>
+						<li>Creating (generating) previously saved pages in your siteroot.</li>
+						<li>Generating ZIP archive with all the previously saved pages, site files and folders for uploading onto production server.</li>
+					</ul>
+
+					<h4 class="divider_20">Features that have a fallback if using builder without webserver:</h4>
+					<ul>
+						<li>Default non-highlighted source code editing in the inline text editor in <strong>Content Edit</strong> mode.</li>
+						<li>Export project. Showing a popup with code that you need to manually paste in the new file and save it as <strong>*.JS</strong> file instead of generating it by builder itself.</li>
+						<li>Use "Get page code" function for every of your saved pages to manually paste in the new file and save it as <strong>*.HTML</strong> file instead of generating pages by builder itself.</li>
+					</ul>
+
+					<hr id="buildingPage" class="divider_40">
+					<h2 class="section_header text-center">Building Pages in Visual Builder</h2>
+					<p>Open <strong>_builder.html</strong> in your browser.</p>
+
+					<p><img src="images/documentation/builder01.jpg"></p>
+
+					<h3 class="divider_40">In brief you need to do several steps:</h3>
+					<ul>
+						<li><strong>Create your layout</strong>: drag elements from side menu to the canvas, starting from topline and header down to the footer and copyrights.</li>
+						<li>Switch to <strong>Content edit</strong> mode and replace all of "dummy" content with your content. You can switch editing modes as many times as you need.</li>
+						<li><strong>Save your page</strong> using "save" or "save as" menu item in <strong>pages</strong> dropdown menu at the top of your builder.</li>
+						<li>Use <strong>Preview</strong> menu item in <strong>Actions</strong> dropdown menu at the top of your builder or at the bottom of your side menu for previewing your progress while building your page.</li>
+						<li>Repeat these steps for all of your pages if you are building a multipage website.</li>
+						<li>Generate your HTML pages into your siteroot or create ZIP archive with your previously saved pages by clicking on appropriate menu item in <strong>Actions</strong> dropdown at the top of you builder or at the bottom of your side menu.</li>
+					</ul>
+
+					<br id="buildingPageLayout">
+
+					<h4><i class="fa fa-arrows highlight"></i> Creating layout</h4>
+
+					<p><img src="images/documentation/build_page1.jpg"></p>
+
+					<ul>
+						<li>Open the side menu by clicking on appropriate icon in the top left corner of your builder.</li>
+						<li>Click on elements group name to open the right part of the side menu with available elements and their options.</li>
+						<li>Choose options for element that you want to drag if available.</li>
+						<li>Grab an element icon and drop it onto the canvas.</li>
+						<li>Repeat these steps for other layout elements.</li>
+					</ul>
+
+					<br id="deletingElements">
+					
+					<h4><i class="fa fa-trash highlight"></i> Deleting elements</h4>
+
+					<p>If you need to delete some element, such as column content, the whole column or even full row or section, just drag it into the trash that is in the top of your builder.</p>
+
+					<p>You may also click on <strong>"Delete section"</strong> and <strong>"Delete column"</strong> buttons when hovering on certain section or column:</p>
+
+					<p>
+						<img src="images/documentation/delete_section_column.jpg">
+					</p>
+
+					<br id="buildingPageSectionsColumns">
+					<h4><i class="fa fa-edit highlight"></i> Editing sections and columns</h4>
+
+					<p>When you are building your layout in <strong>Drag'n'Drop</strong> mode you may want to customize the predefined sections: add or change background images and color, sections and paddings etc.</p>
+					<p>To do this just hover on section that you want to customize (in Drag'n'Drop mode) and click on <strong>"Edit section"</strong> button it top right corner of your section:</p>
+					<p>
+						<img src="images/documentation/edit_section_column.jpg">
+					</p>
+					<p> and you'll see the popup window with all the section's options:</p>
+
+					<p class="text-center">
+						<img src="images/documentation/section_options.jpg">
+					</p>
+
+					<p>You can change section tag (section, header or footer), background color and image, vertical paddings, bootstrap container type (regular centered or fullwidth fluid), align your content in section columns verticaly on large screens (as in table), add an ID attribute to sections etc.</p>
+
+
+					<p>You may also want to change Bootstrap columns that are inside your sections.</p>
+
+					<p>To do this just hover on column inside a section that you want to customize (in Drag'n'Drop mode) and click on <strong>"Edit column"</strong> button in the top left corner of your column and you'll see the popup window with column's options:</p>
+
+					<p class="text-center">
+						<img src="images/documentation/column_options.jpg">
+					</p>
+
+					<p>In this popup you can set a column width on different screen sizes, center the column content and set an animation for the column.</p>
+
+					<div class="alert alert-success" role="alert">
+						See template documentation for more info about column animation: <a href="index.html#animationSetup" target="_blank">Setup Animation for Elements</a>
+					</div>
+
+					<div class="alert alert-info" role="alert">
+						See <b>Twitter Bootstrap</b> documentation about template <a href="http://getbootstrap.com/css/#grid" target="_blank">grid system</a>
+					</div>
+
+					
+					<br id="buildingPageContent">
+					<h4><i class="fa fa-edit highlight"></i> Editing content</h4>
+
+					<p><img src="images/documentation/build_page2.jpg"></p>
+
+					<ul>
+						<li>Switch to content editing mode by clicking on <strong>Content Edit</strong> radio button at the top of your editor.</li>
+						<li>Double click on bootstrap column that you need to change.</li>
+						<li>Use inline text editor to modify column content.</li>
+					</ul>
+
+					<h4 class="text-center divider_30">
+						Inline editor menu:<br><br>
+							<img src="images/documentation/editor.jpg">
+					</h4>
+
+					<br id="buildingPageSaveEdit">
+
+					<h4> <i class="fa fa-file-o highlight"></i>&nbsp;&nbsp;&nbsp;Saving, editing and deleting previously saved pages</h4>
+
+					<p>When you're done with building page layout and editing your content you can save your page:</p>
+					<p>
+						<img src="images/documentation/build_page3.jpg">
+					</p>
+
+					<p>Choose page title and page name (which will be used for HTML file name) and hit <strong>"Save Page"</strong>:</p>
+					<p><img src="images/documentation/savepage_modal.jpg"></p>
+					<p>Now you can see your saved page in pages dropdown and in side menu below "Saved pages" title:</p>
+					<p>
+						<img src="images/documentation/savedpage.jpg">
+					</p>
+					<p>If you click on saved page title in dropdown menu or click on page title in side menu and click on <strong>"Edit page"</strong> button, you can start editing your saved page. Current page that you are editing will be replaced with saved page.</p>
+
+					<p>When you are finished with editing your previously saved page you need to open pages dropdown menu by clicking on page name and hitting <strong>"Save"</strong> to replace old page.</p>
+					<p>Also you can save those page as another page by clicking <strong>"Save as..."</strong> and choosing a new page name. You can perform this action if you need a new page that is based on previously saved page (ex. for subpages).</p>
+
+					<p>If you need to delete some pages just open side menu, click on saved page name and hit <strong>"Delete page"</strong> button.</p>
+
+					<hr id="exportImport" class="divider_40">
+
+					<h2 class="section_header text-center">Project export and import</h2>
+					<p class="text-center">You may want to save your project for later editing.</p>
+
+					<div class="alert alert-info" role="alert">
+						You need to save some pages and/or sections before exporting your project.
+					</div>
+
+					<p>You can export project and import your previosly saved project by clicking on the appropriate link in <strong>Actions</strong> dropdown menu at the top of your builder or at the bottom of your side menu:</p>
+
+					<p>
+						<img src="images/documentation/export_import.jpg">
+					</p>
+
+					<p>
+						By clicking <strong>"export"</strong> on the webserver with PHP support you'll get your project file <strong>project_***.zip</strong> which you can later import in builder.
+					</p>
+
+					<p>
+						If you run builder locally by clicking <strong>"export"</strong> you'll see the popup window with the code that you can copy and paste in a new file and save it for future importing.
+					</p>
+
+					<p>
+						Click on <strong>Import</strong> for import of your previosly exported project file (ZIP or manual saved file).
+					</p>
+
+					<div class="alert alert-warning" role="alert">
+						<strong>Warning!</strong> Your saved pages and sections will be replaced with pages and sections from project that your import!
+					</div>
+
+					<hr id="generatePagesProject" class="divider_40">
+
+					<h2 class="section_header text-center">Creating pages and project archive</h2>
+					<p class="text-center">When you're done with building your pages you need to generate HTML files or create full project archive.</p>
+
+					<div class="alert alert-info" role="alert">
+						You need to save at least one page to create HTML pages or generate ZIP package of your project.
+					</div>
+					<div class="alert alert-warning" role="alert">
+						You need a webserver with PHP support to use these functions.
+					</div>
+
+					<p>
+						You can generate HTML files and create project archive by clicking the appropriate buttons in Actions dropdown menu at the top of the builder or at the bottom of the side menu:
+					</p>
+
+					<p>
+						<img src="images/documentation/pages_zip.jpg">
+					</p>
+
+					<p>
+						By clicking <strong>"Create Pages"</strong> button all of your saved pages will be created as HTML files in your siteroot directory.
+					</p>
+
+					<div class="alert alert-warning" role="alert">
+						If your page names match HTML filenames in your siteroot, those <b>pages will be overwritten</b>!
+					</div>
+
+					<p>By clicking <strong>"Get ZIP"</strong> button all the content of your siteroot directory except builder folder and files will be zipped </p>
+
+					<hr id="credits" class="divider_40">
+
+					<h2 class="section_header text-center">Credits ans Sources</h2>
+					<p class="text-center">As we mentioned earlier, we used <a href="http://getbootstrap.com">Twitter Bootstrap v3</a> as CSS framework and <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a> for this template.</p>
+
+
+					<h3>Fonts:</h3>
+					<ul>
+						<li><a href="http://www.google.com/fonts/">http://www.google.com/fonts/</a> - Google WebFonts</li>
+						<li><a href="http://www.socicon.com/">http://www.socicon.com/</a> - Social Icons Font</li>
+						<li><a href="http://fontawesome.io/">http://fontawesome.io/</a> - Font Awesome</li>
+						<li><a href="http://icomoon.io/">http://icomoon.io/</a> - teaser rt-icons font</li>
+
+					</ul>
+
+					<h3>Template Scripts</h3>
+
+				  
+				  
+					<ul>
+						<li><a href="http://modernizr.com/">modernizr-2.6.2.min.js</a> detecting browser's features.</li>
+						<li><a href="http://jquery.com/">jquery-2.2.4.min.js</a> is a popular JavaScript library.</li>
+						<li><a href="http://getbootstrap.com">bootstrap.min.js</a> is a stantard Twitter Bootstrap library.</li>
+						<li><a href="https://github.com/scottjehl/Respond">respond.min.js</a> is required for working Twitter Bootstrap v3 in older browsers.</li>
+						<li><a href="https://code.google.com/p/html5shiv/">html5shiv.min.js</a> adds HTML5 compatibility for older browsers.</li>
+						<li><a href="http://users.tpg.com.au/j_birch/plugins/superfish/">superfish.js</a> is a script that enables dropdown menu.</li>
+						<li><a href="https://github.com/briancherne/jquery-hoverIntent">hoverIntent.js</a> is a component for superfish menu.</li>
+						<li><a href="http://www.woothemes.com/flexslider/">jquery.flexslider-min.js</a> is a jQuery plugin for main and bottom sliders.</li>
+						<li><a href="http://isotope.metafizzy.co/">jquery.isotope.min.js</a> is a jQuery plugin for filtrable gallery.</li>
+						<li><a href="http://www.no-margin-for-errors.com/projects/prettyphoto-jquery-lightbox-clone/">jquery.prettyPhoto.js</a> is a jQuery plugin for displaying lightbox content.</li>
+						<li><a href="http://www.mattvarone.com/web-design/uitotop-jquery-plugin/">jquery.ui.totop.js</a> is a jQuery plugin for toTop button.</li>
+						<li><a href="http://gsgd.co.uk/sandbox/jquery/easing/">jquery.easing.1.3.js</a> is a jQuery plugin for different types of animation</li>
+
+						<li><a href="http://flesler.blogspot.com/">jquery.scrollTo-min.js and jquery.localscroll-min.js</a> needed for smooth single page navigation.</li>
+						<li><a href="http://rendro.github.io/easy-pie-chart/">jquery.easypiechart.min.js</a> is a jQuery plugin that uses the canvas element to render simple pie charts for single values.</li>
+						<li><a href="http://files.gethifi.com/posts/jflickrfeed/example.html">jquery.jflickrfeed.min.js</a> plugin makes it easy to pull Flickr feeds and display them on your site.</li>
+						<li><a href="https://github.com/StanScates/Tweet.js-Mod">jquery.tweet.min.js</a> plugin enables twitter widget on your site.</li>
+						<li><a href="http://www.owlgraphic.com/owlcarousel">owl.carousel.min.js</a> is a jQuery carousel plugin for “partners” section</li>
+						<li><a href="http://bxslider.com/">jquery.bxslider.min.js</a> is a jQuery slider plugin</li>
+						<li><a href="http://areaaperta.com/nicescroll">jquery.nicescroll.min.js</a> is a plugin used to replace browser's standard scroll bar</li>
+						<li><a href="http://fractionslider.jacksbox.de">jquery.fractionslider.min.js</a> is a great slider plugin for main slider</li>
+						<li><a href="http://www.ianlunn.co.uk/plugins/jquery-parallax/">jquery.parallax-1.1.3.js</a> is used for parallax backgrounds.</li>
+						<li><a href="https://github.com/morr/jquery.appear/">jquery.appear.js</a> is used to determine whether the HTML element is inside the browser's viewport</li>
+						<li><a href="https://github.com/gromo/jquery.scrollbar/">jquery.scrollbar.min.js</a> is a jQuery plugin for custom scrollbar</li>
+						<li><a href="https://github.com/mhuggins/jquery-countTo">jquery.countTo.js</a> is used for teasers with counter</li>
+						<li><a href="http://www.minddust.com/project/bootstrap-progressbar/">bootstrap-progressbar.min.js</a> is used for animating Twitter Bootstrap progressbars</li>
+						<li><a href="https://github.com/carhartl/jquery-cookie">jquery.cookie.js</a> is used for store cookies information in template</li>
+						<li><a href="http://spectragram.js.org/">spectragram.min.js</a> is used for Instagram feed</li>
+						<li><a href="http://keith-wood.name/countdown.html">jquery.countdown.min.js</a> is used for Coming Soon page</li>
+					</ul>
+
+					<h3>Builder scripts</h3>
+
+
+					<ul>
+						<li><a href="http://jqueryui.com">jquery-ui.min.js</a> is a popular UI library for jQuery</li>
+						<li><a href="http://www.tinymce.com/">tinymce.min.js</a> is a popular WYSIWYG editor</li>
+						<li><a href="http://www.dropzonejs.com/">dropzone.js</a> is drag'n'drop file upload library</li>
+						<li><a href="http://silviomoreto.github.io/bootstrap-select">bootstrap-select.min.js</a> is s custom select for Twitter Bootstrap using button dropdown</li>
+						<li><a href="http://angularjs.org">angular.min.js</a> is a powerfull Google javascript framework</li>
+						<li><a href="https://github.com/joaoneto/angular-bootstrap-select">angular-bootstrap-select.js</a> is a Angular module for select input elements</li>
+						<li><a href="#">angular-dropzone.js</a> is a module for Angular to work with Dropzone lib</li>
+						<li><a href="https://docs.angularjs.org/api/ngSanitize">angular-sanitize.min.js</a> is a module for Angular to sanitize HTML code</li>
+						<li><a href="http://angular-js.in/ngstorage/">angular.ngStorage.min.js</a> is a module for Angular to work with browser Local Storage</li>
+					</ul>
+
+					<h3>Images</h3>
+					<ul>
+						<li><a href="http://depositphotos.com">depositphotos.com</a></li>
+						<li><a href="http://danielezedda.com">danielezedda.com</a></li>
+						<li><a href="http://foodiesfeed.com">foodiesfeed.com</a></li>
+						<li><a href="http://gratisography.com">gratisography.com</a></li>
+						<li><a href="http://magdeleine.co">magdeleine.co</a></li>
+						<li><a href="http://picjumbo.com">picjumbo.com</a></li>
+						<li><a href="http://picography.co">picography.co</a></li>
+						<li><a href="http://unsplash.com">unsplash.com</a></li>
+						<li><a href="http://freepsdfiles.net/">freepsdfiles.net</a></li>
+						<li><a href="http://free-logo-design.net/">free-logo-design.net</a></li>
+
+
+
+					</ul>
+
+				</div> <!--eof .col-sm-8 (main content)-->
+
+						<!-- sidebar -->
+			<aside class="col-sm-5 col-md-4 col-lg-4 affix-aside">
+		
+				<div class="with_border darklinks mainmenu_side_wrapper">
+
+					<ul class="nav menu-click" id="land">
+					
+						<li>
+							<a href="#builderFiles">Visual Builder Files</a>
+						</li>
+						<li>
+							<a href="#builderFeatures">Builder Features</a>
+						</li>
+						<li>
+							<a href="#builderRequirements">Requirements</a>
+						</li>
+						<li>
+							<a href="#buildingPage">Building Page</a>
+							<ul>
+								<li>
+									<a href="#buildingPageLayout">Creating layout</a>
+								</li>
+								<li>
+									<a href="#deletingElements">Deleting elements</a>
+								</li>
+								<li>
+									<a href="#buildingPageSectionsColumns">Editing sections and columns</a>
+								</li>
+								<li>
+									<a href="#buildingPageContent">Editing content</a>
+								</li>
+								<li>
+									<a href="#buildingPageSaveEdit">Saving, editing and deleting pages</a>
+								</li>
+							</ul>
+						</li>
+						<li><a href="#exportImport">Project export and import</a></li>
+						
+						<li><a href="#generatePagesProject">Creating pages and project archive</a></li>
+
+						<li><a href="#credits">Sources and Credits</a></li>
+					
+					</ul>  
+				
+					
+					
+				</div>
+
+
+			</aside> <!-- eof aside sidebar -->
+
+		</div>
+	</div>
+</section>
+
+<section class="page_copyright section_padding_25 ds">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<p>&copy; Copyright 2018. ClearView. All Rights Reserved.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+</div><!-- eof #box_wrapper -->
+</div><!-- eof #canvas -->
+
+<div class="preloader">
+	<div class="preloader_image"></div>
+</div>
+
+		<script src="js/compressed.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>

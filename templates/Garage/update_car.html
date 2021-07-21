@@ -1,53 +1,159 @@
-{% load crispy_forms_tags %}
+{##}
+{#    <form action="{% url 'update_car' car_id=car.id %}" method="POST" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {{ form|crispy }}#}
+{#        <input class="form-control" type="text" placeholder="Марка" value="{{ car.producer }}" name="producer">#}
+{#        <input class="form-control" type="text" placeholder="Модель" value="{{ car.model }}" name="model">#}
+{#        <input class="form-control" type="number" placeholder="Год" value="{{ car.year }}" name="year">#}
+{##}
+{#        <label for="transmission">Выбери тип КПП:</label>#}
+{#        <select name="transmission" value="{{ car.transmission }}" id="transmission">#}
+{#          <option value="ручная/механика">Ручная/Механика</option>#}
+{#          <option value="автомат">Автомат</option>#}
+{#          <option value="типтроник">Типтроник</option>#}
+{#          <option value="робот">Робот</option>#}
+{#          <option value="вариатор">Вариатор</option>#}
+{#        </select>#}
+{##}
+{#        <label for="fuel">Выбери тип топлива:</label>#}
+{#        <select name="fuel" value="{{ car.fuel }}" id="fuel">#}
+{#          <option value=1>Бензин</option>#}
+{#          <option value=2>Дизель</option>#}
+{#          <option value=3>Газ</option>#}
+{#          <option value=4>Газ/Бензин</option>#}
+{#          <option value=5>Гибрид</option>#}
+{#          <option value=6>Электро</option>#}
+{#          <option value=7>Газ метан</option>#}
+{#          <option value=8>Газ пропан-бутан</option>#}
+{#          <option value=9>Другое</option>#}
+{#        </select>#}
+{##}
+{#        <label for="drive_system">Выбери тип привода:</label>#}
+{#        <select name="drive_system" id="drive_system">#}
+{#          <option value=1>Полный</option>#}
+{#          <option value=2>Передний</option>#}
+{#          <option value=3>Задний</option>#}
+{#        </select>#}
+{#        <input class="form-control" type="text" placeholder="Пробег" value="{{ car.mileage }}" name="mileage">#}
+{#        <input class="form-control" type="text" placeholder="Стоимость" value="{{ car.price }}" name="price">#}
+{##}
+{#        <input class="form-control" type="text" placeholder="Тип кузова" value="{{ car.body }}" name="body">#}
+{#        <input class="form-control" type="text" placeholder="Тип топлива" value="{{ car.engine }}" name="engine">#}
+{#        <input type="submit" value="Save" class="btn-default">#}
+{#    </form>#}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add_car</title>
-</head>
-<body>
-    <form action="{% url 'update_car' car_id=car.id %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <input class="form-control" type="text" placeholder="Марка" value="{{ car.producer }}" name="producer">
-        <input class="form-control" type="text" placeholder="Модель" value="{{ car.model }}" name="model">
-        <input class="form-control" type="number" placeholder="Год" value="{{ car.year }}" name="year">
 
-        <label for="transmission">Выбери тип КПП:</label>
-        <select name="transmission" value="{{ car.transmission }}" id="transmission">
-          <option value="ручная/механика">Ручная/Механика</option>
-          <option value="автомат">Автомат</option>
-          <option value="типтроник">Типтроник</option>
-          <option value="робот">Робот</option>
-          <option value="вариатор">Вариатор</option>
-        </select>
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+    <section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2>Добавить машину</h2>
+                    <ol class="breadcrumb greylinks">
+                        <li> <a href="#">
+                    Главная
+                </a> </li>
+                        <li> <a href="{% url "add_car" %}">Машины</a> </li>
+                        <li class="active">Добавить машину</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
+        <div class="container">
+            <div class="row">
+                <form class="contact-form" action="{% url 'update_car' car_id=car.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <!-- Add car photo -->
+                    <div class="col-sm-5 col-md-4 col-lg-3">
+                        <div class="vertical-item content-padding rounded overflow_hidden with_background">
+                            <div class="item-media"> <img src="/static/images/team/01.jpg" alt="">
+                                <div class="media-links ds">
+                                    <div class="bottom-links"> <a href="team-single.html" class="theme_button inverse">View profile</a> </div>
+                                </div>
+                            </div>
+                            <div class="item-content bottom_color_border">
+                                <h4 class="entry-title bottommargin_0"> <a href="team-single.html">Добавить фото</a> </h4>
+                                <p class="small-text highlight bottommargin_10">Director</p>
+                                <p class="social-links"> <a class="social-icon socicon-facebook" href="#" title="Facebook"></a> <a class="social-icon socicon-twitter" href="#" title="Twitter"></a> <a class="social-icon socicon-google" href="#" title="Twitter"></a> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 col-md-8 col-lg-9">
+                        <p class="contact-form">
+                            <input type="text" aria-required="true" size="30" value="{{ car.producer }}" name="producer" class="contact-form-producer" placeholder="Марка">
+                            <input type="text" aria-required="true" size="30" value="{{ car.model }}" name="model" class="contact-form-model" placeholder="Модель">
+                        </p>
+                        <p class="contact-form">
+                            <input type="number" aria-required="true" size="30" value="{{ car.year }}" name="year" class="contact-form-year" placeholder="Год">
+                            <input type="number" aria-required="false" size="30" value="{{ car.mileage }}" name="mileage" class="contact-form-mileage" placeholder="Пробег">
+                        </p>
+                        <p class="contact-form">
+                            <label for="transmission">Выбери тип КПП:</label>
+                            <select name="transmission" id="transmission">
+                              {% if car.transmission %}
+                                <option value="{{ car.transmission }}">{{ car.transmission.title }}</option>
+                              {% endif %}
+                              <option value="ручная/механика">Ручная/Механика</option>
+                              <option value="автомат">Автомат</option>
+                              <option value="типтроник">Типтроник</option>
+                              <option value="робот">Робот</option>
+                              <option value="вариатор">Вариатор</option>
+                            </select>
 
-        <label for="fuel">Выбери тип топлива:</label>
-        <select name="fuel" value="{{ car.fuel }}" id="fuel">
-          <option value=1>Бензин</option>
-          <option value=2>Дизель</option>
-          <option value=3>Газ</option>
-          <option value=4>Газ/Бензин</option>
-          <option value=5>Гибрид</option>
-          <option value=6>Электро</option>
-          <option value=7>Газ метан</option>
-          <option value=8>Газ пропан-бутан</option>
-          <option value=9>Другое</option>
-        </select>
+                            <label for="drive_system">Выбери тип привода:</label>
+                            <select name="drive_system" id="drive_system">
+                              {% if car.drive_system %}
+                                <option value="{{ car.drive_system }}">{{ car.drive_system }}</option>
+                              {% endif %}
+                              <option value=1>Полный</option>
+                              <option value=2>Передний</option>
+                              <option value=3>Задний</option>
+                            </select>
+                        </p>
+                        <p class="contact-form">
+                            <label for="fuel">Выбери тип топлива:</label>
+                            <select name="fuel" id="fuel" value="{{ car.fuel }}">
+                              {% if car.fuel %}
+                                <option value="{{ car.fuel }}">{{ car.fuel }}</option>
+                              {% endif %}
+                              <option value=1>Бензин</option>
+                              <option value=2>Дизель</option>
+                              <option value=3>Газ</option>
+                              <option value=4>Газ/Бензин</option>
+                              <option value=5>Гибрид</option>
+                              <option value=6>Электро</option>
+                              <option value=7>Газ метан</option>
+                              <option value=8>Газ пропан-бутан</option>
+                              <option value=9>Другое</option>
+                            </select>
 
-        <label for="drive_system">Выбери тип привода:</label>
-        <select name="drive_system" id="drive_system">
-          <option value=1>Полный</option>
-          <option value=2>Передний</option>
-          <option value=3>Задний</option>
-        </select>
-        <input class="form-control" type="text" placeholder="Пробег" value="{{ car.mileage }}" name="mileage">
-        <input class="form-control" type="text" placeholder="Стоимость" value="{{ car.price }}" name="price">
-
-        <input class="form-control" type="text" placeholder="Тип кузова" value="{{ car.body }}" name="body">
-        <input class="form-control" type="text" placeholder="Тип топлива" value="{{ car.engine }}" name="engine">
-        <input type="submit" value="Save" class="btn-default">
-    </form>
-</body>
-</html>
+                            <input type="number" aria-required="false" size="30" value="{{ car.price | floatformat }}" name="price" class="contact-form-price" placeholder="Стоимость">
+                        </p>
+                        <p class="contact-form">
+                            {% if car.body is None %}
+                                <input type="text" aria-required="false" size="30" value name="body" class="contact-form-body" placeholder="Тип кузова">
+                            {% else %}
+                                <input type="text" aria-required="false" size="30" value="{{ car.body }}" name="body" class="contact-form-body" placeholder="Тип кузова">
+                            {% endif %}
+                            {% if car.engine is None %}
+                                <input type="text" aria-required="false" size="30" value name="engine" class="contact-form--engine" placeholder="Тип двигателя">
+                            {% else %}
+                                <input type="text" aria-required="false" size="30" value="{{ car.engine }}" name="engine" class="contact-form--engine" placeholder="Тип двигателя">
+                            {% endif %}
+                        </p>
+                        <input type="submit" value="Save" class="btn-default">
+                        {% if errors %}
+                            {% for error in errors %}
+                                <p class="contact-form">{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
