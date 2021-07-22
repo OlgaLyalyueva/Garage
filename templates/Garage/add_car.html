@@ -39,16 +39,16 @@
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9">
                         <p class="contact-form">
-                            <input type="text" aria-required="true" size="30" value name="producer" class="contact-form-producer" placeholder="Марка">
-                            <input type="text" aria-required="true" size="30" value name="model" class="contact-form-producer" placeholder="Модель">
+                            <input type="text" required="true" size="30" value name="producer" class="contact-form-producer" placeholder="Марка">
+                            <input type="text" required="true" size="30" value name="model" class="contact-form-producer" placeholder="Модель">
                         </p>
                         <p class="contact-form">
-                            <input type="number" aria-required="true" size="30" value name="year" class="contact-form-year" placeholder="Год">
+                            <input type="number" required="true" size="30" value name="year" class="contact-form-year" placeholder="Год">
                             <input type="number" aria-required="false" size="30" value name="mileage" class="contact-form-mileage" placeholder="Пробег">
                         </p>
                         <p class="contact-form">
                             <label for="transmission">Выбери тип КПП:</label>
-                            <select name="transmission" id="transmission">
+                            <select name="transmission" id="transmission" required>
                               <option hidden disabled selected value> Тип КПП </option>
                               <option value="ручная/механика">Ручная/Механика</option>
                               <option value="автомат">Автомат</option>
@@ -58,7 +58,7 @@
                             </select>
 
                             <label for="drive_system">Выбери тип привода:</label>
-                            <select name="drive_system" id="drive_system">
+                            <select name="drive_system" id="drive_system" required>
                               <option hidden disabled selected value> Тип привода </option>
                               <option value=1>Полный</option>
                               <option value=2>Передний</option>
@@ -67,7 +67,7 @@
                         </p>
                         <p class="contact-form">
                             <label for="fuel">Выбери тип топлива:</label>
-                            <select name="fuel" id="fuel">
+                            <select name="fuel" id="fuel" required>
                               <option hidden disabled selected value> Тип топлава </option>
                               <option value=1>Бензин</option>
                               <option value=2>Дизель</option>
@@ -87,11 +87,6 @@
                             <input type="text" aria-required="false" size="30" value name="engine" class="contact-form--engine" placeholder="Тип двигателя">
                         </p>
                         <input type="submit" value="Save" class="btn-default">
-{#                        {% if errors %}#}
-{#                            {% for error in errors %}#}
-{#                                <p class="contact-form">{{ error }}</p>#}
-{#                            {% endfor %}#}
-{#                        {% endif %}#}
                     </div>
                 </form>
             </div>
