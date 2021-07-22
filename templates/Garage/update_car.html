@@ -83,6 +83,20 @@
                         </div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9">
+                        {% if form_car.errors %}
+                            <!-- Error messaging -->
+                            <div id="errors">
+                                <div class="inner">
+                                    <p>В введенной вами информации были ошибки. Исправьте следующее:</p>
+                                    <ul>
+                                        {% for field in form_car %}
+                                            {% if field.errors %}<li>{{ field.label| }}: {{ field.errors|striptags }}</li>{% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /Error messaging -->
+                        {% endif %}
                         <p class="contact-form">
                             <input type="text" aria-required="true" size="30" value="{{ car.producer }}" name="producer" class="contact-form-producer" placeholder="Марка">
                             <input type="text" aria-required="true" size="30" value="{{ car.model }}" name="model" class="contact-form-model" placeholder="Модель">
@@ -146,11 +160,6 @@
                             {% endif %}
                         </p>
                         <input type="submit" value="Save" class="btn-default">
-                        {% if errors %}
-                            {% for error in errors %}
-                                <p class="contact-form">{{ error }}</p>
-                            {% endfor %}
-                        {% endif %}
                     </div>
                 </form>
             </div>

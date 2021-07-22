@@ -155,6 +155,7 @@ def update_car(request, car_id=None):
         else:
             errors = form_car.errors
             context = {
+                'form_car': form_car,
                 'car': car,
                 'errors': errors}
             return render(request, 'Garage/update_car.html', context)
