@@ -84,9 +84,11 @@ class TestInsurance(TestCase):
     def test_add_optional_fields_of_model(self):
         Insurance.objects.filter(id=1).update(
             description='ОСАГО Тас Банк',
-            policy_number='AC23056'
+            policy_number='AC23056',
+            price=121.31,
         )
         insurance = Insurance.objects.get(id=1)
         self.assertEqual(insurance.description, 'ОСАГО Тас Банк')
         self.assertEqual(insurance.policy_number, 'AC23056')
+        self.assertEqual(insurance.price, 121.31)
         self.assertTrue(insurance.type)
