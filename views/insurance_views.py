@@ -68,7 +68,8 @@ def update_insurance(request, insrnc_id=None):
         datetime.datetime.strptime(form_insrnc.data['end_date'], "%Y-%m-%d").date()
         if form_insrnc.is_valid():
             form_insrnc.save()
-            return redirect('insurances')
+            car_id = form_insrnc.data['car']
+            return redirect(f'/car/{car_id}')
         else:
             errors = form_insrnc.errors
             context = {
@@ -81,8 +82,8 @@ def update_insurance(request, insrnc_id=None):
     context = {
         'cars': cars,
         'car': car,
-        'insurance': insrnc,
-        'form': form_insrc
+        'insrnc': insrnc,
+        'form_insrc': form_insrc
     }
     return render(request, 'Garage/update_insurance.html', context)
 

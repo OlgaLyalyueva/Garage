@@ -1,36 +1,56 @@
-{% load crispy_forms_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Update_insurance</title>
-</head>
-<body>
-    <p>{{ car.id }} {{ user.id }}</p>
-    <form action="{% url 'update_insurance' insrnc_id=insurance.id %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form_insrnc|crispy }}
-        {% if errors %}
-            {% for error in errors %}
-                <p>{{ error }}</p>
-            {% endfor %}
-        {% endif %}
-        <input class="form-control" type="text" placeholder="Тип" value="{{ insurance.type }}" name="type">
-        <input class="form-control" type="text" placeholder="Описание" value="{{ insurance.description }}" name="description">
-        <input class="form-control" type="text" placeholder="Номер страхового полиса" value="{{ insurance.policy_number }}" name="policy_number">
-        <input class="form-control" placeholder="Дата начала" value="{{ insurance.start_date|date:"Y-m-d" }}" name="start_date">
-        <input class="form-control" placeholder="Дата окончания" value="{{ insurance.end_date|date:"Y-m-d" }}" name="end_date">
-        <input class="form-control" type="number" placeholder="Стоимость" value="{{ insurance.price }}" name="price">
-
-        <label for="{{ car.id }}">Автомобиль</label>
-        <select name="car" id="{{ car.id }}">
-            {% for car in cars %}
-                <option value={{ car.id }}>{{ car.producer }}, {{ car.model }}</option>
-            {% endfor %}
-        </select>
-
-        <input type="submit" value="Save" class="btn-default">
-    </form>
-</body>
-</html>
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+    <section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2>Изменить страховку</h2>
+                    <ol class="breadcrumb greylinks">
+                        <li> <a href="#">
+                    Главная
+                </a> </li>
+                        <li class="active">Изменить страховку</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
+        <div class="container">
+            <div class="row">
+                <form class="contact-form" action="{% url 'update_insurance' insrnc_id=insrnc.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <div class="col-sm-7 col-md-8 col-lg-9">
+                        <p class="contact-form">
+                            <input type="text" required="true" size="30" value="{{ insrnc.type }}" name="type" class="contact-form-producer" placeholder="Тип страховки">
+                            <input type="text" aria-required="true" size="30" value="{{ insrnc.description }}" name="description" class="contact-form-producer" placeholder="Описание">
+                        </p>
+                        <p class="contact-form">
+                            <input type="text" required="true" size="30" value="{{ insrnc.policy_number }}" name="policy_number" class="contact-form-year" placeholder="Номер полиса">
+                            <input type="date" required="true" size="30" value="{{ insrnc.start_date | date:"Y-m-d" }}" name="start_date" class="contact-form-mileage" placeholder="Дата начала">
+                            <input type="date" required="true" size="30" value="{{ insrnc.end_date | date:"Y-m-d" }}" name="end_date" class="contact-form-mileage" placeholder="Дата окончания">
+                        </p>
+                        <p>
+                            <input type="number" step="0.01" aria-required="false" size="30" value="{{ insrnc.price|stringformat:".2f" }}" name="price" class="contact-form-price" placeholder="Стоимость">
+                            {% if cars %}
+                                    <p class="contact-form">
+                                        <label for="car">Выбери автомобиль котрый был застрахован:</label>
+                                        <select name="car" id="car_id" value="{{ car.id }}">
+                                            {% if car %}
+                                                <option value="{{ car.id }}">{{ car.producer }}, {{ car.model }}</option>
+                                                {% for car in cars %}
+                                                    <option value="{{ car.id }}">{{ car.producer }}, {{ car.model }}</option>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </select>
+                            {% endif %}
+                        </p>
+                        <input type="submit" value="Save" class="btn-default">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
 
