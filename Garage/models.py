@@ -75,7 +75,7 @@ class Insurance(models.Model):
     policy_number = models.CharField(blank=True, max_length=30, verbose_name='Номер страховки')
     start_date = models.DateField(verbose_name='Дата начала')
     end_date = models.DateField(verbose_name='Дата окончания')
-    price = models.FloatField(verbose_name='Стоимость страховки')
+    price = models.FloatField(blank=True, null=True, verbose_name='Стоимость страховки')
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from Garage.models import Car, Insurance
 from django.shortcuts import render, redirect, get_object_or_404
 from Garage.forms import InsuranceForm
-
+from . import car_views
 
 @login_required()
 def get_insurances(request):
@@ -30,19 +30,21 @@ def get_insurances(request):
 
 
 @login_required()
-def add_insurances(request):
+def add_insurance(request):
     user = request.user
     cars = Car.objects.filter(user_id=user.id)
     if request.method == 'POST':
         form_insrnc = InsuranceForm(request.POST)
         if form_insrnc.is_valid():
             form_insrnc.save()
-            return redirect('insurances')
+            car_id = form_insrnc.data['car']
+            return redirect(f'/car/{car_id}')
         else:
             error_mes = form_insrnc.errors
             context = {
                 'errors': error_mes,
-                'user': user
+                'user': user,
+                'cars': cars,
             }
             return render(request, 'Garage/add_insurance.html', context)
     form_insrnc = InsuranceForm()
