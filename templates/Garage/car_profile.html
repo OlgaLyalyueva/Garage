@@ -1,0 +1,143 @@
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+    <section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2>Описание машины</h2>
+                    <ol class="breadcrumb greylinks">
+                        <li> <a href="#">
+                    Главная
+                </a> </li>
+                        <li> <a href="{% url "cars" %}">Машины</a> </li>
+                        <li class="active">Описание машины</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
+        <div class="container">
+            <div class="row">
+                <!-- Car photo -->
+                <div class="col-sm-5 col-md-4 col-lg-3">
+                    <div class="vertical-item content-padding rounded overflow_hidden with_background">
+                        <div class="item-media"> <img src="/static/images/team/01.jpg" alt="">
+                            <div class="media-links ds">
+                                <div class="bottom-links"> <a href="team-single.html" class="theme_button inverse">View profile</a> </div>
+                            </div>
+                        </div>
+                        <div class="item-content bottom_color_border">
+                            <h4 class="entry-title bottommargin_0"> <a href="team-single.html">Добавить фото</a> </h4>
+                            <p class="small-text highlight bottommargin_10">Director</p>
+                            <p class="social-links"> <a class="social-icon socicon-facebook" href="#" title="Facebook"></a> <a class="social-icon socicon-twitter" href="#" title="Twitter"></a> <a class="social-icon socicon-google" href="#" title="Twitter"></a> </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Car description -->
+
+                <!-- Если значение None не отображать это поле -->
+                <div class="col-sm-7 col-md-8 col-lg-9">
+                    <p>Марка: {{ car.producer }}</p>
+                    <p>Модель: {{ car.model }}</p>
+                    <p>Год выпуска: {{ car.year }}</p>
+                    <p>Тип кузова: {{ car.body }}</p>
+                    <p>Тип привода: {{ car.transmission }}</p>
+                    <!-- Интерпритировать цифры в текст -->
+                    <p>Тип топлива: {{ car.fuel }}</p>
+                    <p>Тип коробки: {{ car.drive_system }}</p>
+                    <p>Пробег: {{ car.mileage }}</p>
+                    <!-- Добавить стоимость в грн и дол -->
+                    <p>Стоимость: {{ car.price }}</p>
+                    <p>Двигатель: {{ car.engine }}</p>
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs topmargin_40" role="tablist">
+                        <li><a href="#tab1" role="tab" data-toggle="tab">Страховка</a></li>
+                        <li><a href="#tab2" role="tab" data-toggle="tab">Ремонт</a></li>
+                        <li><a href="#tab3" role="tab" data-toggle="tab">Проблемы с автомобилем</a></li>
+                        <li><a href="#tab4" role="tab" data-toggle="tab">Улучшения</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content big-padding top-color-border bottommargin_40">
+                        <div class="tab-pane fade" id="tab1">
+                            <h4>Страховка:</h4>
+                            {% if insurance %}
+                                {% for i in insurance %}
+                                <p>Тип страхового плана: {{ i.type }}</p>
+                                <p>Номер страхового плана: {{ i.policy_number }}</p>
+                                <p>Дата начала: {{ i.start_date }}</p>
+                                <p>Дата окончания: {{ i.end_date }}</p>
+                                <p>Описание: {{ i.description }}</p>
+                                <p>Стоимость: {{ i.price }}</p>
+                                <a href="{% url 'update_insurance' insrnc_id=i.id %}" class="small-text highlight">Изменить</a>
+                                    <p></p>
+                                    <p></p>
+                                {% endfor %}
+                            {% else %}
+                                <p>У вас нет добавленных страховых планов</p>
+                            {% endif %}
+                            <a href="{% url 'add_insurance' %}" class="theme_button color1 min_width_button">Добавить страховку</a>
+                        </div>
+                        <div class="tab-pane fade" id="tab2">
+                            <h4>Ремонт:</h4>
+                            {% if repair %}
+                                {% for r in repair %}
+                                <p>Тип ремонта: {{ r.type_of_repair }}</p>
+                                <p>Название: {{ r.name }}</p>
+                                <p>Описание: {{ r.description }}</p>
+                                <p>Заметки: {{ r.note }}</p>
+                                <p>Пробег: {{ r.mileage }}</p>
+                                <p>Стоимость: {{ r.price }}</p>
+                                <p>Дата: {{ r.date }}</p>
+                                <a href="#" class="small-text highlight">Изменить</a>
+                                <p></p>
+                                <p></p>
+                                {% endfor %}
+                            {% else %}
+                                <p>У вас нет добавленных рементов</p>
+                            {% endif %}
+                            <a href="#" class="theme_button color1 min_width_button">Добавить ремонт</a>
+                        </div>
+                        <div class="tab-pane fade" id="tab3">
+                            <h4>Проблемы с автомобилем:</h4>
+                            {% if car_issue %}
+                                {% for c in car_issue %}
+                                <p>Название: {{ c.name }}</p>
+                                <p>Изменение: {{ c.description }}</p>
+                                <p>Состояние: {{ c.state }}</p>
+                                <p>Дата: {{ c.date }}</p>
+                                <a href="#" class="small-text highlight">Изменить</a>
+                                <p></p>
+                                <p></p>
+                                {% endfor %}
+                            {% else %}
+                                <p>Нет текущих проблем с автомобилем</p>
+                            {% endif %}
+                            <a href="#" class="theme_button color1 min_width_button">Добавить текущую проблему</a>
+                        </div>
+                        <div class="tab-pane fade" id="tab4">
+                            <h4>Улучшения:</h4>
+                            {% if improvement %}
+                                {% for i in improvement %}
+                                <p>{{ i.name }}</p>
+                                <p>{{ i.description }}</p>
+                                <p>{{ i.price }}</p>
+                                <p>{{ i.state }}</p>
+                                <p>{{ i.date }}</p>
+                                <a href="#" class="small-text highlight">Изменить</a>
+                                <p></p>
+                                <p></p>
+                                {% endfor %}
+                            {% else %}
+                                <p>Уличшений нет</p>
+                            {% endif %}
+                            <a href="#" class="theme_button color1 min_width_button">Добавить текущее улучшение</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock%}
