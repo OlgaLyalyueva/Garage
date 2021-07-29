@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -137,6 +139,7 @@ def add_engine(engine_name):
 def update_car(request, car_id=None):
     user = request.user
     car = get_object_or_404(Car, id=car_id, user_id=user.id)
+    now = datetime.datetime.now()
     if request.method == 'POST':
         form_car = CarForm(request.POST, instance=car)
         if form_car.is_valid():
@@ -157,12 +160,15 @@ def update_car(request, car_id=None):
             context = {
                 'form_car': form_car,
                 'car': car,
-                'errors': errors}
+                'now': now,
+                'errors': errors
+            }
             return render(request, 'Garage/update_car.html', context)
     form_car = CarForm()
     context = {
         'form_car': form_car,
-        'car': car
+        'car': car,
+        'now': now
                }
     return render(request, 'Garage/update_car.html', context)
 
