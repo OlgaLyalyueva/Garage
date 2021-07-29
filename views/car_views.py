@@ -56,9 +56,9 @@ def get_car(request, car_id):
     user = request.user
     car = get_object_or_404(Car, id=car_id, user_id=user.id)
     try:
-        insurance = Insurance.objects.filter(car_id=car.id)
+        insurances = Insurance.objects.filter(car_id=car.id)
     except ObjectDoesNotExist:
-        insurance = None
+        insurances = None
 
     try:
         repair = Repair.objects.filter(car_id=car.id)
@@ -77,7 +77,7 @@ def get_car(request, car_id):
     context = {
         'user': user,
         'car': car,
-        'insurance': insurance,
+        'insurances': insurances,
         'repair': repair,
         'car_issue': car_issue,
         'improvement': improvement

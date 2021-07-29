@@ -1,5 +1,6 @@
 {% extends 'Garage/index.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
     <section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
         <div class="container">
@@ -36,21 +37,19 @@
                     </div>
                 </div>
                 <!-- Car description -->
-
-                <!-- Если значение None не отображать это поле -->
                 <div class="col-sm-7 col-md-8 col-lg-9">
-                    <p>Марка: {{ car.producer }}</p>
-                    <p>Модель: {{ car.model }}</p>
+                    <p>Марка: {{ car.producer|title }}</p>
+                    <p>Модель: {{ car.model|title }}</p>
                     <p>Год выпуска: {{ car.year }}</p>
-                    <p>Тип кузова: {{ car.body }}</p>
-                    <p>Тип привода: {{ car.transmission }}</p>
+                    <p style="display: {{ car.engine }}">Тип кузова: {{ car.body|title }}</p>
+                    <p>Тип привода: {{ car.transmission|title }}</p>
                     <!-- Интерпритировать цифры в текст -->
                     <p>Тип топлива: {{ car.fuel }}</p>
                     <p>Тип коробки: {{ car.drive_system }}</p>
-                    <p>Пробег: {{ car.mileage }}</p>
+                    <p style="display: {{ car.mileage }}">Пробег: {{ car.mileage }}</p>
                     <!-- Добавить стоимость в грн и дол -->
-                    <p>Стоимость: {{ car.price }}</p>
-                    <p>Двигатель: {{ car.engine }}</p>
+                    <p style="display: {{ car.price }}">Стоимость: {{ car.price|floatformat|intcomma }}$</p>
+                    <p style="display: {{ car.engine }}">Двигатель: {{ car.engine|title }}</p>
 
                     <!-- Popup for remove car -->
                     <a class="theme_button color1 min_width_button" href="{% url 'update_car' car_id=car.id %}">Изменить <span class="glyphicon glyphicon-pencil"> </span></a>
@@ -74,15 +73,15 @@
                     <div class="tab-content big-padding top-color-border bottommargin_40">
                         <div class="tab-pane fade" id="tab1">
                             <h4>Страховка:</h4>
-                            {% if insurance %}
-                                {% for i in insurance %}
-                                <p>Тип страхового плана: {{ i.type }}</p>
-                                <p>Номер страхового плана: {{ i.policy_number }}</p>
-                                <p>Дата начала: {{ i.start_date }}</p>
-                                <p>Дата окончания: {{ i.end_date }}</p>
-                                <p>Описание: {{ i.description }}</p>
-                                <p>Стоимость: {{ i.price }}</p>
-                                <a href="{% url 'update_insurance' insrnc_id=i.id %}" class="small-text highlight">Изменить</a>
+                            {% if insurances %}
+                                {% for insurance in insurances %}
+                                <p>Тип страхового плана: {{ insurance.type }}</p>
+                                <p>Номер страхового плана: {{ insurance.policy_number }}</p>
+                                <p>Дата начала: {{ insurance.start_date }}</p>
+                                <p>Дата окончания: {{ insurance.end_date }}</p>
+                                <p>Описание: {{ insurance.description }}</p>
+                                <p style="display: {{ insurance.price }}">Стоимость: {{ insurance.price|stringformat:".2f"|intcomma }}</p>
+                                <a href="{% url 'update_insurance' insrnc_id=insurance.id %}" class="small-text highlight">Изменить</a>
                                     <p></p>
                                     <p></p>
                                 {% endfor %}
@@ -132,11 +131,11 @@
                             <h4>Улучшения:</h4>
                             {% if improvement %}
                                 {% for i in improvement %}
-                                <p>{{ i.name }}</p>
-                                <p>{{ i.description }}</p>
-                                <p>{{ i.price }}</p>
-                                <p>{{ i.state }}</p>
-                                <p>{{ i.date }}</p>
+                                <p>Название: {{ i.name }}</p>
+                                <p>Описание: {{ i.description }}</p>
+                                <p>Стоимость: {{ i.price }}</p>
+                                <p>Состояние: {{ i.state }}</p>
+                                <p>Дата: {{ i.date }}</p>
                                 <a href="#" class="small-text highlight">Изменить</a>
                                 <p></p>
                                 <p></p>
