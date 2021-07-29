@@ -52,6 +52,17 @@
                     <p>Стоимость: {{ car.price }}</p>
                     <p>Двигатель: {{ car.engine }}</p>
 
+                    <!-- Popup for remove car -->
+                    <a class="theme_button color1 min_width_button" href="{% url 'update_car' car_id=car.id %}">Изменить <span class="glyphicon glyphicon-pencil"> </span></a>
+                    <button type="button" class="theme_button min_width_button btn-danger" data-toggle="modal" data-target="#MyModal" href="{% url 'delete_car' car_id=car.id %}">Удалить <span class="glyphicon glyphicon-trash"> </span></button>
+                    <div id ="MyModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                </div>
+                        </div>
+                    </div>
+                    <!-- End Popup -->
+
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs topmargin_40" role="tablist">
                         <li><a href="#tab1" role="tab" data-toggle="tab">Страховка</a></li>

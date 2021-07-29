@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete car</title>
-</head>
-<body>
+<div class="with_padding with_background rounded bottom_color_border">
     <form action="{% url 'delete_car' car_id=car.id %}" method="POST">
     {% csrf_token %}
-    <a href="{% url 'cars' %}" class="btn btn-primary">No</a>
-    <input type="submit" action="" class="btn btn-danger" value="Yes, delete" />
-  </form>
-</body>
-</html>
+        <h4>Вы уверены что хотите удалить автомобиль?</h4>
+        <a href="{% url 'car_profile' car_id=car.id %}" data-dismiss="modal" class="theme_button color1 min_width_button">Нет</a>
+        <input type="submit" action="" class="btn btn-danger" value="Да, удалить" />
+    </form>
+</div>
