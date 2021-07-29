@@ -14955,3 +14955,8 @@ a.color-icon.border-icon:hover {
 .text-icon {
 	text-transform: uppercase;
 }
+
+/* form of the car */
+.form-car p {
+	display: none;
+}
