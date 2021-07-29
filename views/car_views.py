@@ -147,10 +147,14 @@ def update_car(request, car_id=None):
             if form_car.data['body']:
                 body = add_body(form_car.data['body'])
                 car.body_id = body.id
+            else:
+                car.body_id = None
 
             if form_car.data['engine']:
                 engine = add_engine(form_car.data['engine'])
                 car.engine_id = engine.id
+            else:
+                car.engine_id = None
             car.user = user
             car.save()
 
