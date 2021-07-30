@@ -21,6 +21,11 @@
             <div class="row">
                 <form class="contact-form" action="{% url 'update_insurance' insrnc_id=insrnc.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'archive_insurance' insrnc_id=insrnc.id %}">в архив
+                    <span class="glyphicon glyphicon-inbox"></span>
+                </a>
+{#<button type="button" class="theme_button color1 min_width_button" data-toggle="modal" data-target="#MyModal"  href="{% url 'archive_insurance' insrnc_id=insrnc.id %}">В архив <span class="glyphicon glyphicon-pencil"> </span></button>#}
+
                     <div class="col-sm-7 col-md-8 col-lg-9">
                         <p class="contact-form">
                             <input type="text" required="true" size="30" value="{{ insrnc.type }}" name="type" class="contact-form-producer" placeholder="Тип страховки">

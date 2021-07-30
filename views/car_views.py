@@ -56,7 +56,7 @@ def get_car(request, car_id):
     user = request.user
     car = get_object_or_404(Car, id=car_id, user_id=user.id)
     try:
-        insurances = Insurance.objects.filter(car_id=car.id)
+        insurances = Insurance.objects.filter(car_id=car.id, archive=False)
     except ObjectDoesNotExist:
         insurances = None
 

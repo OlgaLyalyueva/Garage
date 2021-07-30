@@ -76,6 +76,7 @@ class Insurance(models.Model):
     start_date = models.DateField(verbose_name='Дата начала')
     end_date = models.DateField(verbose_name='Дата окончания')
     price = models.FloatField(blank=True, null=True, verbose_name='Стоимость страховки')
+    archive = models.BooleanField(default=False)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):
