@@ -46,9 +46,21 @@
                                         </select>
                             {% endif %}
                         </p>
-                        <input type="submit" value="Save" class="btn-default">
+                        <input type="submit" value="Сохранить" class="btn-default">
+
+                        <button type="button" class="theme_button min_width_button btn-danger" data-toggle="modal" data-target="#MyModal" href="{% url 'delete_insurance' insrnc_id=insrnc.id %}">Удалить <span class="glyphicon glyphicon-trash"> </span></button>
+                        <a class="theme_button color1 min_width_button" href="{% url 'car_profile' car_id=car.id %}">Отменить</a>
                     </div>
                 </form>
+
+                <!-- Popup for sending insurance to the archive -->
+                <div id ="MyModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        </div>
+                    </div>
+                </div>
+                <!-- End Popup -->
             </div>
         </div>
     </section>

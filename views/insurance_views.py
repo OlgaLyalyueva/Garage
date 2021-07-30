@@ -94,14 +94,14 @@ def delete_insurance(request, insrnc_id=None):
     insrnc = get_object_or_404(Insurance, id=insrnc_id)
     car = get_object_or_404(Car, id=insrnc.car_id, user_id=user.id)
     if request.method == 'POST':
-        car.delete()
+        insrnc.delete()
 
         messages.add_message(
                 request,
                 messages.SUCCESS,
                 f'Страховой полис {insrnc.type} №{insrnc.policy_number}, был успешно удален!'
             )
-        return redirect('insurances')
+        return redirect(f'/car/{car.id}')
 
     context = {'insurance': insrnc}
     return render(request, 'Garage/delete_insurance.html', context)
