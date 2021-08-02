@@ -62,6 +62,17 @@ class TestCarsView(TestCase):
             user=second_user
         )
 
+        Car.objects.create(
+            producer='Test Mazda in Archive',
+            model='X6',
+            year=2017,
+            transmission='автомат',
+            fuel=5,
+            drive_system=1,
+            archive=True,
+            user=second_user
+        )
+
     def test_login(self):
         c = Client()
         logged_in = c.login(username='testuser', password='1234567890')
@@ -84,6 +95,13 @@ class TestCarsView(TestCase):
         c.login(username='testuser', password='1234567890')
         response = c.get('/cars/')
         self.assertEqual(response.context['message'], 'У вас нет добавленных автомобилей')
+
+    def test_logged_in_user_receives_cars_that_are_not_in_archive(self):
+        c = Client()
+        c.login(username='second-testuser', password='1234567890')
+        response = c.get('/cars/')
+        cars = response.context['cars']
+        self.assertEqual(len(cars), 2)
 
     def test_logged_in_user_receives_all_data_on_cars(self):
         c = Client()
