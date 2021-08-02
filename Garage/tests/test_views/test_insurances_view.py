@@ -35,7 +35,7 @@ class TestInsurances(TestCase):
         c = Client()
         c.login(username='testuser', password='1234567890')
         user = User.objects.get(username='testuser')
-        car1 = Car.objects.create(
+        Car.objects.create(
             producer='Test insurance producer',
             model='Test insurance model',
             year=1990,
@@ -54,7 +54,7 @@ class TestInsurances(TestCase):
         response = c.get('/insurances/')
         self.assertTemplateUsed(response, 'Garage/insurances.html')
 
-    def test_for_logged_in_user_with_insurances(self):
+    def test_for_logged_in_user_receives_insurances_that_are_not_archived(self):
         c = Client()
         c.login(username='testuser', password='1234567890')
         user = User.objects.get(username='testuser')
@@ -69,15 +69,6 @@ class TestInsurances(TestCase):
             user=user
         )
 
-        Car.objects.create(
-            producer='Test insurance 2 producer',
-            model='Test insurance model',
-            year=1990,
-            transmission=1,
-            fuel=3,
-            drive_system=2,
-            user=user
-        )
         Insurance.objects.create(
             type='ОСАГО',
             description='Test description',
@@ -98,6 +89,63 @@ class TestInsurances(TestCase):
             car=car
         )
 
+        Insurance.objects.create(
+            type='КАСКО архив',
+            description='Test description',
+            policy_number='ЕРО76ГО',
+            start_date=date(2021, 12, 15),
+            end_date=date(2022, 12, 14),
+            price=34682,
+            archive=True,
+            car=car
+        )
+
         response = c.get('/insurances/')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(Insurance.objects.count(), 2)
+        insurances = response.context['insurances']
+        cars = response.context['cars']
+        for car in cars:
+            self.assertEqual(len(insurances[car.id]), 2)
+
+
+    def test_insurances_are_sent_to_archive_if_car_is_moved_to_archive(self):
+        c = Client()
+        c.login(username='testuser', password='1234567890')
+        user = User.objects.get(username='testuser')
+
+        car = Car.objects.create(
+            producer='Test insurance producer',
+            model='Test insurance model',
+            year=1990,
+            transmission=1,
+            fuel=3,
+            drive_system=2,
+            user=user
+        )
+
+        Insurance.objects.create(
+            type='ОСАГО',
+            description='Test description',
+            policy_number='AT23RT1',
+            start_date=date(2021, 1, 3),
+            end_date=date(2022, 1, 2),
+            price=2300.78,
+            car=car
+        )
+
+        Insurance.objects.create(
+            type='КАСКО ',
+            description='Test description',
+            policy_number='ЕРО76ГО',
+            start_date=date(2021, 12, 15),
+            end_date=date(2022, 12, 14),
+            price=34682,
+            car=car
+        )
+        response = c.get('/insurances/')
+        insurances = response.context['insurances'][car.id]
+        self.assertEqual(len(insurances), 2)
+        car.archive = True
+        car.save()
+        response = c.get('/insurances/')
+        self.assertEqual(response.context['message'], 'У вас нет добавленных страховок')

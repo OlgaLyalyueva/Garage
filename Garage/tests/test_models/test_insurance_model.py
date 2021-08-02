@@ -70,6 +70,7 @@ class TestInsurance(TestCase):
         self.assertEqual(insurance.end_date, datetime.date(2021, 2, 28))
         self.assertEqual(insurance.price, 600)
         self.assertTrue(insurance.car)
+        self.assertEqual(insurance.archive, False)
 
     def test_check_max_length_for_producer(self):
         insurance = Insurance.objects.get(id=1)

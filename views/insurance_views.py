@@ -12,10 +12,10 @@ from . import car_views
 def get_insurances(request):
     insurances = {}
     user = request.user
-    cars = Car.objects.filter(user_id=user.id)
+    cars = Car.objects.filter(user_id=user.id, archive=False)
     if cars:
         for car in cars:
-            insurances[car.id] = Insurance.objects.filter(car_id=car.id)
+            insurances[car.id] = Insurance.objects.filter(car_id=car.id, archive=False)
 
         context = {
             'user': user,
