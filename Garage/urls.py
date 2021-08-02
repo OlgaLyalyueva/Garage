@@ -11,6 +11,7 @@ urlpatterns = [
     path('car/add', car_views.add_car, name='add_car'),
     path('car/update/<int:car_id>', car_views.update_car, name='update_car'),
     path('car/delete/<int:car_id>', car_views.delete_car, name='delete_car'),
+    path('car/archive/<int:car_id>', car_views.archive_car, name='archive_car'),
 
     path('insurances/', insurance_views.get_insurances, name='insurances'),
     path('insurance/add/', insurance_views.add_insurance, name='add_insurance'),

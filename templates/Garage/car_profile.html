@@ -38,6 +38,9 @@
                 </div>
 
                 <!-- Car description -->
+                <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'archive_car' car_id=car.id %}">в архив
+                    <span class="glyphicon glyphicon-inbox"></span>
+                </a>
                 <div class="col-sm-7 col-md-8 col-lg-9">
                     <p>Марка: {{ car.producer|title }}</p>
                     <p>Модель: {{ car.model|title }}</p>
@@ -138,6 +141,14 @@
                             <a href="#" class="theme_button color1 min_width_button">Добавить текущее улучшение</a>
                         </div>
                     </div>
+                    <!-- Popup for remove car -->
+                    <div id ="MyModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Popup -->
                 </div>
             </div>
         </div>

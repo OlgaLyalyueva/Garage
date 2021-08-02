@@ -65,6 +65,7 @@ class TestCarModel(TestCase):
         self.assertEqual(car.fuel, 1)
         self.assertEqual(car.drive_system, 1)
         self.assertTrue(car.user_id)
+        self.assertTrue(car.archive is False)
 
     def test_check_max_length_for_producer(self):
         car = Car.objects.get(id=1)

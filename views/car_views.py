@@ -20,7 +20,7 @@ from views import insurance_views
 @login_required()
 def get_cars(request):
     user = request.user
-    cars = Car.objects.filter(user_id=user.id)
+    cars = Car.objects.filter(user_id=user.id, archive=False)
     context = {
         'cars': cars,
         'user': user.username
@@ -193,3 +193,17 @@ def delete_car(request, car_id=None):
 
     context = {'car': car}
     return render(request, 'Garage/delete_car.html', context)
+
+
+@login_required()
+def archive_car(request, car_id=None):
+    user = request.user
+    car = get_object_or_404(Car, id=car_id, user_id=user.id)
+    if request.method == 'POST':
+        car.archive = True
+        car.save()
+        return redirect('cars')
+    context = {
+        'car': car
+    }
+    return render(request, 'Garage/archive_car.html', context)
