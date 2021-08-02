@@ -38,20 +38,6 @@
                         </div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9">
-                        {% if form_car.errors %}
-                            <!-- Error messaging -->
-                            <div id="errors">
-                                <div class="inner">
-                                    <p>В введенной вами информации были ошибки. Исправьте следующее:</p>
-                                    <ul>
-                                        {% for field in form_car %}
-                                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /Error messaging -->
-                        {% endif %}
                         <p class="contact-form">
                             <input type="text" required="true" size="30" value="{{ car.producer }}" name="producer" class="contact-form-producer" placeholder="Марка">
                             <input type="text" required="true" size="30" value="{{ car.model }}" name="model" class="contact-form-model" placeholder="Модель">
@@ -114,9 +100,19 @@
                                 <input type="text" aria-required="false" size="30" value="{{ car.engine }}" name="engine" class="contact-form--engine" placeholder="Тип двигателя">
                             {% endif %}
                         </p>
-                        <input type="submit" value="Save" class="btn-default">
+                        <input type="submit" value="Сохранить" class="btn-default">
+                        <button type="button" class="theme_button min_width_button btn-danger" data-toggle="modal" data-target="#MyModal" href="{% url 'delete_car' car_id=car.id %}">Удалить <span class="glyphicon glyphicon-trash"> </span></button>
+                        <a class="theme_button color1 min_width_button" href="{% url 'car_profile' car_id=car.id %}">Отменить</a>
                     </div>
                 </form>
+                <!-- Popup for remove car -->
+                <div id ="MyModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        </div>
+                    </div>
+                </div>
+                <!-- End Popup -->
             </div>
         </div>
     </section>

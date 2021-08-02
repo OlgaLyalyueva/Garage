@@ -36,6 +36,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Car description -->
                 <div class="col-sm-7 col-md-8 col-lg-9">
                     <p>Марка: {{ car.producer|title }}</p>
@@ -46,21 +47,12 @@
                     <!-- Интерпритировать цифры в текст -->
                     <p>Тип топлива: {{ car.fuel }}</p>
                     <p>Тип коробки: {{ car.drive_system }}</p>
-                    <p style="display: {{ car.mileage }}">Пробег: {{ car.mileage }}</p>
+                    <p style="display: {{ car.mileage }}">Пробег: {{ car.mileage|intcomma }}</p>
                     <!-- Добавить стоимость в грн и дол -->
                     <p style="display: {{ car.price }}">Стоимость: {{ car.price|floatformat|intcomma }}$</p>
                     <p style="display: {{ car.engine }}">Двигатель: {{ car.engine|title }}</p>
 
-                    <!-- Popup for remove car -->
                     <a class="theme_button color1 min_width_button" href="{% url 'update_car' car_id=car.id %}">Изменить <span class="glyphicon glyphicon-pencil"> </span></a>
-                    <button type="button" class="theme_button min_width_button btn-danger" data-toggle="modal" data-target="#MyModal" href="{% url 'delete_car' car_id=car.id %}">Удалить <span class="glyphicon glyphicon-trash"> </span></button>
-                    <div id ="MyModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Popup -->
 
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs topmargin_40" role="tablist">
