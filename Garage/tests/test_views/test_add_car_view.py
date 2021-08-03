@@ -67,7 +67,7 @@ class TestAddCar(TestCase):
             'engine': '',
             'user': user
         }
-        response = c.post("/car/add", data=data)
+        c.post("/car/add", data=data)
         self.assertEqual(Car.objects.count(), 1)
         car = Car.objects.get(producer=data['producer'], user_id=user.id)
         body = Body.objects.get(name=data['body'])
@@ -90,7 +90,7 @@ class TestAddCar(TestCase):
             'engine': 'test engine name',
             'user': user
         }
-        response = c.post("/car/add", data=data)
+        c.post("/car/add", data=data)
         self.assertEqual(Car.objects.count(), 1)
         car = Car.objects.get(producer=data['producer'], user_id=user.id)
         engine = Engine.objects.get(name=data['engine'])
