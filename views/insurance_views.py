@@ -4,9 +4,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from Garage.models import Car, Insurance
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from Garage.forms import InsuranceForm
-from . import car_views
+
 
 @login_required()
 def get_insurances(request):
@@ -32,7 +32,7 @@ def get_insurances(request):
 @login_required()
 def add_insurance(request):
     user = request.user
-    cars = Car.objects.filter(user_id=user.id)
+    cars = get_list_or_404(Car, user_id=user.id, archive=False)
     if request.method == 'POST':
         form_insrnc = InsuranceForm(request.POST)
         if form_insrnc.is_valid():
@@ -47,6 +47,7 @@ def add_insurance(request):
                 'cars': cars,
             }
             return render(request, 'Garage/add_insurance.html', context)
+
     form_insrnc = InsuranceForm()
     context = {
         'user': user,
