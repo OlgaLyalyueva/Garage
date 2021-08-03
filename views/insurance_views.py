@@ -23,9 +23,12 @@ def get_insurances(request):
             'insurances': insurances
         }
         return render(request, 'Garage/insurances.html', context)
-    context = {
-        'user': user
-    }
+
+    else:
+        message = 'У вас нет добавленных страховок'
+        context = {
+            'message': message
+        }
     return render(request, 'Garage/insurances.html', context)
 
 
