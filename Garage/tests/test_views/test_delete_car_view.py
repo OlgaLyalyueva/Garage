@@ -1,7 +1,6 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 
 from Garage.models import User, Car
-from django.test import Client
 
 
 class TestDeleteCar(TestCase):
