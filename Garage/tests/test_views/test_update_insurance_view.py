@@ -173,4 +173,3 @@ class TestUpdateInsurance(TestCase):
         response = c.post(f'/insurance/update/{insrnc.id}', data=data)
         self.assertTrue(len(response.context['errors']), 1)
         self.assertTemplateUsed(response, 'Garage/update_insurance.html')
-

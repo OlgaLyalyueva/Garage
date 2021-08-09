@@ -54,12 +54,19 @@ class TestUpdateCar(TestCase):
         self.assertEqual(response.status_code, 200)
         car = Car.objects.get(id=car_id)
         body = Body.objects.get(name='Test body name')
-        year = 2001
-        form_car = CarForm(instance=car, data={'producer': car.producer, 'model': car.model, 'year': year, 'transmission': car.transmission, 'fuel': car.fuel, 'drive_system': car.drive_system})
+        form_car = CarForm(instance=car, data={
+            'producer': car.producer,
+            'model': car.model,
+            'year': 2001,
+            'transmission': car.transmission,
+            'fuel': car.fuel,
+            'drive_system': car.drive_system
+        }
+                           )
         car.body_id = body.id
         self.assertTrue(form_car.is_valid())
         form_car.save()
         self.assertEqual(car.producer, 'Test update producer')
         self.assertEqual(car.model, 'Test update model')
-        self.assertEqual(car.year, year)
+        self.assertEqual(car.year, 2001)
         self.assertEqual(car.body_id, 1)
