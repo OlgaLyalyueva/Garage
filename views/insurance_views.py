@@ -36,6 +36,7 @@ def get_insurances(request):
 def add_insurance(request):
     user = request.user
     cars = get_list_or_404(Car, user_id=user.id, archive=False)
+    errors = None
     if request.method == 'POST':
         form_insrnc = InsuranceForm(request.POST)
         if form_insrnc.is_valid():
@@ -43,19 +44,14 @@ def add_insurance(request):
             car_id = form_insrnc.data['car']
             return redirect(f'/car/{car_id}')
         else:
-            error_mes = form_insrnc.errors
-            context = {
-                'errors': error_mes,
-                'user': user,
-                'cars': cars,
-            }
-            return render(request, 'Garage/add_insurance.html', context)
+            errors = form_insrnc.errors
 
     form_insrnc = InsuranceForm()
     context = {
         'user': user,
         'cars': cars,
-        'form_insrnc': form_insrnc
+        'form_insrnc': form_insrnc,
+        'errors': errors
     }
     return render(request, 'Garage/add_insurance.html', context)
 

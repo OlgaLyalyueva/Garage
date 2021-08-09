@@ -91,7 +91,7 @@ class TestAddInsurance(TestCase):
         response = c.get(link)
         self.assertEqual(response.context['user'].username, 'testuser')
 
-    def test_logged_in_user_creates_insurance(self):
+    def test_logged_in_user_creates_insurance_with_all_data(self):
         c.login(username=username, password=password)
         user = User.objects.get(username=username)
 
@@ -115,8 +115,50 @@ class TestAddInsurance(TestCase):
             'car': car.id
         }
         response = c.post("/insurance/add/", data=data)
+        insrnc = Insurance.objects.get(type='Test type')
         self.assertEqual(Insurance.objects.count(), 1)
         self.assertRedirects(response, f'/car/{car.id}')
+        self.assertEqual(insrnc.type, 'Test type')
+        self.assertEqual(insrnc.description, 'test description')
+        self.assertEqual(insrnc.policy_number, 'AR 5674326')
+        self.assertEqual(insrnc.start_date, datetime.date(2020, 7, 1))
+        self.assertEqual(insrnc.end_date, datetime.date(2021, 7, 2))
+        self.assertEqual(insrnc.price, 245)
+        self.assertFalse(insrnc.archive)
+        self.assertEqual(insrnc.car_id, car.id)
+
+    def test_logged_in_user_creates_insurance_with_required_data(self):
+        c.login(username=username, password=password)
+        user = User.objects.get(username=username)
+
+        car = Car.objects.create(
+            producer='Test Add Insurance',
+            model='First car',
+            year=2021,
+            transmission='типтроник',
+            fuel=3,
+            drive_system=1,
+            user=user
+        )
+
+        data = {
+            'type': 'Test type',
+            'start_date': datetime.date(2020, 7, 1),
+            'end_date': datetime.date(2021, 7, 2),
+            'car': car.id
+        }
+        response = c.post("/insurance/add/", data=data)
+        insrnc = Insurance.objects.get(type='Test type')
+        self.assertEqual(Insurance.objects.count(), 1)
+        self.assertRedirects(response, f'/car/{car.id}')
+        self.assertEqual(insrnc.type, 'Test type')
+        self.assertEqual(insrnc.description, '')
+        self.assertEqual(insrnc.policy_number, '')
+        self.assertEqual(insrnc.start_date, datetime.date(2020, 7, 1))
+        self.assertEqual(insrnc.end_date, datetime.date(2021, 7, 2))
+        self.assertEqual(insrnc.price, None)
+        self.assertFalse(insrnc.archive)
+        self.assertEqual(insrnc.car_id, car.id)
 
     def test_logged_in_user_receives_error_messages(self):
         c.login(username=username, password=password)
@@ -139,3 +181,4 @@ class TestAddInsurance(TestCase):
         response = c.post("/insurance/add/", data=data)
         self.assertEqual(Insurance.objects.count(), 0)
         self.assertEqual(len(response.context['errors']), 2)
+        self.assertTemplateUsed(response, 'Garage/add_insurance.html')
