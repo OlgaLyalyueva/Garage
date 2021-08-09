@@ -110,12 +110,12 @@ def add_car(request):
             return redirect(f'/car/{car.id}')
         else:
             errors = form_car.errors
-            context = {'errors': errors}
-            return render(request, 'Garage/add_car.html', context)
+
     form_car = CarForm()
     context = {
-        'form_car': form_car
-               }
+        'form_car': form_car,
+        'errors': errors
+    }
     return render(request, 'Garage/add_car.html', context)
 
 
@@ -139,6 +139,7 @@ def add_engine(engine_name):
 def update_car(request, car_id=None):
     user = request.user
     car = get_object_or_404(Car, id=car_id, user_id=user.id)
+    errors = None
     now = datetime.datetime.now()
     if request.method == 'POST':
         form_car = CarForm(request.POST, instance=car)
@@ -157,23 +158,17 @@ def update_car(request, car_id=None):
                 car.engine_id = None
             car.user = user
             car.save()
-
             return redirect(f'/car/{car.id}')
         else:
             errors = form_car.errors
-            context = {
-                'form_car': form_car,
-                'car': car,
-                'now': now,
-                'errors': errors
-            }
-            return render(request, 'Garage/update_car.html', context)
+
     form_car = CarForm()
     context = {
         'form_car': form_car,
         'car': car,
-        'now': now
-               }
+        'now': now,
+        'errors': errors
+    }
     return render(request, 'Garage/update_car.html', context)
 
 
