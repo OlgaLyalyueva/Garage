@@ -197,6 +197,13 @@ def archive_car(request, car_id=None):
     if request.method == 'POST':
         car.archive = True
         car.save()
+        try:
+            insrnc = Insurance.objects.filter(car_id=car.id)
+            for i in insrnc:
+                i.archive = True
+                i.save()
+        except ObjectDoesNotExist:
+            pass
         return redirect('cars')
     context = {
         'car': car
