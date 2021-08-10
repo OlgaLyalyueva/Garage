@@ -106,8 +106,8 @@ def delete_insurance(request, insrnc_id=None):
 @login_required()
 def archive_insurance(request, insrnc_id=None):
     user = request.user
-    insrnc = get_object_or_404(Insurance, id=insrnc_id)
-    car = get_object_or_404(Car, id=insrnc.car_id, user_id=user.id)
+    insrnc = get_object_or_404(Insurance, id=insrnc_id, archive=False)
+    car = get_object_or_404(Car, id=insrnc.car_id, user_id=user.id, archive=False)
     if request.method == 'POST':
         insrnc.archive = True
         insrnc.save()

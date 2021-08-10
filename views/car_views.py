@@ -15,7 +15,6 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 
-from views import insurance_views
 
 @login_required()
 def get_cars(request):
@@ -54,7 +53,7 @@ def get_name_of_engine(engine_id):
 @login_required
 def get_car(request, car_id):
     user = request.user
-    car = get_object_or_404(Car, id=car_id, user_id=user.id)
+    car = get_object_or_404(Car, id=car_id, user_id=user.id, archive=False)
     try:
         insurances = Insurance.objects.filter(car_id=car.id, archive=False)
     except ObjectDoesNotExist:
@@ -87,6 +86,7 @@ def get_car(request, car_id):
 
 @login_required
 def add_car(request):
+    errors = None
     if request.method == 'POST':
         form_car = CarForm(request.POST)
         if form_car.is_valid():
@@ -193,7 +193,7 @@ def delete_car(request, car_id=None):
 @login_required()
 def archive_car(request, car_id=None):
     user = request.user
-    car = get_object_or_404(Car, id=car_id, user_id=user.id)
+    car = get_object_or_404(Car, id=car_id, user_id=user.id, archive=False)
     if request.method == 'POST':
         car.archive = True
         car.save()
