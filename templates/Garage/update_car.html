@@ -39,18 +39,18 @@
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9">
                         <p class="contact-form">
-                            <input type="text" required="true" size="30" value="{{ car.producer }}" name="producer" class="contact-form-producer" placeholder="Марка">
-                            <input type="text" required="true" size="30" value="{{ car.model }}" name="model" class="contact-form-model" placeholder="Модель">
+                            <input type="text" required="true" size="30" value="{{ car.producer }}" name="producer" class="contact-form-producer" placeholder="Марка" title="марка автомобиля">
+                            <input type="text" required="true" size="30" value="{{ car.model }}" name="model" class="contact-form-model" placeholder="Модель" title="модель">
                         </p>
                         <p class="contact-form">
-                            <input type="number" required="true" size="30" min=1900 max={{ now.year }} value="{{ car.year }}" name="year" class="contact-form-year" placeholder="Год">
-                            <input type="number" aria-required="false" size="30" value="{{ car.mileage }}" name="mileage" class="contact-form-mileage" placeholder="Пробег">
+                            <input type="number" required="true" size="30" min=1900 max={{ now.year }} value="{{ car.year }}" name="year" class="contact-form-year" placeholder="Год" title="год выпуска">
+                            <input type="number" aria-required="false" size="30" value="{{ car.mileage }}" name="mileage" class="contact-form-mileage" placeholder="Пробег" title="пробег">
                         </p>
                         <p class="contact-form">
                             <label for="transmission">Выбери тип КПП:</label>
-                            <select name="transmission" id="transmission">
+                            <select name="transmission" id="transmission" title="КПП">
                               {% if car.transmission %}
-                                <option value="{{ car.transmission }}">{{ car.transmission.title }}</option>
+                                <option value="{{ car.transmission }}">{{ car.get_transmission_display }}</option>
                               {% endif %}
                               <option value="ручная/механика">Ручная/Механика</option>
                               <option value="автомат">Автомат</option>
@@ -60,9 +60,9 @@
                             </select>
 
                             <label for="drive_system">Выбери тип привода:</label>
-                            <select name="drive_system" id="drive_system">
+                            <select name="drive_system" id="drive_system" title="тип привода">
                               {% if car.drive_system %}
-                                <option value="{{ car.drive_system }}">{{ car.drive_system }}</option>
+                                <option value="{{ car.drive_system }}">{{ car.get_drive_system_display }}</option>
                               {% endif %}
                               <option value=1>Полный</option>
                               <option value=2>Передний</option>
@@ -71,9 +71,9 @@
                         </p>
                         <p class="contact-form">
                             <label for="fuel">Выбери тип топлива:</label>
-                            <select name="fuel" id="fuel" value="{{ car.fuel }}">
+                            <select name="fuel" id="fuel" value="{{ car.fuel }}" title="тип топлива">
                               {% if car.fuel %}
-                                <option value="{{ car.fuel }}">{{ car.fuel }}</option>
+                                <option value="{{ car.fuel }}">{{ car.get_fuel_display }}</option>
                               {% endif %}
                               <option value=1>Бензин</option>
                               <option value=2>Дизель</option>
@@ -86,18 +86,18 @@
                               <option value=9>Другое</option>
                             </select>
 
-                            <input type="number" aria-required="false" size="30" value="{{ car.price | floatformat }}" name="price" class="contact-form-price" placeholder="Стоимость">
+                            <input type="number" aria-required="false" size="30" value="{{ car.price | floatformat }}" name="price" class="contact-form-price" placeholder="Стоимость" title="стоимость">
                         </p>
                         <p class="contact-form">
                             {% if car.body is None %}
                                 <input type="text" aria-required="false" size="30" value name="body" class="contact-form-body" placeholder="Тип кузова">
                             {% else %}
-                                <input type="text" aria-required="false" size="30" value="{{ car.body }}" name="body" class="contact-form-body" placeholder="Тип кузова">
+                                <input type="text" aria-required="false" size="30" value="{{ car.body }}" name="body" class="contact-form-body" placeholder="Тип кузова" title="тип кузова">
                             {% endif %}
                             {% if car.engine is None %}
                                 <input type="text" aria-required="false" size="30" value name="engine" class="contact-form--engine" placeholder="Тип двигателя">
                             {% else %}
-                                <input type="text" aria-required="false" size="30" value="{{ car.engine }}" name="engine" class="contact-form--engine" placeholder="Тип двигателя">
+                                <input type="text" aria-required="false" size="30" value="{{ car.engine }}" name="engine" class="contact-form--engine" placeholder="Тип двигателя" title="тип двигателя">
                             {% endif %}
                         </p>
                         <input type="submit" value="Сохранить" class="btn-default">

@@ -46,10 +46,10 @@
                     <p>Модель: {{ car.model|title }}</p>
                     <p>Год выпуска: {{ car.year }}</p>
                     <p style="display: {{ car.engine }}">Тип кузова: {{ car.body|title }}</p>
-                    <p>Тип привода: {{ car.transmission|title }}</p>
+                    <p>Тип привода: {{ car.get_transmission_display }}</p>
                     <!-- Интерпритировать цифры в текст -->
-                    <p>Тип топлива: {{ car.fuel }}</p>
-                    <p>Тип коробки: {{ car.drive_system }}</p>
+                    <p>Тип топлива: {{ car.get_fuel_display }}</p>
+                    <p>Тип коробки: {{ car.get_drive_system_display }}</p>
                     <p style="display: {{ car.mileage }}">Пробег: {{ car.mileage|intcomma }}</p>
                     <!-- Добавить стоимость в грн и дол -->
                     <p style="display: {{ car.price }}">Стоимость: {{ car.price|floatformat|intcomma }}$</p>
@@ -101,7 +101,7 @@
                                 <p></p>
                                 {% endfor %}
                             {% else %}
-                                <p>У вас нет добавленных рементов</p>
+                                <p>У вас нет добавленных ремонтов</p>
                             {% endif %}
                             <a href="#" class="theme_button color1 min_width_button">Добавить ремонт</a>
                         </div>
@@ -110,7 +110,7 @@
                             {% if car_issue %}
                                 {% for c in car_issue %}
                                 <p>Название: {{ c.name }}</p>
-                                <p>Изменение: {{ c.description }}</p>
+                                <p>Описание: {{ c.description }}</p>
                                 <p>Состояние: {{ c.state }}</p>
                                 <p>Дата: {{ c.date }}</p>
                                 <a href="#" class="small-text highlight">Изменить</a>
@@ -136,7 +136,7 @@
                                 <p></p>
                                 {% endfor %}
                             {% else %}
-                                <p>Уличшений нет</p>
+                                <p>Улучшений нет</p>
                             {% endif %}
                             <a href="#" class="theme_button color1 min_width_button">Добавить текущее улучшение</a>
                         </div>
