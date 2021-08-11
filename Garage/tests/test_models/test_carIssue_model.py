@@ -1,3 +1,5 @@
+import datetime
+
 from django.test import TestCase
 
 from Garage.models import (
@@ -53,11 +55,13 @@ class TestCarIssue(TestCase):
         self.assertEqual(state, 'Состояние')
 
     def test_check_save_data_in_db(self):
+        car = Car.objects.get(producer='Land Rower')
         car_issue = CarIssue.objects.get(id=1)
         self.assertEqual(car_issue.name, 'Шумит шаровая')
         self.assertTrue(car_issue.state)
-        self.assertTrue(car_issue.date)
-        self.assertTrue(car_issue.car)
+        self.assertEqual(car_issue.date, datetime.date.today())
+        self.assertEqual(car_issue.car_id, car.id)
+        self.assertFalse(car_issue.archive)
 
     def test_check_max_length_for_name(self):
         car_issue = CarIssue.objects.get(id=1)

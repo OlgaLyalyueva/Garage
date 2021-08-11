@@ -23,7 +23,7 @@ class TestCarIssues(TestCase):
 
     def test_not_logged_in_user_redirect_to_login_page(self):
         response = c.get('/issues/')
-        self.assertEqual(response, '/accounts/login/?next=/issues/', 302)
+        self.assertRedirects(response, '/accounts/login/?next=/issues/', 302)
 
     def test_logged_in(self):
         logged_in = c.login(username=username, password=password)
@@ -109,7 +109,7 @@ class TestCarIssues(TestCase):
             for car in cars:
                 issues[car.id] = CarIssue.objects.filter(car_id=car.id, archive=False)
                 if issues:
-                    self.assertRedirects(response.status_code, 200)
+                    self.assertEqual(response.status_code, 200)
                     self.assertEqual(Car.objects.count(), 1)
                     self.assertEqual(CarIssue.objects.count(), 1)
                     # добавить проверку для контекста
@@ -157,7 +157,7 @@ class TestCarIssues(TestCase):
             for car in cars:
                 issues[car.id] = CarIssue.objects.filter(car_id=car.id, archive=False)
                 if issues:
-                    self.assertRedirects(response.status_code, 200)
+                    self.assertEqual(response.status_code, 200)
                     self.assertEqual(Car.objects.count(), 2)
                     self.assertEqual(CarIssue.objects.count(), 2)
                     # добавить проверку для контекста
