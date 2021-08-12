@@ -44,9 +44,9 @@ class TestCarIssues(TestCase):
         user = User.objects.get(username=username)
         cars = Car.objects.filter(user_id=user.id)
         response = c.get('/issues/')
-        if len(cars) == 0:
-            self.assertEqual(response.status_code, 200)
-            self.assertEqual(response.context['message'], 'У вас нет добавленных автомобилей')
+        self.assertEqual(cars.count(), 0)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['message'], 'У вас нет добавленных автомобилей')
 
     def test_logged_in_user_without_carissue_receives_message(self):
         user = User.objects.get(username=username)
@@ -72,17 +72,9 @@ class TestCarIssues(TestCase):
         )
 
         c.login(username=username, password=password)
-        cars = Car.objects.filter(user_id=user.id, archive=False)
-        issues = {}
         response = c.get('/issues/')
-        if cars:
-            for car in cars:
-                issues[car.id] = CarIssue.objects.filter(car_id=car.id, archive=False)
-                if not issues:
-                    self.assertEqual(response.status_code, 200)
-                    self.assertEqual(Car.objects.count(), 1)
-                    self.assertEqual(len(response.context['cars']), 1)
-                    self.assertEqual(response.context['message'], 'У вас нет текущих проблем')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['cars'].count(), 1)
 
     def test_logged_in_user_receives_issue(self):
         user = User.objects.get(username=username)
@@ -102,17 +94,16 @@ class TestCarIssues(TestCase):
         )
 
         c.login(username=username, password=password)
-        cars = Car.objects.filter(user_id=user.id, archive=False)
-        issues = {}
         response = c.get('/issues/')
-        if cars:
-            for car in cars:
-                issues[car.id] = CarIssue.objects.filter(car_id=car.id, archive=False)
-                if issues:
-                    self.assertEqual(response.status_code, 200)
-                    self.assertEqual(Car.objects.count(), 1)
-                    self.assertEqual(CarIssue.objects.count(), 1)
-                    # добавить проверку для контекста
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Car.objects.count(), 1)
+        self.assertEqual(response.context['cars'][0].producer, car.producer)
+        self.assertEqual(response.context['cars'][0].model, car.model)
+        self.assertEqual(response.context['cars'][0].year, car.year)
+        self.assertEqual(response.context['cars'][0].transmission, str(car.transmission))
+        self.assertEqual(response.context['cars'][0].fuel, car.fuel)
+        self.assertEqual(response.context['cars'][0].drive_system, car.drive_system)
+        self.assertEqual(CarIssue.objects.count(), 1)
 
     def test_logged_in_user_receives_issues(self):
         user = User.objects.get(username=username)
@@ -136,12 +127,12 @@ class TestCarIssues(TestCase):
             user=user
         )
 
-        CarIssue.objects.create(
+        first_car_issue = CarIssue.objects.create(
             name='Test First CarIssue',
             car=first_car
         )
 
-        CarIssue.objects.create(
+        second_car_issue = CarIssue.objects.create(
             name='Test Second CarIssue',
             description='Test description for second car',
             date=datetime.date(2021, 8, 9),
@@ -150,14 +141,19 @@ class TestCarIssues(TestCase):
         )
 
         c.login(username=username, password=password)
-        cars = Car.objects.filter(user_id=user.id, archive=False)
-        issues = {}
         response = c.get('/issues/')
-        if cars:
-            for car in cars:
-                issues[car.id] = CarIssue.objects.filter(car_id=car.id, archive=False)
-                if issues:
-                    self.assertEqual(response.status_code, 200)
-                    self.assertEqual(Car.objects.count(), 2)
-                    self.assertEqual(CarIssue.objects.count(), 2)
-                    # добавить проверку для контекста
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Car.objects.count(), 2)
+        self.assertEqual(CarIssue.objects.count(), 2)
+        first_car = response.context['car_issues'][1].values()
+        self.assertEqual(first_car[0]['name'], first_car_issue.name)
+        self.assertEqual(first_car[0]['state'], first_car_issue.state)
+        self.assertEqual(first_car[0]['date'], first_car_issue.date)
+        self.assertEqual(first_car[0]['car_id'], first_car_issue.car_id)
+        self.assertEqual(first_car[0]['description'], first_car_issue.description)
+        second_car = response.context['car_issues'][2].values()
+        self.assertEqual(second_car[0]['name'], second_car_issue.name)
+        self.assertEqual(second_car[0]['state'], second_car_issue.state)
+        self.assertEqual(second_car[0]['date'], second_car_issue.date)
+        self.assertEqual(second_car[0]['car_id'], second_car_issue.car_id)
+        self.assertEqual(second_car[0]['description'], second_car_issue.description)
