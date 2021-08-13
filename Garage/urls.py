@@ -20,6 +20,7 @@ urlpatterns = [
     path('insurance/archive/<int:insrnc_id>', insurance_views.archive_insurance, name='archive_insurance'),
 
     path('issues/', carissue_views.get_carissues, name='car_issues'),
+    path('issue/add/', carissue_views.add_issue, name='add_issue'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 

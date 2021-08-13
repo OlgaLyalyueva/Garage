@@ -93,7 +93,7 @@ class CarIssue(models.Model):
     date = models.DateField(auto_now=True, blank=True)
     name = models.CharField(max_length=255, verbose_name='Название проблемы')
     description = models.CharField(blank=True, null=True, max_length=1000, verbose_name='Описание')
-    state = models.BooleanField(default=True, verbose_name='Состояние')
+    open = models.BooleanField(default=True, verbose_name='Состояние')
     archive = models.BooleanField(default=False)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 

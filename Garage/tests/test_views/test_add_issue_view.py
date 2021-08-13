@@ -67,6 +67,7 @@ class TestAddIssue(TestCase):
 
     def test_logged_in_user_creates_issue_with_all_data(self):
         c.login(username=username, password=password)
+        c.get(link)
         user = User.objects.get(username=username)
 
         car = Car.objects.create(
@@ -90,9 +91,10 @@ class TestAddIssue(TestCase):
         self.assertRedirects(response, f'/car/{car.id}')
         self.assertEqual(issue.name, 'Test name')
         self.assertEqual(issue.date, datetime.date.today())
-        self.assertEqual(issue.state, True)
+        self.assertTrue(issue.open)
         self.assertEqual(issue.car_id, car.id)
         self.assertEqual(issue.description, 'Test Description')
+        self.assertFalse(issue.archive)
 
     def test_logged_in_user_creates_issue_with_required_data(self):
         c.login(username=username, password=password)
@@ -118,9 +120,9 @@ class TestAddIssue(TestCase):
         self.assertRedirects(response, f'/car/{car.id}')
         self.assertEqual(issue.name, 'Test name')
         self.assertEqual(issue.date, datetime.date.today())
-        self.assertEqual(issue.state, True)
+        self.assertEqual(issue.open, True)
         self.assertEqual(issue.car_id, car.id)
-        self.assertEqual(issue.description, '')
+        self.assertEqual(issue.description, None)
 
     def test_logged_in_user_receives_error_messages(self):
         c.login(username=username, password=password)
@@ -137,7 +139,7 @@ class TestAddIssue(TestCase):
         )
 
         data = {
-            'name': 'Test name',
+            'name': '',
             'car': car.id,
         }
         response = c.post("/issue/add/", data=data)

@@ -1,4 +1,4 @@
-from .models import Car, Body, Engine, Insurance
+from .models import Car, Body, Engine, Insurance, CarIssue
 from django import forms
 
 
@@ -24,3 +24,9 @@ class InsuranceForm(forms.ModelForm):
     class Meta:
         model = Insurance
         fields = '__all__'
+
+
+class IssueForm(forms.ModelForm):
+    class Meta:
+        model = CarIssue
+        fields = ['name', 'description', 'car']
