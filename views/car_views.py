@@ -14,6 +14,7 @@ from Garage.forms import CarForm
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
+from views import insurance_views
 
 
 @login_required()
@@ -138,7 +139,7 @@ def add_engine(engine_name):
 @login_required()
 def update_car(request, car_id=None):
     user = request.user
-    car = get_object_or_404(Car, id=car_id, user_id=user.id)
+    car = get_object_or_404(Car, id=car_id, user_id=user.id, archive=False)
     errors = None
     now = datetime.datetime.now()
     if request.method == 'POST':
@@ -195,15 +196,15 @@ def archive_car(request, car_id=None):
     user = request.user
     car = get_object_or_404(Car, id=car_id, user_id=user.id, archive=False)
     if request.method == 'POST':
-        car.archive = True
-        car.save()
         try:
-            insrnc = Insurance.objects.filter(car_id=car.id)
-            for i in insrnc:
-                i.archive = True
-                i.save()
+            insrncs = Insurance.objects.filter(car_id=car.id)
+            for insrnc in insrncs:
+                insurance_views.archive_insurance(request, insrnc_id=insrnc.id)
         except ObjectDoesNotExist:
             pass
+        car.archive = True
+        car.save()
+
         return redirect('cars')
     context = {
         'car': car
