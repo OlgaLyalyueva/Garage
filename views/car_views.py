@@ -66,7 +66,7 @@ def get_car(request, car_id):
         repair = None
 
     try:
-        car_issue = CarIssue.objects.filter(car_id=car.id)
+        car_issue = CarIssue.objects.filter(car_id=car.id, archive=False)
     except ObjectDoesNotExist:
         car_issue = None
 

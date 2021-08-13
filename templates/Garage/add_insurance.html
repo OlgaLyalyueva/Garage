@@ -36,10 +36,10 @@
                             <input type="number" step="0.01" aria-required="false" size="30" value name="price" class="contact-form-price" placeholder="Стоимость">
                             {% if cars %}
                                     <p class="contact-form">
-                                        <label for="car">Выбери автомобиль котрый был застрахован:</label>
+                                        <label for="car">Выбери автомобиль который был застрахован:</label>
                                         <select name="car" id="car_id" value="{{ car.id }}">
                                             {% for car in cars %}
-                                                <option value="{{ car.id }}">{{ car.produce }} {{ car.model }}</option>
+                                                <option value="{{ car.id }}">{{ car.producer }} {{ car.model }}</option>
                                             {% endfor %}
                                         </select>
                             {% endif %}

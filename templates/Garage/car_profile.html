@@ -110,8 +110,12 @@
                             {% if car_issue %}
                                 {% for c in car_issue %}
                                 <p>Название: {{ c.name }}</p>
-                                <p>Описание: {{ c.description }}</p>
-                                <p>Состояние: {{ c.state }}</p>
+                                <p style="display: {{ c.description }}">Описание: {{ c.description }}</p>
+                                {% if c.open %}
+                                    <p>Состояние: поломка не устранена</p>
+                                {% else %}
+                                    <p>Состояние: устранена</p>
+                                {% endif %}
                                 <p>Дата: {{ c.date }}</p>
                                 <a href="#" class="small-text highlight">Изменить</a>
                                 <p></p>
@@ -120,7 +124,7 @@
                             {% else %}
                                 <p>Нет текущих проблем с автомобилем</p>
                             {% endif %}
-                            <a href="#" class="theme_button color1 min_width_button">Добавить текущую проблему</a>
+                            <a href="{% url 'add_issue' %}" class="theme_button color1 min_width_button">Добавить текущую поломку</a>
                         </div>
                         <div class="tab-pane fade" id="tab4">
                             <h4>Улучшения:</h4>
