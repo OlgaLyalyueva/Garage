@@ -136,7 +136,7 @@ class TestCarIssues(TestCase):
             name='Test Second CarIssue',
             description='Test description for second car',
             date=datetime.date(2021, 8, 9),
-            state=False,
+            open=False,
             car=second_car
         )
 
@@ -147,13 +147,13 @@ class TestCarIssues(TestCase):
         self.assertEqual(CarIssue.objects.count(), 2)
         first_car = response.context['car_issues'][1].values()
         self.assertEqual(first_car[0]['name'], first_car_issue.name)
-        self.assertEqual(first_car[0]['state'], first_car_issue.state)
+        self.assertEqual(first_car[0]['open'], first_car_issue.open)
         self.assertEqual(first_car[0]['date'], first_car_issue.date)
         self.assertEqual(first_car[0]['car_id'], first_car_issue.car_id)
         self.assertEqual(first_car[0]['description'], first_car_issue.description)
         second_car = response.context['car_issues'][2].values()
         self.assertEqual(second_car[0]['name'], second_car_issue.name)
-        self.assertEqual(second_car[0]['state'], second_car_issue.state)
+        self.assertEqual(second_car[0]['open'], second_car_issue.open)
         self.assertEqual(second_car[0]['date'], second_car_issue.date)
         self.assertEqual(second_car[0]['car_id'], second_car_issue.car_id)
         self.assertEqual(second_car[0]['description'], second_car_issue.description)

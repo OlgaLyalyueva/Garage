@@ -49,16 +49,16 @@ class TestCarIssue(TestCase):
         car_issue = CarIssue.objects.get(id=1)
         name = car_issue._meta.get_field('name').verbose_name
         description = car_issue._meta.get_field('description').verbose_name
-        state = car_issue._meta.get_field('state').verbose_name
+        open = car_issue._meta.get_field('open').verbose_name
         self.assertEqual(name, 'Название проблемы')
         self.assertEqual(description, 'Описание')
-        self.assertEqual(state, 'Состояние')
+        self.assertEqual(open, 'Состояние')
 
     def test_check_save_data_in_db(self):
         car = Car.objects.get(producer='Land Rower')
         car_issue = CarIssue.objects.get(id=1)
         self.assertEqual(car_issue.name, 'Шумит шаровая')
-        self.assertTrue(car_issue.state)
+        self.assertTrue(car_issue.open)
         self.assertEqual(car_issue.date, datetime.date.today())
         self.assertEqual(car_issue.car_id, car.id)
         self.assertFalse(car_issue.archive)

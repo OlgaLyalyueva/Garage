@@ -49,7 +49,7 @@ class TestCarView(TestCase):
         CarIssue.objects.create(
             name='Test car problem',
             description='Test description',
-            state=False,
+            open=False,
             date=date.today(),
             car_id=car.id
         )
@@ -114,7 +114,7 @@ class TestCarView(TestCase):
         response = c.get('/car/1')
         self.assertEqual(response.context['car_issue'][0].name, 'Test car problem')
         self.assertEqual(response.context['car_issue'][0].description, 'Test description')
-        self.assertEqual(response.context['car_issue'][0].state, False)
+        self.assertEqual(response.context['car_issue'][0].open, False)
         self.assertEqual(response.context['car_issue'][0].date, date.today())
 
     def test_logged_in_user_receives_insurances_for_car(self):
