@@ -39,7 +39,7 @@
                                         <label for="car">Выбери автомобиль который был застрахован:</label>
                                         <select name="car" id="car_id" value="{{ car.id }}">
                                             {% for car in cars %}
-                                                <option value="{{ car.id }}">{{ car.producer }} {{ car.model }}</option>
+                                                <option value="{{ car.id }}">{{ car.producer }}, {{ car.model }}</option>
                                             {% endfor %}
                                         </select>
                             {% endif %}

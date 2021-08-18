@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_list_or_404, redirect, get_object_or_404
 
@@ -87,8 +88,22 @@ def update_issue(request, issue_id=None):
 
 
 @login_required()
-def delete_issue(request, issue_id):
-    pass
+def delete_issue(request, issue_id=None):
+    user = request.user
+    issue = get_object_or_404(CarIssue, id=issue_id)
+    car = get_object_or_404(Car, id=issue.car_id, user_id=user.id, archive=False)
+    if request.method == 'POST':
+        issue.delete()
+
+        messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'Поломка была успешно удалена!'
+            )
+        return redirect(f'/car/{car.id}')
+
+    context = {'issue': issue}
+    return render(request, 'Garage/delete_issue.html', context)
 
 
 @login_required()
