@@ -29,4 +29,4 @@ class InsuranceForm(forms.ModelForm):
 class IssueForm(forms.ModelForm):
     class Meta:
         model = CarIssue
-        fields = ['name', 'description', 'car']
+        fields = ['name', 'description', 'car', 'open', 'date']

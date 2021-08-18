@@ -114,10 +114,10 @@
                                 {% if c.open %}
                                     <p>Состояние: поломка не устранена</p>
                                 {% else %}
-                                    <p>Состояние: устранена</p>
+                                    <p>Состояние: поломка устранена</p>
                                 {% endif %}
                                 <p>Дата: {{ c.date }}</p>
-                                <a href="#" class="small-text highlight">Изменить</a>
+                                <a href="{% url 'update_issue' issue_id=c.id %}" class="small-text highlight">Изменить</a>
                                 <p></p>
                                 <p></p>
                                 {% endfor %}

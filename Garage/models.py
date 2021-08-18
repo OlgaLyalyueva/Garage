@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -90,7 +92,7 @@ class Insurance(models.Model):
 
 class CarIssue(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
-    date = models.DateField(auto_now=True, blank=True)
+    date = models.DateField(default=datetime.date.today, blank=True)
     name = models.CharField(max_length=255, verbose_name='Название проблемы')
     description = models.CharField(blank=True, null=True, max_length=1000, verbose_name='Описание')
     open = models.BooleanField(default=True, verbose_name='Состояние')

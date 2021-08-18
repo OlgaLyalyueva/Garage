@@ -83,7 +83,8 @@ class TestAddIssue(TestCase):
         data = {
             'name': 'Test name',
             'car': car.id,
-            'description': 'Test Description'
+            'description': 'Test Description',
+            'open': True
         }
         response = c.post('/issue/add/', data=data)
         issue = CarIssue.objects.get(name='Test name')
@@ -113,6 +114,7 @@ class TestAddIssue(TestCase):
         data = {
             'name': 'Test name',
             'car': car.id,
+            'open': True
         }
         response = c.post("/issue/add/", data=data)
         issue = CarIssue.objects.get(name='Test name')

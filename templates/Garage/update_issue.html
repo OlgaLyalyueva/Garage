@@ -5,12 +5,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <h2>Изменить страховку</h2>
+                    <h2>Изменить текущую проблему</h2>
                     <ol class="breadcrumb greylinks">
                         <li> <a href="#">
                     Главная
                 </a> </li>
-                        <li class="active">Изменить страховку</li>
+                        <li class="active">Изменить текущую проблему</li>
                     </ol>
                 </div>
             </div>
@@ -19,27 +19,32 @@
     <section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
         <div class="container">
             <div class="row">
-                <form class="contact-form" action="{% url 'update_insurance' insrnc_id=insrnc.id %}" method="POST" enctype="multipart/form-data">
+                <form class="contact-form" action="{% url 'update_issue' issue_id=issue.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'archive_insurance' insrnc_id=insrnc.id %}">в архив
+                <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'archive_issue' issue_id=issue.id %}">в архив
                     <span class="glyphicon glyphicon-inbox"></span>
                 </a>
                     <div class="col-sm-7 col-md-8 col-lg-9">
                         <p class="contact-form">
-                            <input type="text" required="true" size="30" value="{{ insrnc.type }}" name="type" class="contact-form-producer" placeholder="Тип страховки" title="тип страховки">
-                            <input type="text" aria-required="true" size="30" value="{{ insrnc.description }}" name="description" class="contact-form-producer" placeholder="Описание" title="описание">
+                            <input type="text" required="true" size="30" value="{{ issue.name }}" name="name" class="contact-form-name" placeholder="Название поломки" title="название поломки">
+                            {% if issue.description %}
+                                <input type="text" aria-required="true" size="30" value="{{ issue.description }}" name="description" class="contact-form-issue" placeholder="Описание" title="описание">
+                            {% else %}
+                                <input type="text" aria-required="true" size="30" value name="description" class="contact-form-issue" placeholder="Описание" title="описание">
+                            {% endif %}
                         </p>
                         <p class="contact-form">
-                            <input type="text" required="true" size="30" value="{{ insrnc.policy_number }}" name="policy_number" class="contact-form-year" placeholder="Номер полиса" title="номер полиса">
-                            <input type="date" required="true" size="30" value="{{ insrnc.start_date | date:"Y-m-d" }}" name="start_date" class="contact-form-mileage" placeholder="Дата начала" title="дата начала страховки">
-                            <input type="date" required="true" size="30" value="{{ insrnc.end_date | date:"Y-m-d" }}" name="end_date" class="contact-form-mileage" placeholder="Дата окончания" title="дата окончания страховки">
+                            <input type="date" aria-required="true" size="30" value="{{ issue.date | date:"Y-m-d" }}" name="date" class="contact-form-date" placeholder="Дата создания" title="дата создания поломки">
                         </p>
                         <p>
-                            <input type="number" aria-required="false" size="30" value="{{ insrnc.price|stringformat:".2f" }}" name="price" class="contact-form-price" placeholder="Стоимость" title="стоимость">
+                            <p>Состояние поломки:</p>
+                                <div>
+                                    <input type="checkbox" aria-required="false" size="30" value="True" name="open" class="contact-form-open" placeholder="Статус поломки" title="статус поломки"> актуальна
+                                </div>
                             {% if cars %}
                                     <p class="contact-form">
-                                        <label for="car">Выбери автомобиль который был застрахован:</label>
-                                        <select name="car" id="car_id" value="{{ car.id }}" title="застрахованный автомобиль">
+                                        <label for="car">Выбери автомобиль у которого возникла поломка:</label>
+                                        <select name="car" id="car_id" value="{{ car.id }}" title="автомобиль">
                                             {% if car %}
                                                 <option value="{{ car.id }}">{{ car.producer }}, {{ car.model }}</option>
                                                 {% for car in cars %}
@@ -51,7 +56,7 @@
                         </p>
                         <input type="submit" value="Сохранить" class="btn-default">
 
-                        <button type="button" class="theme_button min_width_button btn-danger" data-toggle="modal" data-target="#MyModal" href="{% url 'delete_insurance' insrnc_id=insrnc.id %}">Удалить <span class="glyphicon glyphicon-trash"> </span></button>
+                        <button type="button" class="theme_button min_width_button btn-danger" data-toggle="modal" data-target="#MyModal" href="{% url 'delete_issue' issue_id=issue.id %}">Удалить <span class="glyphicon glyphicon-trash"> </span></button>
                         <a class="theme_button color1 min_width_button" href="{% url 'car_profile' car_id=car.id %}">Отменить</a>
                     </div>
                 </form>
