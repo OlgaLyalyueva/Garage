@@ -108,4 +108,15 @@ def delete_issue(request, issue_id=None):
 
 @login_required()
 def archive_issue(request, issue_id):
-    pass
+    user = request.user
+    issue = get_object_or_404(CarIssue, id=issue_id, archive=False)
+    car = get_object_or_404(Car, id=issue.car_id, user_id=user.id, archive=False)
+    if request.method == 'POST':
+        issue.archive = True
+        issue.save()
+        return redirect(f'/car/{car.id}')
+
+    context = {
+        'issue': issue
+    }
+    return render(request, 'Garage/archive_issue.html', context)
