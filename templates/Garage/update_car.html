@@ -102,7 +102,7 @@
                         </p>
                         <input type="submit" value="Сохранить" class="btn-default">
                         <button type="button" class="theme_button min_width_button btn-danger" data-toggle="modal" data-target="#MyModal" href="{% url 'delete_car' car_id=car.id %}">Удалить <span class="glyphicon glyphicon-trash"> </span></button>
-                        <a class="theme_button color1 min_width_button" href="{% url 'car_profile' car_id=car.id %}">Отменить</a>
+                        <input class="theme_button color1 min_width_button" type="button" value="Отменить" onclick="goBack()">
                     </div>
                 </form>
                 <!-- Popup for remove car -->

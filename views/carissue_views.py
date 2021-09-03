@@ -57,6 +57,7 @@ def add_issue(request):
     }
     return render(request, 'Garage/add_issue.html', context)
 
+
 @login_required()
 def update_issue(request, issue_id=None):
     user = request.user

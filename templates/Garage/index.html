@@ -26,6 +26,13 @@
 		<script src="/static/js/vendor/respond.min.js"></script>
 		<script src="/static/js/vendor/jquery-1.12.4.min.js"></script>
 	<![endif]-->
+    <!-- return back when user clicks the Cancel button -->
+    <script>
+    function goBack() {
+      window.history.back();
+    }
+    </script>
+    <!-- end -->
 </head>
 
     <body>
@@ -110,65 +117,15 @@
                                             </li>
                                             <li> <a href="{% url "cars" %}">Машина</a>
                                                 <ul>
-                                                    <!-- features -->
-                                                    <li> <a href="shortcodes_teasers.html">Shortcodes &amp; Widgets</a>
-                                                        <ul>
-                                                            <li> <a href="shortcodes_typography.html">Typography</a> </li>
-                                                            <li> <a href="shortcodes_buttons.html">Buttons</a> </li>
-                                                            <li> <a href="shortcodes_teasers.html">Teasers</a> </li>
-                                                            <li> <a href="shortcodes_progress.html">Progress</a> </li>
-                                                            <li> <a href="shortcodes_tabs.html">Tabs &amp; Collapse</a> </li>
-                                                            <li> <a href="shortcodes_bootstrap.html">Bootstrap Elements</a> </li>
-                                                            <li> <a href="shortcodes_widgets.html">Widgets</a> </li>
-                                                            <li> <a href="shortcodes_animation.html">Animation</a> </li>
-                                                            <li> <a href="shortcodes_icons.html">Template Icons</a> </li>
-                                                            <li> <a href="shortcodes_socialicons.html">Social Icons</a> </li>
-                                                        </ul>
+                                                    <li> <a href={% url 'insurances' %}>Страховки</a></li>
+                                                    <li> <a href="{% url 'car_issues' %}">Проблемы с автомобилями</a> </li>
+                                                    <li> <a href="team.html">Ремонты</a>
+{#                                                        <ul>#}
+{#                                                            <li> <a href="team.html">Team</a> </li>#}
+{#                                                            <li> <a href="team-single.html">Team Member</a> </li>#}
+{#                                                        </ul>#}
                                                     </li>
-                                                    <!-- eof features -->
-                                                    <li> <a href="about.html">About</a> </li>
-                                                    <li> <a href="team.html">Team</a>
-                                                        <ul>
-                                                            <li> <a href="team.html">Team</a> </li>
-                                                            <li> <a href="team-single.html">Team Member</a> </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li> <a href="testimonials.html">Testimonials</a> </li>
-                                                    <li> <a href="timetable.html">Timetable</a> </li>
-                                                    <!-- events -->
-                                                    <li> <a href="events-left.html">Events</a>
-                                                        <ul>
-                                                            <li> <a href="events-left.html">Left Sidebar</a> </li>
-                                                            <li> <a href="events-right.html">Right Sidebar</a> </li>
-                                                            <li> <a href="events-full.html">Full Width</a> </li>
-                                                            <li> <a href="event-single-left.html">Single Event</a>
-                                                                <ul>
-                                                                    <li> <a href="event-single-left.html">Left Sidebar</a> </li>
-                                                                    <li> <a href="event-single-right.html">Right Sidebar</a> </li>
-                                                                    <li> <a href="event-single-full.html">Full Width</a> </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <!-- eof events -->
-                                                    <li> <a href="comingsoon1.html">Comingsoon</a>
-                                                        <ul>
-                                                            <li> <a href="comingsoon1.html">Comingsoon</a> </li>
-                                                            <li> <a href="comingsoon2.html">Comingsoon 2</a> </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li> <a href="faq.html">FAQ</a>
-                                                        <ul>
-                                                            <li> <a href="faq.html">FAQ</a> </li>
-                                                            <li> <a href="faq2.html">FAQ 2</a> </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li> <a href="404.html">404</a>
-                                                        <ul>
-                                                            <li> <a href="404.html">404</a> </li>
-                                                            <li> <a href="4042.html">404 2</a> </li>
-                                                        </ul>
-                                                    </li>
+                                                    <li> <a href="testimonials.html">Улучшения</a> </li>
                                                 </ul>
                                             </li>
                                             <!-- eof pages -->
