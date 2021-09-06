@@ -15,17 +15,18 @@ def get_insurances(request):
     cars = Car.objects.filter(user_id=user.id, archive=False)
     if cars:
         for car in cars:
-            insurances[car.id] = Insurance.objects.filter(car_id=car.id, archive=False)
-
+            insurances[car.id] = list(Insurance.objects.filter(car_id=car.id, archive=False))
+            if insurances[car.id] == []:
+                insurances.pop(car.id)
         context = {
             'user': user,
             'cars': cars,
-            'insurances': insurances
+            'insurances': list(insurances.values())
         }
         return render(request, 'Garage/insurances.html', context)
 
     else:
-        message = 'У вас нет добавленных страховок'
+        message = 'У вас нет добавленных автомобилей и страховок'
         context = {
             'message': message
         }

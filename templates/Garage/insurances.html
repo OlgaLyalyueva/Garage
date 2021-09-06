@@ -1,0 +1,60 @@
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+<section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2>Страховки</h2>
+                <ol class="breadcrumb greylinks">
+                    <li> <a href="#">
+                Главная
+            </a> </li>
+                    <li class="active"> <a href="{% url "insurances" %}">Страховки</a> </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls page_portfolio section_padding_top_100 section_padding_bottom_100">
+    <div class="container">
+        {% if message %}
+            <p>{{ message }}</p>
+{#            <a class="theme_button color1 min_width_button" href="{% url 'add_insurance' %}">Добавить страховку(ИСПРАВИТЬ)</a>#}
+        {% else %}
+            <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
+                {% if insurances %}
+                    <table>
+                      <tr>
+                          <th>Тип</th>
+                          <th>Описание</th>
+                          <th>Номер</th>
+                          <th>Дата начала</th>
+                          <th>Дата окончания</th>
+                          <th>Стоимость</th>
+                          <th>Автомобиль</th>
+                      </tr>
+                        {% for insurance in insurances %}
+                            {% if insurance %}
+                                      {% for i in insurance %}
+                                      <tr>
+                                          <td><a href="{%  url 'update_insurance' insrnc_id=i.id %}">{{ i.type }}</a></td>
+                                          <td>{{ i.description}}</td>
+                                          <td>{{ i.policy_number }}</td>
+                                          <td>{{ i.start_date}}</td>
+                                          <td>{{ i.end_date }}</td>
+                                          <td>{{ i.price }}</td>
+                                          <td>{{ i.car }}</td>
+                                      </tr>
+                                      {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>У вас нет добавленных страховок</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
