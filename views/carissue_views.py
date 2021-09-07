@@ -16,11 +16,12 @@ def get_carissues(request):
     if cars:
         for car in cars:
             car_issues[car.id] = CarIssue.objects.filter(car_id=car.id, archive=False)
-
+            if car_issues[car.id] == []:
+                car_issues.pop(car.id)
         context = {
             'user': user,
             'cars': cars,
-            'car_issues': car_issues
+            'car_issues': list(car_issues.values())
         }
         return render(request, 'Garage/car_issues.html', context)
 
