@@ -26,7 +26,12 @@ class InsuranceForm(forms.ModelForm):
         fields = '__all__'
 
 
-class IssueForm(forms.ModelForm):
+class AddIssueForm(forms.ModelForm):
+    class Meta:
+        model = CarIssue
+        fields = ['name', 'description', 'car', 'date']
+
+class UpdateIssueForm(forms.ModelForm):
     class Meta:
         model = CarIssue
         fields = ['name', 'description', 'car', 'open', 'date']

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_list_or_404, redirect, get_object_or_404
 
 from Garage.models import Car, CarIssue
-from Garage.forms import IssueForm
+from Garage.forms import AddIssueForm, UpdateIssueForm
 
 
 @login_required()
@@ -41,7 +41,7 @@ def add_issue(request):
     cars = get_list_or_404(Car, user_id=user.id, archive=False)
     errors = None
     if request.method == 'POST':
-        form_issue = IssueForm(request.POST)
+        form_issue = AddIssueForm(request.POST)
         if form_issue.is_valid():
             form_issue.save()
             car_id = form_issue.data['car']
@@ -49,7 +49,7 @@ def add_issue(request):
         else:
             errors = form_issue.errors
 
-    form_issue = IssueForm()
+    form_issue = AddIssueForm()
     context = {
         'user': user,
         'cars': cars,
@@ -67,7 +67,7 @@ def update_issue(request, issue_id=None):
     cars = Car.objects.filter(user_id=user.id, archive=False)
     errors = None
     if request.method == 'POST':
-        form_issue = IssueForm(request.POST, instance=issue)
+        form_issue = UpdateIssueForm(request.POST, instance=issue)
         try:
             datetime.datetime.strptime(form_issue.data['date'], "%Y-%m-%d").date()
             if form_issue.is_valid():
@@ -78,7 +78,7 @@ def update_issue(request, issue_id=None):
                 errors = form_issue.errors
         except ValueError:
             errors = 'Дата создания поломки должна содержать день, месяц и год!'
-    form_issue = IssueForm()
+    form_issue = UpdateIssueForm()
     context = {
         'cars': cars,
         'car': car,
