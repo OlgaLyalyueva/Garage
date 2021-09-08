@@ -61,6 +61,7 @@ class TestImprovement(TestCase):
         self.assertEqual(improvement.date, datetime.date.today())
         self.assertEqual(improvement.name, 'Поменять лампочки в фарах')
         self.assertEqual(improvement.state, True)
+        self.assertFalse(improvement.archive)
         self.assertTrue(improvement.car)
 
     def test_check_max_length_for_name(self):
@@ -81,3 +82,4 @@ class TestImprovement(TestCase):
         improvement = Improvement.objects.get(id=1)
         self.assertEqual(improvement.description, ' ')
         self.assertEqual(improvement.price, 1800)
+        self.assertFalse(improvement.archive)
