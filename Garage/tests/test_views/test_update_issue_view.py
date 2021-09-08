@@ -37,7 +37,6 @@ class TestUpdateIssue(TestCase):
         CarIssue.objects.create(
             name='Test Update Name',
             description='Test Update Description',
-            open=True,
             car_id=car.id
         )
 
@@ -82,7 +81,6 @@ class TestUpdateIssue(TestCase):
         data = {
             'name': 'Test new update name',
             'date': i.date,
-            'open': i.open,
             'car': car.id
         }
         c.post(f'/issue/update/{i.id}', data=data)
@@ -90,7 +88,7 @@ class TestUpdateIssue(TestCase):
         self.assertEqual(CarIssue.objects.count(), 1)
         self.assertEqual(issue.name, 'Test new update name')
         self.assertEqual(issue.archive, False)
-        self.assertEqual(issue.open, i.open)
+        self.assertEqual(issue.close, i.close)
         self.assertEqual(issue.date, i.date)
         self.assertEqual(issue.description, None)
         self.assertEqual(issue.car_id, i.car_id)
@@ -105,7 +103,7 @@ class TestUpdateIssue(TestCase):
             'name': 'Test new update name',
             'date': datetime.date(2021, 3, 4),
             'description': 'New description',
-            'open': False,
+            'close': True,
             'car': car.id
         }
         response = c.post(f'/issue/update/{i.id}', data=data)
@@ -114,7 +112,7 @@ class TestUpdateIssue(TestCase):
         self.assertEqual(issue.name, 'Test new update name')
         self.assertEqual(issue.archive, False)
         self.assertEqual(issue.description, 'New description')
-        self.assertEqual(issue.open, False)
+        self.assertEqual(issue.close, True)
         self.assertEqual(issue.car_id, i.car_id)
         self.assertEqual(issue.date, datetime.date(2021, 3, 4))
         self.assertRedirects(response, f'/car/{car.id}', 302)
@@ -128,7 +126,7 @@ class TestUpdateIssue(TestCase):
             'name': '',
             'date': datetime.date(2021, 3, 4),
             'description': 'New description',
-            'open': False,
+            'close': True,
             'car': car.id
         }
         response = c.post(f'/issue/update/{issue.id}', data=data)

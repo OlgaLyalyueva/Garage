@@ -83,8 +83,7 @@ class TestAddIssue(TestCase):
         data = {
             'name': 'Test name',
             'car': car.id,
-            'description': 'Test Description',
-            'open': True
+            'description': 'Test Description'
         }
         response = c.post('/issue/add/', data=data)
         issue = CarIssue.objects.get(name='Test name')
@@ -92,7 +91,7 @@ class TestAddIssue(TestCase):
         self.assertRedirects(response, f'/car/{car.id}')
         self.assertEqual(issue.name, 'Test name')
         self.assertEqual(issue.date, datetime.date.today())
-        self.assertTrue(issue.open)
+        self.assertFalse(issue.close)
         self.assertEqual(issue.car_id, car.id)
         self.assertEqual(issue.description, 'Test Description')
         self.assertFalse(issue.archive)
@@ -113,8 +112,7 @@ class TestAddIssue(TestCase):
 
         data = {
             'name': 'Test name',
-            'car': car.id,
-            'open': True
+            'car': car.id
         }
         response = c.post("/issue/add/", data=data)
         issue = CarIssue.objects.get(name='Test name')
@@ -122,7 +120,7 @@ class TestAddIssue(TestCase):
         self.assertRedirects(response, f'/car/{car.id}')
         self.assertEqual(issue.name, 'Test name')
         self.assertEqual(issue.date, datetime.date.today())
-        self.assertEqual(issue.open, True)
+        self.assertEqual(issue.close, False)
         self.assertEqual(issue.car_id, car.id)
         self.assertEqual(issue.description, None)
 

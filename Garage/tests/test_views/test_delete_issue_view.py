@@ -40,7 +40,6 @@ class TestDeleteIssue(TestCase):
             name='Test delete issue',
             description='Test delete description',
             date=datetime.date(2020, 3, 14),
-            open=True,
             car_id=car.id
         )
 

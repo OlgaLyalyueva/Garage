@@ -111,10 +111,10 @@
                                 {% for c in car_issue %}
                                 <p>Название: {{ c.name }}</p>
                                 <p style="display: {{ c.description }}">Описание: {{ c.description }}</p>
-                                {% if c.open %}
-                                    <p>Состояние: поломка не устранена</p>
-                                {% else %}
+                                {% if c.close %}
                                     <p>Состояние: поломка устранена</p>
+                                {% else %}
+                                    <p>Состояние: поломка не устранена</p>
                                 {% endif %}
                                 <p>Дата: {{ c.date }}</p>
                                 <a href="{% url 'update_issue' issue_id=c.id %}" class="small-text highlight">Изменить</a>

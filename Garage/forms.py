@@ -31,7 +31,8 @@ class AddIssueForm(forms.ModelForm):
         model = CarIssue
         fields = ['name', 'description', 'car', 'date']
 
+
 class UpdateIssueForm(forms.ModelForm):
     class Meta:
         model = CarIssue
-        fields = ['name', 'description', 'car', 'open', 'date']
+        fields = ['name', 'description', 'car', 'close', 'date']
