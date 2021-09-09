@@ -30,7 +30,6 @@
                             <input type="text" required="true" size="30" value name="policy_number" class="contact-form-year" placeholder="Номер полиса">
                             <input type="date" required="true" size="30" value name="start_date" class="contact-form-mileage" placeholder="Дата начала">
                             <input type="date" required="true" size="30" value name="end_date" class="contact-form-mileage" placeholder="Дата окончания">
-
                         </p>
                         <p>
                             <input type="number" step="0.01" aria-required="false" size="30" value name="price" class="contact-form-price" placeholder="Стоимость">
@@ -45,6 +44,7 @@
                             {% endif %}
                         </p>
                         <input type="submit" value="Save" class="btn-default">
+                        <input class="theme_button color1 min_width_button" type="button" value="Отменить" onclick="goBack()">
                     </div>
                 </form>
             </div>
