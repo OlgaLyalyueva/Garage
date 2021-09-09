@@ -1,4 +1,4 @@
-from .models import Car, Body, Engine, Insurance, CarIssue
+from .models import Car, Body, Engine, Insurance, CarIssue, Improvement
 from django import forms
 
 
@@ -29,10 +29,16 @@ class InsuranceForm(forms.ModelForm):
 class AddIssueForm(forms.ModelForm):
     class Meta:
         model = CarIssue
-        fields = ['name', 'description', 'car', 'date']
+        fields = ['name', 'description', 'car']
 
 
 class UpdateIssueForm(forms.ModelForm):
     class Meta:
         model = CarIssue
         fields = ['name', 'description', 'car', 'close', 'date']
+
+
+class AddImprovementForm(forms.ModelForm):
+    class Meta:
+        model = Improvement
+        fields = ['name', 'description', 'price', 'car']
