@@ -116,7 +116,7 @@
                                 {% else %}
                                     <p>Состояние: поломка не устранена</p>
                                 {% endif %}
-                                <p>Дата: {{ c.date }}</p>
+                                <p>Дата создания: {{ c.date }}</p>
                                 <a href="{% url 'update_issue' issue_id=c.id %}" class="small-text highlight">Изменить</a>
                                 <p></p>
                                 <p></p>
