@@ -25,6 +25,7 @@ urlpatterns = [
     path('issue/delete/<int:issue_id>', carissue_views.delete_issue, name='delete_issue'),
     path('issue/archive/<int:issue_id>', carissue_views.archive_issue, name='archive_issue'),
 
+    path('improvements/', improvement_views.get_improvements, name='improvements'),
     path('improvement/add/', improvement_views.add_improvement, name='add_improvement'),
 
     path('accounts/', include('django.contrib.auth.urls')),

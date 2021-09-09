@@ -1,8 +1,33 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_list_or_404
 
-from Garage.models import Car
+from Garage.models import Car, Improvement
 from Garage.forms import AddImprovementForm
+
+
+@login_required()
+def get_improvements(request):
+    improvements = {}
+    user = request.user
+    cars = Car.objects.filter(user_id=user.id, archive=False)
+    if cars:
+        for car in cars:
+            improvements[car.id] = list(Improvement.objects.filter(car_id=car.id, archive=False))
+            if improvements[car.id] == []:
+                improvements.pop(car.id)
+        context = {
+            'user': user,
+            'cars': cars,
+            'improvements': list(improvements.values())
+        }
+        return render(request, 'Garage/improvements.html', context)
+
+    else:
+        message = 'У вас нет добавленных автомобилей и улучшений'
+        context = {
+            'message': message
+        }
+    return render(request, 'Garage/improvements.html', context)
 
 
 @login_required()
