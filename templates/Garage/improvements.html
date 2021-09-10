@@ -1,10 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+<section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2>Страховки</h2>
+                <ol class="breadcrumb greylinks">
+                    <li> <a href="#">
+                Главная
+            </a> </li>
+                    <li class="active"> <a href="{% url "improvements" %}">Улучшения</a> </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls page_portfolio section_padding_top_100 section_padding_bottom_100">
+    <div class="container">
+        {% if message %}
+            <p>{{ message }}</p>
+            <a class="theme_button color1 min_width_button" href="{% url 'add_car' %}">Добавить автомобиль</a>
+        {% else %}
+            <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
+                {% if improvements %}
+                    <table>
+                      <tr>
+                          <th>Название</th>
+                          <th>Описание</th>
+                          <th>Состояние</th>
+                          <th>Стоимость</th>
+                          <th>Автомобиль</th>
+                      </tr>
+                        {% for improvement in improvements %}
+                            {% if improvement %}
+                                      {% for i in improvement %}
+                                      <tr>
+                                          <td><a href="{%  url 'update_improvement' impr_id=i.id %}">{{ i.name }}</a></td>
+                                          <td>{{ i.description}}</td>
+                                          <td>{{ i.state }}</td>
+                                          <td>{{ i.price }}</td>
+                                          <td>{{ i.car }}</td>
+                                      </tr>
+                                      {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>У вас нет добавленных улучшений</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
