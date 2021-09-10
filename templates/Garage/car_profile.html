@@ -131,18 +131,18 @@
                             {% if improvement %}
                                 {% for i in improvement %}
                                 <p>Название: {{ i.name }}</p>
-                                <p>Описание: {{ i.description }}</p>
-                                <p>Стоимость: {{ i.price }}</p>
-                                <p>Состояние: {{ i.state }}</p>
-                                <p>Дата: {{ i.date }}</p>
-                                <a href="#" class="small-text highlight">Изменить</a>
+                                <p style="display: {{ i.description }}">Описание: {{ i.description }}</p>
+                                <p style="display: {{ i.price }}">Стоимость: {{ i.price }}</p>
+                                <p>Состояние: {% if i.state %} актуально {% else %} не актуально {% endif %}</p>
+                                <p>Дата создания: {{ i.date }}</p>
+                                <a href="{% url 'update_improvement' impr_id=i.id %}" class="small-text highlight">Изменить</a>
                                 <p></p>
                                 <p></p>
                                 {% endfor %}
                             {% else %}
                                 <p>Улучшений нет</p>
                             {% endif %}
-                            <a href="#" class="theme_button color1 min_width_button">Добавить текущее улучшение</a>
+                            <a href="{% url 'add_improvement' %}" class="theme_button color1 min_width_button">Добавить текущее улучшение</a>
                         </div>
                     </div>
                     <!-- Popup for remove car -->
