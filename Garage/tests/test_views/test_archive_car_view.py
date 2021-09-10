@@ -2,8 +2,7 @@ import datetime
 
 from django.test import TestCase, Client
 from Garage.models import Car, \
-    User, \
-    Insurance
+    User
 
 c = Client()
 username = 'testuser'
@@ -24,7 +23,7 @@ class TestArchiveCar(TestCase):
         user.set_password('1234567890')
         user.save()
 
-        car = Car.objects.create(
+        Car.objects.create(
             producer='Test Archive Car',
             model='First car',
             year=2021,
@@ -34,25 +33,6 @@ class TestArchiveCar(TestCase):
             user=user
         )
 
-        Insurance.objects.create(
-            type='Test Archive Car Type',
-            description='Test Archive car Description',
-            policy_number='ui 1063489',
-            start_date=datetime.date(1999, 2, 4),
-            end_date=datetime.date(2020, 2, 3),
-            price=909.00,
-            car_id=car.id
-        )
-
-        Insurance.objects.create(
-            type='Second Insurance Test Archive Car Type',
-            description='Second Insurance Test Archive car Description',
-            policy_number='ui 1063489',
-            start_date=datetime.date(1999, 2, 21),
-            end_date=datetime.date(2020, 2, 20),
-            price=1209.67,
-            car_id=car.id
-        )
 
     def test_not_logged_in_user_redirects_to_login_page(self):
         car = Car.objects.get(producer='Test Archive Car')
@@ -88,8 +68,4 @@ class TestArchiveCar(TestCase):
         r = c.post(f'/car/archive/{car.id}')
         car_re_requested = Car.objects.get(producer='Test Archive Car')
         self.assertTrue(car_re_requested.archive)
-        insrnc = Insurance.objects.filter(car_id=car_re_requested.id)
-        if insrnc:
-            for i in insrnc:
-                self.assertTrue(i.archive)
         self.assertRedirects(r, '/cars/', 302)
