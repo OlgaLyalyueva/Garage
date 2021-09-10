@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 
 from Garage.models import Car, Improvement
@@ -79,3 +80,21 @@ def update_improvement(request, impr_id=None):
         'errors': errors
     }
     return render(request, 'Garage/update_improvement.html', context)
+
+
+@login_required()
+def delete_improvement(request, impr_id=None):
+    impr = get_object_or_404(Improvement, id=impr_id)
+    car = get_object_or_404(Car, id=impr.car_id, user_id=request.user.id, archive=False)
+    if request.method == 'POST':
+        impr.delete()
+
+        messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'Улучшение {impr.name} было успешно удалено!'
+            )
+        return redirect(f'/car/{car.id}')
+
+    context = {'improvement': impr}
+    return render(request, 'Garage/delete_improvement.html', context)

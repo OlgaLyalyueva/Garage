@@ -28,6 +28,7 @@ urlpatterns = [
     path('improvements/', improvement_views.get_improvements, name='improvements'),
     path('improvement/add/', improvement_views.add_improvement, name='add_improvement'),
     path('improvement/update/<int:impr_id>', improvement_views.update_improvement, name='update_improvement'),
+    path('improvement/delete/<int:impr_id>', improvement_views.delete_improvement, name='delete_improvement'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 
