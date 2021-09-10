@@ -1,0 +1,8 @@
+<div class="with_padding with_background rounded bottom_color_border">
+    <form action="{% url 'archive_improvement' impr_id=improvement.id %}" method="POST">
+    {% csrf_token %}
+        <h4>Вы уверены что хотите отправить в архив данные?</h4>
+        <a href="{% url 'update_improvement' impr_id=improvement.id %}" data-dismiss="modal" class="theme_button color1 min_width_button">Нет</a>
+        <input type="submit" action="" class="btn btn-danger" value="Да" />
+    </form>
+</div>
