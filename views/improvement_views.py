@@ -98,3 +98,18 @@ def delete_improvement(request, impr_id=None):
 
     context = {'improvement': impr}
     return render(request, 'Garage/delete_improvement.html', context)
+
+
+@login_required()
+def archive_improvement(request, impr_id=None):
+    impr = get_object_or_404(Improvement, id=impr_id, archive=False)
+    car = get_object_or_404(Car, id=impr.car_id, user_id=request.user.id, archive=False)
+    if request.method == 'POST':
+        impr.archive = True
+        impr.save()
+        return redirect(f'/car/{car.id}')
+
+    context = {
+        'improvement': impr
+    }
+    return render(request, 'Garage/archive_improvement.html', context)
