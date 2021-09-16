@@ -49,18 +49,18 @@ class TestImprovement(TestCase):
         improvement = Improvement.objects.get(id=1)
         name = improvement._meta.get_field('name').verbose_name
         description = improvement._meta.get_field('description').verbose_name
-        state = improvement._meta.get_field('state').verbose_name
+        close = improvement._meta.get_field('close').verbose_name
         price = improvement._meta.get_field('price').verbose_name
         self.assertEqual(name, 'Название проблемы')
         self.assertEqual(description, 'Описание')
-        self.assertEqual(state, 'Состояние')
+        self.assertEqual(close, 'Состояние')
         self.assertEqual(price, 'Стоимость')
 
     def test_check_save_data_in_db(self):
         improvement = Improvement.objects.get(id=1)
         self.assertEqual(improvement.date, datetime.date.today())
         self.assertEqual(improvement.name, 'Поменять лампочки в фарах')
-        self.assertEqual(improvement.state, True)
+        self.assertFalse(improvement.close)
         self.assertFalse(improvement.archive)
         self.assertTrue(improvement.car)
 

@@ -132,8 +132,9 @@ class TestCarView(TestCase):
         c.login(username='testuser', password='1234567890')
         response = c.get('/car/1')
         self.assertEqual(response.context['improvement'][0].name, 'Test name')
-        self.assertEqual(response.context['improvement'][0].state, True)
+        self.assertFalse(response.context['improvement'][0].close)
         self.assertEqual(response.context['improvement'][0].date, date.today())
+        self.assertFalse(response.context['improvement'][0].archive)
 
     def test_logged_in_user_receives_two_repair_for_car(self):
         c = Client()

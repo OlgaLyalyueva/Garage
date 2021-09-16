@@ -47,4 +47,4 @@ class AddImprovementForm(forms.ModelForm):
 class UpdateImprovementForm(forms.ModelForm):
     class Meta:
         model = Improvement
-        fields = ['name', 'description', 'price', 'state', 'car']
+        fields = ['name', 'description', 'price', 'close', 'car']

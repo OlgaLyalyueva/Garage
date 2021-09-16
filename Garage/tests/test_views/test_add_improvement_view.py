@@ -120,7 +120,7 @@ class TestAddImprovement(TestCase):
         self.assertEqual(improvement.description, 'test description')
         self.assertEqual(improvement.price, 223.72)
         self.assertEqual(improvement.date, datetime.date.today())
-        self.assertTrue(improvement.state)
+        self.assertFalse(improvement.close)
         self.assertFalse(improvement.archive)
         self.assertEqual(improvement.car_id, car.id)
 
@@ -150,7 +150,7 @@ class TestAddImprovement(TestCase):
         self.assertEqual(improvement.description, None)
         self.assertEqual(improvement.price, None)
         self.assertEqual(improvement.date, datetime.date.today())
-        self.assertTrue(improvement.state)
+        self.assertFalse(improvement.close)
         self.assertFalse(improvement.archive)
         self.assertEqual(improvement.car_id, car.id)
 

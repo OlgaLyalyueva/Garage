@@ -82,7 +82,7 @@ class TestUpdateImprovement(TestCase):
         data = {
             'name': 'Test new update name',
             'description': impr.description,
-            'state': impr.state,
+            'close': impr.close,
             'price': impr.price,
             'car': car.id
         }
@@ -91,7 +91,7 @@ class TestUpdateImprovement(TestCase):
         self.assertEqual(Improvement.objects.count(), 1)
         self.assertEqual(improvement.name, 'Test new update name')
         self.assertEqual(improvement.description, impr.description)
-        self.assertEqual(improvement.state, impr.state)
+        self.assertEqual(improvement.close, impr.close)
         self.assertEqual(improvement.price, impr.price)
         self.assertEqual(improvement.date, datetime.date.today())
         self.assertEqual(improvement.car_id, impr.car_id)
@@ -106,7 +106,7 @@ class TestUpdateImprovement(TestCase):
         data = {
             'name': 'Test new update name',
             'description': 'New description',
-            'state': False,
+            'close': True,
             'price': 345,
             'car': car.id
         }
@@ -115,7 +115,7 @@ class TestUpdateImprovement(TestCase):
         self.assertEqual(Improvement.objects.count(), 1)
         self.assertEqual(improvement.name, 'Test new update name')
         self.assertEqual(improvement.description, 'New description')
-        self.assertFalse(improvement.state)
+        self.assertTrue(improvement.close)
         self.assertEqual(improvement.price, 345)
         self.assertEqual(improvement.car_id, car.id)
         self.assertEqual(improvement.archive, False)
