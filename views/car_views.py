@@ -70,9 +70,10 @@ def get_car(request, car_id):
         car_issue = None
 
     try:
-        improvement = Improvement.objects.filter(car_id=car.id)
+        improvement = Improvement.objects.filter(car_id=car.id, archive=False)
     except ObjectDoesNotExist:
         improvement = None
+
     context = {
         'user': user,
         'car': car,
