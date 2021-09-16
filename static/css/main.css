@@ -349,6 +349,7 @@ input[type="password"],
 input[type="search"],
 input[type="tel"],
 input[type="number"],
+input[type="float"],
 input[type="date"],
 textarea,
 select,
@@ -375,6 +376,7 @@ input[type="password"] + .theme_button,
 input[type="search"] + .theme_button,
 input[type="tel"] + .theme_button,
 input[type="number"] + .theme_button,
+input[type="float"] + .theme_button,
 input[type="date"] + .theme_button,
 textarea + .theme_button,
 select + .theme_button,
@@ -400,6 +402,7 @@ input[type="password"], .input-text-center
 input[type="search"], .input-text-center
 input[type="tel"], .input-text-center
 input[type="number"], .input-text-center
+input[type="float"], .input-text-center
 input[type="date"], .input-text-center
 textarea, .input-text-center
 select, .input-text-center
@@ -1804,6 +1807,10 @@ iframe {
 }
 
 input[type='number'] {
+	-moz-appearance: textfield;
+}
+
+input[type='float'] {
 	-moz-appearance: textfield;
 }
 
@@ -8106,6 +8113,7 @@ body.active-side-header.slide-right .page_header_side {
 .ls.ms input[type="search"],
 .ls.ms input[type="tel"],
 .ls.ms input[type="number"],
+.ls.ms input[type="float"],
 .ls.ms textarea,
 .ls.ms .select-group,
 .ls.ms .form-control {
@@ -8119,6 +8127,7 @@ body.active-side-header.slide-right .page_header_side {
 .ls.ms .with_background input[type="search"],
 .ls.ms .with_background input[type="tel"],
 .ls.ms .with_background input[type="number"],
+.ls.ms .with_background input[type="float"],
 .ls.ms .with_background textarea,
 .ls.ms .with_background select,
 .ls.ms .with_background .form-control {
@@ -8494,6 +8503,7 @@ body.active-side-header.slide-right .page_header_side {
 .ds input[type="search"],
 .ds input[type="tel"],
 .ds input[type="number"],
+.ds input[type="float"],
 .ds textarea,
 .ds select,
 .ds .form-control,
@@ -9383,6 +9393,7 @@ body.active-side-header.slide-right .page_header_side {
 .cs input[type="search"],
 .cs input[type="tel"],
 .cs input[type="number"],
+.cs input[type="float"],
 .cs textarea,
 .cs select,
 .cs .form-control,
@@ -9394,6 +9405,7 @@ body.active-side-header.slide-right .page_header_side {
 .background_cover input[type="search"],
 .background_cover input[type="tel"],
 .background_cover input[type="number"],
+.background_cover input[type="float"],
 .background_cover textarea,
 .background_cover select,
 .background_cover .form-control,
