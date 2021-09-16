@@ -114,8 +114,9 @@ class TestCarView(TestCase):
         response = c.get('/car/1')
         self.assertEqual(response.context['car_issue'][0].name, 'Test car problem')
         self.assertEqual(response.context['car_issue'][0].description, 'Test description')
-        self.assertEqual(response.context['car_issue'][0].close, True)
+        self.assertTrue(response.context['car_issue'][0].close)
         self.assertEqual(response.context['car_issue'][0].date, date.today())
+        self.assertFalse(response.context['car_issue'][0].archive)
 
     def test_logged_in_user_receives_insurances_for_car(self):
         c = Client()
@@ -126,6 +127,7 @@ class TestCarView(TestCase):
         self.assertEqual(response.context['insurances'][0].start_date, date(2021, 1, 1))
         self.assertEqual(response.context['insurances'][0].end_date, date(2021, 12, 31))
         self.assertEqual(response.context['insurances'][0].price, 599.43)
+        self.assertFalse(response.context['insurances'][0].archive)
 
     def test_logged_in_user_receives_improvement_for_car(self):
         c = Client()
