@@ -94,7 +94,7 @@
                                 <p>Описание: {{ r.description }}</p>
                                 <p>Заметки: {{ r.note }}</p>
                                 <p>Пробег: {{ r.mileage }}</p>
-                                <p>Стоимость: {{ r.price }}</p>
+                                <p>Стоимость: {{ r.price|stringformat:".2f"|intcomma }}</p>
                                 <p>Дата: {{ r.date }}</p>
                                 <a href="#" class="small-text highlight">Изменить</a>
                                 <p></p>
@@ -132,8 +132,8 @@
                                 {% for i in improvement %}
                                 <p>Название: {{ i.name }}</p>
                                 <p style="display: {{ i.description }}">Описание: {{ i.description }}</p>
-                                <p style="display: {{ i.price }}">Стоимость: {{ i.price }}</p>
-                                <p>Состояние: {% if i.state %} актуально {% else %} не актуально {% endif %}</p>
+                                <p style="display: {{ i.price }}">Стоимость: {{ i.price|stringformat:".2f"|intcomma }}</p>
+                                <p>Состояние: {% if i.close %} не актуально {% else %} актуально {% endif %}</p>
                                 <p>Дата создания: {{ i.date }}</p>
                                 <a href="{% url 'update_improvement' impr_id=i.id %}" class="small-text highlight">Изменить</a>
                                 <p></p>
