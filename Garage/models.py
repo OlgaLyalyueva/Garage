@@ -138,6 +138,7 @@ class Repair(models.Model):
     mileage = models.IntegerField(blank=True, null=True, verbose_name='Пробег')
     price = models.FloatField(blank=True, null=True, verbose_name='Стоимость')
     date = models.DateField(blank=True)
+    archive = models.BooleanField(default=False)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -71,7 +71,20 @@ class TestRepair(TestCase):
         max_length = repair._meta.get_field('note').max_length
         self.assertEqual(max_length, 500)
 
+    def test_check_save_data_in_db(self):
+        repair = Repair.objects.get(id=1)
+        self.assertEqual(repair.type_of_repair, 1)
+        self.assertEqual(repair.name, 'Замена масла')
+        self.assertEqual(repair.description, None)
+        self.assertEqual(repair.note, None)
+        self.assertEqual(repair.mileage, None)
+        self.assertEqual(repair.date, datetime.date.today())
+        self.assertEqual(repair.car_id, 1)
+        self.assertEqual(repair.price, None)
+        self.assertFalse(repair.archive)
+
     def test_add_optional_fields_of_model(self):
+        repair_before_update = Repair.objects.get(name='Замена масла')
         Repair.objects.filter(id=1).update(
             description='Масло в коробке',
             note='Проверить клапан',
@@ -79,7 +92,11 @@ class TestRepair(TestCase):
             price=2100,
         )
         r = Repair.objects.get(id=1)
+        self.assertEqual(r.type_of_repair, repair_before_update.type_of_repair)
+        self.assertEqual(r.name, repair_before_update.name)
         self.assertEqual(r.description, 'Масло в коробке')
         self.assertEqual(r.note, 'Проверить клапан')
         self.assertEqual(r.mileage, 120000)
         self.assertEqual(r.price, 2100)
+        self.assertEqual(r.date, repair_before_update.date)
+        self.assertEqual(r.car_id, repair_before_update.car_id)

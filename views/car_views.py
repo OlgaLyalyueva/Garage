@@ -60,7 +60,7 @@ def get_car(request, car_id):
         insurances = None
 
     try:
-        repair = Repair.objects.filter(car_id=car.id)
+        repair = Repair.objects.filter(car_id=car.id, archive=False)
     except ObjectDoesNotExist:
         repair = None
 
