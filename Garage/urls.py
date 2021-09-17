@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib import admin
 
-from views import car_views, insurance_views, carissue_views, improvement_views
+from views import car_views, insurance_views, carissue_views, improvement_views, repair_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,8 @@ urlpatterns = [
     path('improvement/update/<int:impr_id>', improvement_views.update_improvement, name='update_improvement'),
     path('improvement/delete/<int:impr_id>', improvement_views.delete_improvement, name='delete_improvement'),
     path('improvement/archive/<int:impr_id>', improvement_views.archive_improvement, name='archive_improvement'),
+
+    path('repair/add/', repair_views.add_repair, name='add_repair'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 

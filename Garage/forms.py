@@ -1,4 +1,4 @@
-from .models import Car, Body, Engine, Insurance, CarIssue, Improvement
+from .models import Car, Body, Engine, Insurance, CarIssue, Improvement, Repair
 from django import forms
 
 
@@ -48,3 +48,18 @@ class UpdateImprovementForm(forms.ModelForm):
     class Meta:
         model = Improvement
         fields = ['name', 'description', 'price', 'close', 'car']
+
+
+class RepairForm(forms.ModelForm):
+    class Meta:
+        model = Repair
+        fields = [
+            'type_of_repair',
+            'name',
+            'description',
+            'note',
+            'mileage',
+            'price',
+            'date',
+            'car'
+        ]
