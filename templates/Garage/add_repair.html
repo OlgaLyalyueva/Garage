@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+    <section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2>Добавить ремонт</h2>
+                    <ol class="breadcrumb greylinks">
+                        <li> <a href="#">
+                    Главная
+                </a> </li>
+                        <li class="active">Добавить ремонт</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
+        <div class="container">
+            <div class="row">
+                <form class="contact-form" action="{% url 'add_repair' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <div class="col-sm-7 col-md-8 col-lg-9">
+                        <p class="contact-form">
+                            <label for="type_of_repair">Выбери тип ремонта:</label>
+                            <select name="type_of_repair" id="type_of_repair" required>
+                              <option hidden disabled selected value> Тип ремонта </option>
+                              <option value="1">ТО</option>
+                              <option value="2">Замена запчастей</option>
+                              <option value="3">Кузовные работы</option>
+                            </select>
+                            <input type="text" required="true" size="30" value name="name" class="contact-form-name" placeholder="Название" title="Название">
+                        </p>
+                        <p>
+                            <input type="text" aria-required="false" size="30" value name="description" class="contact-form-description" placeholder="Описание" title="Описание">
+                            <input type="text" aria-required="false"  size="30" value name="note" class="contact-form-note" placeholder="Заметки" title="Заметки">
+                        </p>
+                        <p>
+                            <input type="number" aria-required="false" size="30" value name="mileage" class="contact-form-mileage" placeholder="Пробег" title="Пробег">
+                            <input type="float" step="0.01" aria-required="false" size="30" value name="price" class="contact-form-price" placeholder="Стоимость" title="Стоимость">
+                        </p>
+                        <p>
+                            <input type="date" required="true" size="30" value name="date" class="contact-form-date" placeholder="Дата ремонта" title="Дата ремонта">
+                            {% if cars %}
+                                    <p class="contact-form">
+                                        <label for="car">Выбери автомобиль который был застрахован:</label>
+                                        <select name="car" id="car_id" value="{{ car.id }}">
+                                            {% for car in cars %}
+                                                <option value="{{ car.id }}">{{ car.producer }}, {{ car.model }}</option>
+                                            {% endfor %}
+                                        </select>
+                            {% endif %}
+                        </p>
+                        <input type="submit" value="Save" class="btn-default">
+                        <input class="theme_button color1 min_width_button" type="button" value="Отменить" onclick="goBack()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
