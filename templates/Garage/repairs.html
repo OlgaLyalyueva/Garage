@@ -1,0 +1,62 @@
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+<section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2>Ремонты</h2>
+                <ol class="breadcrumb greylinks">
+                    <li> <a href="#">
+                Главная
+            </a> </li>
+                    <li class="active"> <a href="{% url "repairs" %}">Ремонты</a> </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls page_portfolio section_padding_top_100 section_padding_bottom_100">
+    <div class="container">
+        {% if message %}
+            <p>{{ message }}</p>
+            <a class="theme_button color1 min_width_button" href="{% url 'add_car' %}">Добавить автомобиль</a>
+        {% else %}
+            <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
+                {% if insurances %}
+                    <table>
+                      <tr>
+                          <th>Тип ремонта</th>
+                          <th>Название</th>
+                          <th>Описание</th>
+                          <th>Заметки</th>
+                          <th>Пробег</th>
+                          <th>Стоимость</th>
+                          <th>Дата</th>
+                          <th>Автомобиль</th>
+                      </tr>
+                        {% for repair in repairs %}
+                            {% if repair %}
+                                      {% for r in repair %}
+                                      <tr>
+                                          <td><a href="{%  url 'update_insurance' insrnc_id=i.id %}">{{ r.type_of_repair }}</a></td>
+                                          <td>{{ r.name }}</td>
+                                          <td>{{ r.description }}</td>
+                                          <td>{{ r.note }}</td>
+                                          <td>{{ r.mileage }}</td>
+                                          <td>{{ r.price }}</td>
+                                          <td>{{ r.date}}</td>
+                                          <td>{{ r.car }}</td>
+                                      </tr>
+                                      {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>У вас нет добавленных ремонтов</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
