@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_list_or_404, redirect, render
+from django.shortcuts import get_list_or_404, redirect, render, get_object_or_404
 
 from Garage.forms import RepairForm
 from Garage.models import Repair, Car
@@ -51,3 +51,29 @@ def add_repair(request):
         'errors': errors
     }
     return render(request, 'Garage/add_repair.html', context)
+
+
+@login_required()
+def update_repair(request, repair_id=None):
+    repair = get_object_or_404(Repair, id=repair_id, archive=False)
+    car = get_object_or_404(Car, id=repair.car_id, user_id=request.user.id, archive=False)
+    cars = Car.objects.filter(user_id=request.user.id, archive=False)
+    errors = None
+
+    if request.method == 'POST':
+        form_repair = RepairForm(request.POST, instance=repair)
+        if form_repair.is_valid():
+            form_repair.save()
+            car_id = form_repair.data['car']
+            return redirect(f'/car/{car_id}')
+        else:
+            errors = form_repair.errors
+    form_repair = RepairForm()
+    context = {
+        'cars': cars,
+        'car': car,
+        'repair': repair,
+        'form_repair': form_repair,
+        'errors': errors
+    }
+    return render(request, 'Garage/update_repair.html', context)

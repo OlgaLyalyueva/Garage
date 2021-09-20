@@ -33,6 +33,7 @@ urlpatterns = [
 
     path('repairs/', repair_views.get_repairs, name='repairs'),
     path('repair/add/', repair_views.add_repair, name='add_repair'),
+    path('repair/update/<int:repair_id>', repair_views.update_repair, name='update_repair'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 
