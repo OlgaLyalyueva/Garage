@@ -96,3 +96,18 @@ def delete_repair(request, repair_id=None):
 
     context = {'repair': repair}
     return render(request, 'Garage/delete_repair.html', context)
+
+
+@login_required()
+def archive_repair(request, repair_id=None):
+    repair = get_object_or_404(Repair, id=repair_id, archive=False)
+    car = get_object_or_404(Car, id=repair.car_id, user_id=request.user.id, archive=False)
+    if request.method == 'POST':
+        repair.archive = True
+        repair.save()
+        return redirect(f'/car/{car.id}')
+
+    context = {
+        'repair': repair
+    }
+    return render(request, 'Garage/archive_repair.html', context)
