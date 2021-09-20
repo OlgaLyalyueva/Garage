@@ -1,7 +1,11 @@
 from django.urls import path, include
 from django.contrib import admin
 
-from views import car_views, insurance_views, carissue_views, improvement_views, repair_views
+from views import car_views, \
+    insurance_views, \
+    carissue_views, \
+    improvement_views, \
+    repair_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,7 +38,8 @@ urlpatterns = [
     path('repairs/', repair_views.get_repairs, name='repairs'),
     path('repair/add/', repair_views.add_repair, name='add_repair'),
     path('repair/update/<int:repair_id>', repair_views.update_repair, name='update_repair'),
+    path('repair/delete/<int:repair_id>', repair_views.delete_repair, name='delete_repair'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 
-    ]
+]

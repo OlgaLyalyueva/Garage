@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_list_or_404, redirect, render, get_object_or_404
 
@@ -77,3 +78,21 @@ def update_repair(request, repair_id=None):
         'errors': errors
     }
     return render(request, 'Garage/update_repair.html', context)
+
+
+@login_required()
+def delete_repair(request, repair_id=None):
+    repair = get_object_or_404(Repair, id=repair_id)
+    car = get_object_or_404(Car, id=repair.car_id, user_id=request.user.id, archive=False)
+    if request.method == 'POST':
+        repair.delete()
+
+        messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'Информация о ремонте была успешно удалена!'
+            )
+        return redirect(f'/car/{car.id}')
+
+    context = {'repair': repair}
+    return render(request, 'Garage/delete_repair.html', context)
