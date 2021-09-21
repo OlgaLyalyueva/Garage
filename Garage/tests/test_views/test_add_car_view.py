@@ -21,13 +21,13 @@ class TestAddCar(TestCase):
 
     def test_not_logged_in_user_redirects_to_login_page(self):
         c = Client()
-        response = c.get('/car/add')
-        self.assertRedirects(response, '/accounts/login/?next=/car/add', 302)
+        response = c.get('/car/add/')
+        self.assertRedirects(response, '/accounts/login/?next=/car/add/', 302)
 
     def test_render_template_for_logged_in_user(self):
         c = Client()
         c.login(username='testuser', password='1234567890')
-        response = c.get('/car/add')
+        response = c.get('/car/add/')
         self.assertTemplateUsed(response, 'Garage/add_car.html')
 
     def test_logged_in_user_create_car_without_body_and_engine(self):
@@ -45,7 +45,7 @@ class TestAddCar(TestCase):
             'engine': '',
             'user': user
         }
-        response = c.post("/car/add", data=data)
+        response = c.post("/car/add/", data=data)
         self.assertEqual(Car.objects.count(), 1)
         car = Car.objects.get(producer=data['producer'], user_id=user.id)
         self.assertEqual(car.body_id, None)
@@ -67,7 +67,7 @@ class TestAddCar(TestCase):
             'engine': '',
             'user': user
         }
-        c.post("/car/add", data=data)
+        c.post("/car/add/", data=data)
         self.assertEqual(Car.objects.count(), 1)
         car = Car.objects.get(producer=data['producer'], user_id=user.id)
         body = Body.objects.get(name=data['body'])
@@ -90,7 +90,7 @@ class TestAddCar(TestCase):
             'engine': 'test engine name',
             'user': user
         }
-        c.post("/car/add", data=data)
+        c.post("/car/add/", data=data)
         self.assertEqual(Car.objects.count(), 1)
         car = Car.objects.get(producer=data['producer'], user_id=user.id)
         engine = Engine.objects.get(name=data['engine'])
@@ -105,6 +105,6 @@ class TestAddCar(TestCase):
             'producer': 'Test car',
             'user': user
         }
-        response = c.post("/car/add", data=data)
+        response = c.post("/car/add/", data=data)
         self.assertEqual(Car.objects.count(), 0)
         self.assertEqual(len(response.context['errors']), 5)
