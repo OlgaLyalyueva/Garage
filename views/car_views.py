@@ -66,7 +66,7 @@ def get_name_of_engine(engine_id):
 @login_required
 def get_car(request, car_id):
     user = request.user
-    car = get_object_or_404(Car, id=car_id, user_id=user.id, archive=False)
+    car = get_object_or_404(Car, id=car_id, user_id=user.id)
     try:
         insurances = Insurance.objects.filter(car_id=car.id, archive=False)
     except ObjectDoesNotExist:
@@ -218,3 +218,18 @@ def archive_car(request, car_id=None):
         'car': car
     }
     return render(request, 'Garage/archive_car.html', context)
+
+
+@login_required()
+def unarchive_car(request, car_id=None):
+    car = get_object_or_404(Car, id=car_id, user_id=request.user.id, archive=True)
+    if request.method == 'POST':
+        car.archive = False
+        car.save()
+
+        return redirect(f'/car/{car.id}')
+
+    context = {
+        'car': car
+    }
+    return render(request, 'Garage/unarchive_car.html', context)

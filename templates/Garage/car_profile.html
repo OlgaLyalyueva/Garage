@@ -39,7 +39,7 @@
 
                 <!-- Car description -->
                 {% if car.archive %}
-                    <a class="small-text" data-toggle="modal" data-target="#MyModal" href="#">вернуть из архива
+                    <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_car' car_id=car.id %}">вернуть из архива
                         <span class="glyphicon glyphicon-inbox"></span>
                     </a>
                 {% else %}
