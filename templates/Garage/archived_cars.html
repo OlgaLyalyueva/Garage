@@ -1,0 +1,53 @@
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+<section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2>Автомобили</h2>
+                <ol class="breadcrumb greylinks">
+                    <li> <a href="#">
+                Главная
+            </a> </li>
+                    <li class="active"> <a href="{% url "archived_cars" %}">Заархивированные автомобили</a> </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls page_portfolio section_padding_top_100 section_padding_bottom_100">
+    <div class="container">
+        {% if message %}
+            <p>{{ message }}</p>
+        {% else %}
+            <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
+                <table>
+                  <tr>
+                      <th>Марка</th>
+                      <th>Модель</th>
+                      <th>Год выпуска</th>
+                      <th>Тип привода</th>
+                      <th>Тип топлива</th>
+                      <th>Тип коробки</th>
+                      <th>Пробег</th>
+                      <th>Стоимость</th>
+                  </tr>
+                    {% for car in cars %}
+                      <tr>
+                          <td><a href="{%  url 'car_profile' car_id=car.id %}">{{ car.producer }}</a></td>
+                          <td>{{ car.model }}</td>
+                          <td>{{ car.year }}</td>
+                          <td>{{ car.get_transmission_display }}</td>
+                          <td>{{ car.get_fuel_display }}</td>
+                          <td>{{ car.get_drive_system_display }}</td>
+                          <td>{{ car.mileage }}</td>
+                          <td>{{ car.price }}</td>
+                      </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

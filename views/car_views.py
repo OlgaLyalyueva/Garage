@@ -40,6 +40,19 @@ def get_cars(request):
     return render(request, 'Garage/cars.html', context)
 
 
+@login_required()
+def get_archived_cars(request):
+    message = None
+    cars = Car.objects.filter(user_id=request.user.id, archive=True)
+    if not cars:
+        message = 'У вас нет автомобилей в папке архив'
+    context = {
+        'cars': cars,
+        'message': message
+    }
+    return render(request, 'Garage/archived_cars.html', context)
+
+
 def get_name_of_body(body_id):
     body = Body.objects.get(id=body_id)
     return body.name

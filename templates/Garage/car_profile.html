@@ -38,9 +38,15 @@
                 </div>
 
                 <!-- Car description -->
-                <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'archive_car' car_id=car.id %}">в архив
-                    <span class="glyphicon glyphicon-inbox"></span>
-                </a>
+                {% if car.archive %}
+                    <a class="small-text" data-toggle="modal" data-target="#MyModal" href="#">вернуть из архива
+                        <span class="glyphicon glyphicon-inbox"></span>
+                    </a>
+                {% else %}
+                    <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'archive_car' car_id=car.id %}">в архив
+                        <span class="glyphicon glyphicon-inbox"></span>
+                    </a>
+                {% endif %}
                 <div class="col-sm-7 col-md-8 col-lg-9">
                     <p>Марка: {{ car.producer|title }}</p>
                     <p>Модель: {{ car.model|title }}</p>
