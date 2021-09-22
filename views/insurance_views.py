@@ -118,3 +118,19 @@ def archive_insurance(request, insrnc_id=None):
         'insrnc': insrnc
     }
     return render(request, 'Garage/archive_insurance.html', context)
+
+
+@login_required()
+def unarchive_insurance(request, insrnc_id=None):
+    insrnc = get_object_or_404(Insurance, id=insrnc_id, archive=True)
+    if request.method == 'POST':
+        insrnc.archive = False
+        insrnc.save()
+
+        return redirect(f'/car/{insrnc.car_id}')
+
+    context = {
+        'insrnc': insrnc
+    }
+    return render(request, 'Garage/unarchive_insurance.html', context)
+

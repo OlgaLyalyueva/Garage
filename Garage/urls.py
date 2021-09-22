@@ -24,6 +24,7 @@ urlpatterns = [
     path('insurance/update/<int:insrnc_id>', insurance_views.update_insurance, name='update_insurance'),
     path('insurance/delete/<int:insrnc_id>', insurance_views.delete_insurance, name='delete_insurance'),
     path('insurance/archive/<int:insrnc_id>', insurance_views.archive_insurance, name='archive_insurance'),
+    path('insurance/unarchive/<int:insrnc_id>', insurance_views.unarchive_insurance, name='unarchive_insurance'),
 
     path('issues/', carissue_views.get_carissues, name='car_issues'),
     path('issue/add/', carissue_views.add_issue, name='add_issue'),
