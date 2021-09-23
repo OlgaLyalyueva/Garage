@@ -36,6 +36,26 @@ def get_carissues(request):
 
 
 @login_required()
+def get_archived_issues(request):
+    message = None
+    issues = []
+    cars = Car.objects.filter(user_id=request.user.id)
+    if cars:
+        for car in cars:
+            if CarIssue.objects.filter(car_id=car.id, archive=True):
+                issues.append(CarIssue.objects.filter(car_id=car.id, archive=True))
+        if not issues:
+            message = 'У вас нет поломок в папке архив'
+    else:
+        message = 'У вас нет добавленных автомобилей'
+    context = {
+        'issues': issues,
+        'message': message
+    }
+    return render(request, 'Garage/archived_issues.html', context)
+
+
+@login_required()
 def add_issue(request):
     user = request.user
     cars = get_list_or_404(Car, user_id=user.id, archive=False)

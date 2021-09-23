@@ -12,6 +12,7 @@ c = Client()
 username = 'testuser'
 password = '1234567890'
 
+
 class TestInsurancesArchivedView(TestCase):
 
     @classmethod
