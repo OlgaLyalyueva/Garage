@@ -34,6 +34,26 @@ def get_insurances(request):
 
 
 @login_required()
+def get_archived_insurances(request):
+    message = None
+    insrnc = []
+    cars = Car.objects.filter(user_id=request.user.id)
+    if cars:
+        for car in cars:
+            if Insurance.objects.filter(car_id=car.id, archive=True):
+                insrnc.append(Insurance.objects.filter(car_id=car.id, archive=True))
+        if not insrnc:
+            message = 'У вас нет страховок в папке архив'
+    else:
+        message = 'У вас нет автомобилей и страховок'
+    context = {
+        'insrnc': insrnc,
+        'message': message
+    }
+    return render(request, 'Garage/archived_insurances.html', context)
+
+
+@login_required()
 def add_insurance(request):
     user = request.user
     cars = get_list_or_404(Car, user_id=user.id, archive=False)

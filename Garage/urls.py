@@ -20,6 +20,7 @@ urlpatterns = [
     path('car/unarchive/<int:car_id>', car_views.unarchive_car, name='unarchive_car'),
 
     path('insurances/', insurance_views.get_insurances, name='insurances'),
+    path('insurances/archived/', insurance_views.get_archived_insurances, name='archived_insurances'),
     path('insurance/add/', insurance_views.add_insurance, name='add_insurance'),
     path('insurance/update/<int:insrnc_id>', insurance_views.update_insurance, name='update_insurance'),
     path('insurance/delete/<int:insrnc_id>', insurance_views.delete_insurance, name='delete_insurance'),
