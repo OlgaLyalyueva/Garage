@@ -5,12 +5,12 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h2>Страховки</h2>
+                <h2>Поломки</h2>
                 <ol class="breadcrumb greylinks">
                     <li> <a href="#">
                 Главная
             </a> </li>
-                    <li class="active"> <a href="{% url "archived_issues" %}">Заархивированные страховки</a> </li>
+                    <li class="active"> <a href="{% url "archived_issues" %}">Заархивированные поломки</a> </li>
                 </ol>
             </div>
         </div>
@@ -32,7 +32,6 @@
                   </tr>
                     {% for item in issues %}
                         {% for i in item %}
-                            <p>{{ i }}</p>
                           <tr>
                               <td><a data-toggle="modal" data-target="#MyModal" href="#">{{ i.name }}</a></td>
                               <td>{{ i.description }}</td>

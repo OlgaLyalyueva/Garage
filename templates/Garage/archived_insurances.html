@@ -34,7 +34,6 @@
                   </tr>
                     {% for item in insrnc %}
                         {% for i in item %}
-                            <p>{{ i }}</p>
                           <tr>
                               <td><a data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_insurance' insrnc_id=i.id %}">{{ i.type }}</a></td>
                               <td>{{ i.description }}</td>
