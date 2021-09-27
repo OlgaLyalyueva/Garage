@@ -33,6 +33,7 @@ urlpatterns = [
     path('issue/update/<int:issue_id>', carissue_views.update_issue, name='update_issue'),
     path('issue/delete/<int:issue_id>', carissue_views.delete_issue, name='delete_issue'),
     path('issue/archive/<int:issue_id>', carissue_views.archive_issue, name='archive_issue'),
+    path('issue/unarchive/<int:issue_id>', carissue_views.unarchive_issue, name='unarchive_issue'),
 
     path('improvements/', improvement_views.get_improvements, name='improvements'),
     path('improvement/add/', improvement_views.add_improvement, name='add_improvement'),

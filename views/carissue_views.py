@@ -142,3 +142,18 @@ def archive_issue(request, issue_id):
         'issue': issue
     }
     return render(request, 'Garage/archive_issue.html', context)
+
+
+@login_required()
+def unarchive_issue(request, issue_id=None):
+    issue = get_object_or_404(CarIssue, id=issue_id, archive=True)
+    if request.method == 'POST':
+        issue.archive = False
+        issue.save()
+
+        return redirect(f'/car/{issue.car_id}')
+
+    context = {
+        'issue': issue
+    }
+    return render(request, 'Garage/unarchive_issue.html', context)
