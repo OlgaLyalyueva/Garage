@@ -33,7 +33,7 @@
                     {% for item in issues %}
                         {% for i in item %}
                           <tr>
-                              <td><a data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_issue' issue_id=issue.id %}">{{ i.name }}</a></td>
+                              <td><a data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_issue' issue_id=i.id %}">{{ i.name }}</a></td>
                               <td>{{ i.description }}</td>
                               <td>{{ i.date }}</td>
                               <td>{{ i.close }}</td>
