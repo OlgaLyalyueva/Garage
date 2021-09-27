@@ -140,7 +140,7 @@ class TestCarIssuesArchivedView(TestCase):
     def test_logged_in_user_without_archived_issues_get_message(self):
         c.login(username='second-testuser', password=password)
         response = c.get('/issues/archived/')
-        self.assertEqual(response.context['message'], 'У вас нет поломок в папке архив')
+        self.assertEqual(response.context['message'], 'У вас нет добавленных поломок в папке архив')
 
     def test_logged_in_user_receives_archived_issues(self):
         c.login(username='third-testuser', password=password)
