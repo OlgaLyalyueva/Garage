@@ -45,7 +45,7 @@ def get_archived_issues(request):
             if CarIssue.objects.filter(car_id=car.id, archive=True):
                 issues.append(CarIssue.objects.filter(car_id=car.id, archive=True))
         if not issues:
-            message = 'У вас нет поломок в папке архив'
+            message = 'У вас нет добавленных поломок в папке архив'
     else:
         message = 'У вас нет добавленных автомобилей'
     context = {
