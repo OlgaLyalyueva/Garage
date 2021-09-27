@@ -54,7 +54,7 @@ class TestUnarchiveInsurance(TestCase):
         logged_in = c.login(username=username, password=password)
         self.assertTrue(logged_in)
 
-    def test_logged_in_user_with_wrong_car_id_receives_404_error(self):
+    def test_logged_in_user_with_wrong_insurance_id_receives_404_error(self):
         c.login(username=username, password=password)
         response = c.get('/insurance/unarchive/2')
         self.assertEqual(response.status_code, 404)
