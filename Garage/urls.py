@@ -36,6 +36,7 @@ urlpatterns = [
     path('issue/unarchive/<int:issue_id>', carissue_views.unarchive_issue, name='unarchive_issue'),
 
     path('improvements/', improvement_views.get_improvements, name='improvements'),
+    path('improvements/archived/', improvement_views.get_archived_improvements, name='archived_improvements'),
     path('improvement/add/', improvement_views.add_improvement, name='add_improvement'),
     path('improvement/update/<int:impr_id>', improvement_views.update_improvement, name='update_improvement'),
     path('improvement/delete/<int:impr_id>', improvement_views.delete_improvement, name='delete_improvement'),

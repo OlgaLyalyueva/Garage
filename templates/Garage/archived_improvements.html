@@ -1,0 +1,59 @@
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+<section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2>Улучшения</h2>
+                <ol class="breadcrumb greylinks">
+                    <li> <a href="#">
+                Главная
+            </a> </li>
+                    <li class="active"> <a href="#">Заархивированные улучшения</a> </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls page_portfolio section_padding_top_100 section_padding_bottom_100">
+    <div class="container">
+        {% if message %}
+            <p>{{ message }}</p>
+        {% else %}
+            <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
+                <table>
+                  <tr>
+                      <th>Название</th>
+                      <th>Описание</th>
+                      <th>Дата</th>
+                      <th>Стоимость</th>
+                      <th>Состояние</th>
+                      <th>Автомобиль</th>
+                  </tr>
+                    {% for improvement in improvements %}
+                        {% for i in improvement %}
+                          <tr>
+                              <td><a data-toggle="modal" data-target="#MyModal" href="#">{{ i.name }}</a></td>
+                              <td>{{ i.description }}</td>
+                              <td>{{ i.date }}</td>
+                              <td>{{ i.price }}</td>
+                              <td>{{ i.close }}</td>
+                              <td><a href="{% url 'car_profile' car_id=i.car_id %}">{{ i.car }}</a></td>
+                          </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+        <!-- Popup -->
+                    <div id ="MyModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            </div>
+                        </div>
+                    </div>
+        <!-- End Popup -->
+    </div>
+</section>
+{% endblock %}

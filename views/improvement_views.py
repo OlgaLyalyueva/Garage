@@ -34,6 +34,26 @@ def get_improvements(request):
 
 
 @login_required()
+def get_archived_improvements(request):
+    message = None
+    improvements = []
+    cars = Car.objects.filter(user_id=request.user.id)
+    if cars:
+        for car in cars:
+            if Improvement.objects.filter(car_id=car.id, archive=True):
+                improvements.append(Improvement.objects.filter(car_id=car.id, archive=True))
+        if not improvements:
+            message = 'У вас нет добавленных улучшений в папке архив'
+    else:
+        message = 'У вас нет добавленных автомобилей'
+    context = {
+        'improvements': improvements,
+        'message': message
+    }
+    return render(request, 'Garage/archived_improvements.html', context)
+
+
+@login_required()
 def add_improvement(request):
     user = request.user
     cars = get_list_or_404(Car, user_id=user.id, archive=False)
