@@ -10,26 +10,21 @@ from Garage.forms import AddIssueForm, UpdateIssueForm
 
 @login_required()
 def get_carissues(request):
+    message = None
     user = request.user
     cars = Car.objects.filter(user_id=user.id, archive=False)
-    car_issues = {}
+    car_issues = []
     if cars:
         for car in cars:
-            car_issues[car.id] = CarIssue.objects.filter(car_id=car.id, archive=False)
-            if car_issues[car.id] == []:
-                car_issues.pop(car.id)
-        context = {
-            'user': user,
-            'cars': cars,
-            'car_issues': list(car_issues.values())
-        }
-        return render(request, 'Garage/car_issues.html', context)
-
+            if CarIssue.objects.filter(car_id=car.id, archive=False):
+                car_issues.append(CarIssue.objects.filter(car_id=car.id, archive=False))
     else:
         message = 'У вас нет добавленных автомобилей'
 
     context = {
         'user': user,
+        'cars': cars,
+        'car_issues': car_issues,
         'message': message
     }
     return render(request, 'Garage/car_issues.html', context)
