@@ -44,6 +44,7 @@ urlpatterns = [
     path('improvement/unarchive/<int:impr_id>', improvement_views.unarchive_improvement, name='unarchive_improvement'),
 
     path('repairs/', repair_views.get_repairs, name='repairs'),
+    path('repairs/archived/', repair_views.get_archived_repairs, name='archived_repair'),
     path('repair/add/', repair_views.add_repair, name='add_repair'),
     path('repair/update/<int:repair_id>', repair_views.update_repair, name='update_repair'),
     path('repair/delete/<int:repair_id>', repair_views.delete_repair, name='delete_repair'),

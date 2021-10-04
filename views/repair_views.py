@@ -31,6 +31,26 @@ def get_repairs(request):
     return render(request, 'Garage/repairs.html', context)
 
 
+@login_required()
+def get_archived_repairs(request):
+    message = None
+    repairs = []
+    cars = Car.objects.filter(user_id=request.user.id)
+    if cars:
+        for car in cars:
+            if Repair.objects.filter(car_id=car.id, archive=True):
+                repairs.append(Repair.objects.filter(car_id=car.id, archive=True))
+        if not repairs:
+            message = 'У вас нет добавленных ремонтов в папке архив'
+    else:
+        message = 'У вас нет автомобилей и ремонтов'
+    context = {
+        'repairs': repairs,
+        'message': message
+    }
+    return render(request, 'Garage/archived_repairs.html', context)
+
+
 @login_required
 def add_repair(request):
     cars = get_list_or_404(Car, user_id=request.user.id, archive=False)
