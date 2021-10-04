@@ -28,17 +28,15 @@
                       <th>Описание</th>
                       <th>Дата</th>
                       <th>Стоимость</th>
-                      <th>Состояние</th>
                       <th>Автомобиль</th>
                   </tr>
                     {% for improvement in improvements %}
                         {% for i in improvement %}
                           <tr>
-                              <td><a data-toggle="modal" data-target="#MyModal" href="#">{{ i.name }}</a></td>
+                              <td><a data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_improvement' impr_id=i.id %}">{{ i.name }}</a></td>
                               <td>{{ i.description }}</td>
                               <td>{{ i.date }}</td>
                               <td>{{ i.price }}</td>
-                              <td>{{ i.close }}</td>
                               <td><a href="{% url 'car_profile' car_id=i.car_id %}">{{ i.car }}</a></td>
                           </tr>
                         {% endfor %}
@@ -47,12 +45,12 @@
             </div>
         {% endif %}
         <!-- Popup -->
-                    <div id ="MyModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            </div>
-                        </div>
-                    </div>
+        <div id ="MyModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
         <!-- End Popup -->
     </div>
 </section>
