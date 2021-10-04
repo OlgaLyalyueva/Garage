@@ -133,3 +133,18 @@ def archive_improvement(request, impr_id=None):
         'improvement': impr
     }
     return render(request, 'Garage/archive_improvement.html', context)
+
+
+@login_required()
+def unarchive_improvement(request, impr_id=None):
+    impr = get_object_or_404(Improvement, id=impr_id, archive=True)
+    if request.method == 'POST':
+        impr.archive = False
+        impr.save()
+
+        return redirect(f'/car/{impr.car_id}')
+
+    context = {
+        'impr': impr
+    }
+    return render(request, 'Garage/unarchive_improvement.html', context)
