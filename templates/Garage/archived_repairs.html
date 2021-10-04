@@ -1,10 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+<section class="page_breadcrumbs ds parallax section_padding_top_15 section_padding_bottom_15">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2>Ремонты</h2>
+                <ol class="breadcrumb greylinks">
+                    <li> <a href="#">
+                Главная
+            </a> </li>
+                    <li class="active"> <a href="{% url "archived_repair" %}">Заархивированные ремонты</a> </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls page_portfolio section_padding_top_100 section_padding_bottom_100">
+    <div class="container">
+        {% if message %}
+            <p>{{ message }}</p>
+        {% else %}
+            <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
+                <table>
+                  <tr>
+                      <th>Тип ремонта</th>
+                      <th>Название</th>
+                      <th>Описание</th>
+                      <th>Заметки</th>
+                      <th>Пробег</th>
+                      <th>Стоимость</th>
+                      <th>Дата</th>
+                      <th>Автомобиль</th>
+                  </tr>
+                    {% for repair in repairs %}
+                        {% for r in repair %}
+                          <tr>
+                              <td><a data-toggle="modal" data-target="#MyModal" href="#">{{ r.get_type_of_repair_display }}</a></td>
+                              <td>{{ r.name }}</td>
+                              {% if r.description %}<td>{{ r.description }}</td>{% else %}<td></td>{% endif %}
+                              {% if r.note %}<td>{{ r.note }}</td>{% else %}<td></td>{% endif %}
+                              {% if r.mileage %}<td>{{ r.mileage }}</td>{% else %}<td></td>{% endif %}
+                              {% if r.price %}<td>{{ r.price }}</td>{% else %}<td></td>{% endif %}
+                              <td>{{ r.date }}</td>
+                              <td><a href="{% url 'car_profile' car_id=r.car_id %}">{{ r.car }}</a></td>
+                          </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+        <!-- Popup -->
+        <div id ="MyModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
+        <!-- End Popup -->
+    </div>
+</section>
+{% endblock %}
