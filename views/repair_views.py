@@ -131,3 +131,18 @@ def archive_repair(request, repair_id=None):
         'repair': repair
     }
     return render(request, 'Garage/archive_repair.html', context)
+
+
+@login_required()
+def unarchive_repair(request, repair_id=None):
+    repair = get_object_or_404(Repair, id=repair_id, archive=True)
+    if request.method == 'POST':
+        repair.archive = False
+        repair.save()
+
+        return redirect(f'/car/{repair.car_id}')
+
+    context = {
+        'repair': repair
+    }
+    return render(request, 'Garage/unarchive_repair.html', context)

@@ -36,7 +36,7 @@
                     {% for repair in repairs %}
                         {% for r in repair %}
                           <tr>
-                              <td><a data-toggle="modal" data-target="#MyModal" href="#">{{ r.get_type_of_repair_display }}</a></td>
+                              <td><a data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_repair' repair_id=r.id %}">{{ r.get_type_of_repair_display }}</a></td>
                               <td>{{ r.name }}</td>
                               {% if r.description %}<td>{{ r.description }}</td>{% else %}<td></td>{% endif %}
                               {% if r.note %}<td>{{ r.note }}</td>{% else %}<td></td>{% endif %}

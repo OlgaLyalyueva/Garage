@@ -49,6 +49,7 @@ urlpatterns = [
     path('repair/update/<int:repair_id>', repair_views.update_repair, name='update_repair'),
     path('repair/delete/<int:repair_id>', repair_views.delete_repair, name='delete_repair'),
     path('repair/archive/<int:repair_id>', repair_views.archive_repair, name='archive_repair'),
+    path('repair/unarchive/<int:repair_id>', repair_views.unarchive_repair, name='unarchive_repair'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 
