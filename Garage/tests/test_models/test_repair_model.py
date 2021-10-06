@@ -72,14 +72,15 @@ class TestRepair(TestCase):
         self.assertEqual(max_length, 500)
 
     def test_check_save_data_in_db(self):
-        repair = Repair.objects.get(id=1)
+        repair = Repair.objects.get(name='Замена масла')
+        car = Car.objects.get(producer='Land Rower')
         self.assertEqual(repair.type_of_repair, 1)
         self.assertEqual(repair.name, 'Замена масла')
         self.assertEqual(repair.description, None)
         self.assertEqual(repair.note, None)
         self.assertEqual(repair.mileage, None)
         self.assertEqual(repair.date, datetime.date.today())
-        self.assertEqual(repair.car_id, 1)
+        self.assertEqual(repair.car_id, car.id)
         self.assertEqual(repair.price, None)
         self.assertFalse(repair.archive)
 

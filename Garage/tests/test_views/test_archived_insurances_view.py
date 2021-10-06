@@ -155,9 +155,9 @@ class TestInsurancesArchivedView(TestCase):
 
     def test_logged_in_user_receives_all_insurances_data(self):
         c.login(username='third-testuser', password=password)
-        first_insrnc = Insurance.objects.get(id=1)
-        second_insrnc = Insurance.objects.get(id=3)
-        third_insrnc = Insurance.objects.get(id=4)
+        first_insrnc = Insurance.objects.get(policy_number='RO60753F45')
+        second_insrnc = Insurance.objects.get(policy_number='ER594CCD2')
+        third_insrnc = Insurance.objects.get(price=1099.34)
         response = c.get('/insurances/archived/')
         insurances = response.context['insrnc']
         self.assertEqual(len(insurances), 2)

@@ -29,16 +29,16 @@ class TestCarModel(TestCase):
         )
 
     def test_check_car_instance(self):
-        car = Car.objects.get(id=1)
+        car = Car.objects.get(producer='Suzuki')
         self.assertTrue(isinstance(car, Car))
 
     def test_meta_label_name(self):
-        car = Car.objects.get(id=1)
+        car = Car.objects.get(producer='Suzuki')
         meta_label_name = car._meta.verbose_name
         self.assertEqual(meta_label_name, 'Автомобиль')
 
     def test_get_verbose_labels(self):
-        car = Car.objects.get(id=1)
+        car = Car.objects.get(producer='Suzuki')
         producer_label = car._meta.get_field('producer').verbose_name
         model_label = car._meta.get_field('model').verbose_name
         year_label = car._meta.get_field('year').verbose_name
@@ -57,7 +57,7 @@ class TestCarModel(TestCase):
         self.assertEqual(price_label, 'Стоимость')
 
     def test_check_save_data_in_db(self):
-        car = Car.objects.get(id=1)
+        car = Car.objects.get(producer='Suzuki')
         self.assertEqual(car.producer, 'Suzuki')
         self.assertEqual(car.model, 'Модель')
         self.assertEqual(car.year, 2006)
@@ -68,12 +68,12 @@ class TestCarModel(TestCase):
         self.assertTrue(car.archive is False)
 
     def test_check_max_length_for_producer(self):
-        car = Car.objects.get(id=1)
+        car = Car.objects.get(producer='Suzuki')
         max_length = car._meta.get_field('producer').max_length
         self.assertEqual(max_length, 300)
 
     def test_check_max_length_for_model(self):
-        car = Car.objects.get(id=1)
+        car = Car.objects.get(producer='Suzuki')
         max_length = car._meta.get_field('model').max_length
         self.assertEqual(max_length, 300)
 

@@ -30,13 +30,15 @@ class TestDeleteCar(TestCase):
 
     def test_not_logged_in_user_redirects_to_login_page(self):
         c = Client()
-        response = c.get('/car/delete/1')
-        self.assertRedirects(response, '/accounts/login/?next=/car/delete/1', 302)
+        car = Car.objects.get(producer='Test delete producer')
+        response = c.get(f'/car/delete/{car.id}')
+        self.assertRedirects(response, f'/accounts/login/?next=/car/delete/{car.id}', 302)
 
     def test_render_template_for_logged_in_user(self):
         c = Client()
         c.login(username='testuser', password='1234567890')
-        response = c.get('/car/delete/1')
+        car = Car.objects.get(producer='Test delete producer')
+        response = c.get(f'/car/delete/{car.id}')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'Garage/delete_car.html')
 
@@ -44,6 +46,6 @@ class TestDeleteCar(TestCase):
         c = Client()
         c.login(username='testuser', password='1234567890')
         user = User.objects.get(username='testuser')
-        car = Car.objects.get(id=1, user_id=user.id)
+        car = Car.objects.get(producer='Test delete producer', user_id=user.id)
         response = c.post(f'/car/delete/{car.id}')
         self.assertRedirects(response, '/cars/')

@@ -151,9 +151,9 @@ class TestRepairsArchivedView(TestCase):
 
     def test_logged_in_user_receives_all_repairs_data(self):
         c.login(username='third-testuser', password=password)
-        first_repair = Repair.objects.get(id=1)
-        second_repair = Repair.objects.get(id=2)
-        third_repair = Repair.objects.get(id=4)
+        first_repair = Repair.objects.get(name='замена масла')
+        second_repair = Repair.objects.get(name='замена фильтров')
+        third_repair = Repair.objects.get(name='поклейка пленки на капот')
         response = c.get('/repairs/archived/')
         repair = response.context['repairs']
         self.assertEqual(len(repair), 2)

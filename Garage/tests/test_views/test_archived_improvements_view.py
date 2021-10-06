@@ -142,9 +142,9 @@ class TestImprovementsArchivedView(TestCase):
 
     def test_logged_in_user_receives_all_improvements_data(self):
         c.login(username='third-testuser', password=password)
-        first_impr = Improvement.objects.get(id=1)
-        second_impr = Improvement.objects.get(id=3)
-        third_impr = Improvement.objects.get(id=4)
+        first_impr = Improvement.objects.get(name='Замена ремня')
+        second_impr = Improvement.objects.get(name='Защита на двигатель')
+        third_impr = Improvement.objects.get(name='Тонировка')
         response = c.get('/improvements/archived/')
         improvements = response.context['improvements']
         self.assertEqual(len(improvements), 2)

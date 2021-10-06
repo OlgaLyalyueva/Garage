@@ -149,9 +149,9 @@ class TestCarIssuesArchivedView(TestCase):
 
     def test_logged_in_user_receives_all_issues_data(self):
         c.login(username='third-testuser', password=password)
-        first_issue = CarIssue.objects.get(id=1)
-        second_issue = CarIssue.objects.get(id=2)
-        third_issue = CarIssue.objects.get(id=4)
+        first_issue = CarIssue.objects.get(name='Тонировка')
+        second_issue = CarIssue.objects.get(name='Перетяжка сидений')
+        third_issue = CarIssue.objects.get(name='замена дворников')
         response = c.get('/issues/archived/')
         issues = response.context['issues']
         self.assertEqual(len(issues), 2)

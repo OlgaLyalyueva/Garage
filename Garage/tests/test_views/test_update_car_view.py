@@ -37,23 +37,24 @@ class TestUpdateCar(TestCase):
 
     def test_not_logged_in_user_redirects_to_login_page(self):
         c = Client()
-        response = c.get('/car/update/1')
-        self.assertRedirects(response, '/accounts/login/?next=/car/update/1', 302)
+        car = Car.objects.get(producer='Test update producer')
+        response = c.get(f'/car/update/{car.id}')
+        self.assertRedirects(response, f'/accounts/login/?next=/car/update/{car.id}', 302)
 
     def test_render_template_for_logged_in_user(self):
         c = Client()
         c.login(username='testuser', password='1234567890')
-        response = c.get('/car/update/1')
+        car = Car.objects.get(producer='Test update producer')
+        response = c.get(f'/car/update/{car.id}')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'Garage/update_car.html')
 
     def test_logged_in_user_updates_all_required_fields(self):
         c = Client()
-        car_id = 1
         c.login(username='testuser', password='1234567890')
-        car = Car.objects.get(id=car_id)
+        car = Car.objects.get(producer='Test update producer')
         user = User.objects.get(id=car.user_id)
-        response = c.get(f'/car/update/{car_id}')
+        response = c.get(f'/car/update/{car.id}')
         self.assertEqual(response.status_code, 200)
         data = {
             'producer': 'New producer',
@@ -68,7 +69,7 @@ class TestUpdateCar(TestCase):
         }
         c.post(f'/car/update/{car.id}', data=data)
         self.assertEqual(Car.objects.count(), 1)
-        update_car = Car.objects.get(id=car_id)
+        update_car = Car.objects.get(id=car.id)
         self.assertEqual(update_car.producer, 'New producer')
         self.assertEqual(update_car.model, 'New model')
         self.assertEqual(update_car.year, 1999)
@@ -84,11 +85,10 @@ class TestUpdateCar(TestCase):
 
     def test_logged_in_user_updates_all_not_required_fields(self):
         c = Client()
-        car_id = 1
         c.login(username='testuser', password='1234567890')
-        car = Car.objects.get(id=car_id)
+        car = Car.objects.get(producer='Test update producer')
         user = User.objects.get(id=car.user_id)
-        response = c.get(f'/car/update/{car_id}')
+        response = c.get(f'/car/update/{car.id}')
         self.assertEqual(response.status_code, 200)
         data = {
             'producer': car.producer,
@@ -105,7 +105,7 @@ class TestUpdateCar(TestCase):
         }
         response = c.post(f'/car/update/{car.id}', data=data)
         self.assertEqual(Car.objects.count(), 1)
-        update_car = Car.objects.get(id=car_id)
+        update_car = Car.objects.get(producer='Test update producer')
         body = Body.objects.get(name='body')
         engine = Engine.objects.get(name='engine')
         self.assertEqual(update_car.producer, car.producer)
@@ -124,11 +124,10 @@ class TestUpdateCar(TestCase):
 
     def test_logged_in_user_receives_error_messages(self):
         c = Client()
-        car_id = 1
         c.login(username='testuser', password='1234567890')
-        car = Car.objects.get(id=car_id)
+        car = Car.objects.get(producer='Test update producer')
         user = User.objects.get(id=car.user_id)
-        response = c.get(f'/car/update/{car_id}')
+        response = c.get(f'/car/update/{car.id}')
         self.assertEqual(response.status_code, 200)
         data = {
             'price': 23000,
