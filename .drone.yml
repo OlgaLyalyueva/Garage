@@ -9,3 +9,13 @@ steps:
   commands:
   - pip install --no-cache-dir -r requirements.txt
   - python ./manage.py test
+
+services:
+- name: database
+  image: postgres
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: example
+    POSTGRES_DB: garage
+  ports:
+    - 5432:5432
