@@ -11,8 +11,10 @@ steps:
   - python ./manage.py test
 
 services:
-- name: database
+- name: garage
   image: postgres
+  ports:
+    - 5432
   environment:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: example
