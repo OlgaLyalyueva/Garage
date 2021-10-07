@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Car(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
+    vin = models.CharField(max_length=17, blank=True, null=True, verbose_name='VIN-код')
     producer = models.CharField(max_length=300, verbose_name='Марка')
     model = models.CharField(max_length=300, verbose_name='Модель')
     year = models.IntegerField(verbose_name='Год')

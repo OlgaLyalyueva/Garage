@@ -5,7 +5,7 @@ from django import forms
 class CarForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = ['producer', 'model', 'year', 'transmission', 'fuel', 'drive_system', 'mileage', 'price']
+        fields = ['producer', 'model', 'year', 'vin', 'transmission', 'fuel', 'drive_system', 'mileage', 'price']
 
 
 class BodyForm(forms.ModelForm):

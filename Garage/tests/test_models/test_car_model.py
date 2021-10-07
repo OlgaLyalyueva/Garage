@@ -41,6 +41,7 @@ class TestCarModel(TestCase):
         car = Car.objects.get(producer='Suzuki')
         producer_label = car._meta.get_field('producer').verbose_name
         model_label = car._meta.get_field('model').verbose_name
+        vin_lable = car._meta.get_field('vin').verbose_name
         year_label = car._meta.get_field('year').verbose_name
         transmission_label = car._meta.get_field('transmission').verbose_name
         fuel_label = car._meta.get_field('fuel').verbose_name
@@ -49,6 +50,7 @@ class TestCarModel(TestCase):
         price_label = car._meta.get_field('price').verbose_name
         self.assertEqual(producer_label, 'Марка')
         self.assertEqual(model_label, 'Модель')
+        self.assertEqual(vin_lable, 'VIN-код')
         self.assertEqual(year_label, 'Год')
         self.assertEqual(transmission_label, 'КПП')
         self.assertEqual(fuel_label, 'Топливо')
@@ -77,18 +79,25 @@ class TestCarModel(TestCase):
         max_length = car._meta.get_field('model').max_length
         self.assertEqual(max_length, 300)
 
+    def test_check_max_length_for_vin(self):
+        car = Car.objects.get(producer='Suzuki')
+        max_length = car._meta.get_field('vin').max_length
+        self.assertEqual(max_length, 17)
+
     def test_add_optional_fields_of_model(self):
         Body.objects.get_or_create(name='Седан')
         body = Body.objects.get(name='Седан')
         Engine.objects.create(name='2.2')
         engine = Engine.objects.get(name='2.2')
-        Car.objects.filter(id=1).update(
+        Car.objects.filter(producer='Suzuki').update(
+            vin='ASE345VGRO4040012',
             mileage=20000,
             body=body.id,
             engine=engine.id,
             price=9300
         )
-        car = Car.objects.get(id=1)
+        car = Car.objects.get(producer='Suzuki')
+        self.assertEqual(car.vin, 'ASE345VGRO4040012')
         self.assertEqual(car.mileage, 20000)
         self.assertTrue(car.body, 'Седан')
         self.assertTrue(car.engine, '2.2')
