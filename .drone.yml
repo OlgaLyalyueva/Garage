@@ -17,5 +17,3 @@ services:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: example
     POSTGRES_DB: garage
-  ports:
-    - 5433:5432
