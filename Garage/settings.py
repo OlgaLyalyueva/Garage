@@ -90,14 +90,14 @@ DATABASES = {
     }
 }
 
-if os.environ.get('GITHUB_WORKFLOW'):
+if os.environ.get('DRONE'):
     DATABASES = {
         'default': {
            'ENGINE': 'django.db.backends.postgresql',
            'NAME': 'garage',
            'USER': 'postgres',
-           'PASSWORD': 'postgres',
-           'HOST': '127.0.0.1',
+           'PASSWORD': 'example',
+           'HOST': 'postgres',
            'PORT': '5432',
         }
     }
