@@ -8,7 +8,7 @@ steps:
   image: python:3.9
   commands:
   - pip install --no-cache-dir -r requirements.txt
-  - python ./manage.py test
+  - python ./manage.py test --settings=Garage.settings_test
 
 services:
 - name: postgres

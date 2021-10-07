@@ -90,17 +90,6 @@ DATABASES = {
     }
 }
 
-if os.environ.get('DRONE'):
-    DATABASES = {
-        'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'garage',
-           'USER': 'postgres',
-           'PASSWORD': 'example',
-           'HOST': 'postgres',
-           'PORT': '5432',
-        }
-    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
