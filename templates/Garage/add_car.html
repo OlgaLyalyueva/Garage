@@ -23,6 +23,9 @@
                 <form class="contact-form" action="{% url 'add_car' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                     <!-- Add car photo -->
+                    {% if errors %}
+                        <p>{{ errors }}</p>
+                    {% endif %}
                     <div class="col-sm-5 col-md-4 col-lg-3">
                         <div class="vertical-item content-padding rounded overflow_hidden with_background">
                             <div class="item-media"> <img src="/static/images/team/01.jpg" alt="">
