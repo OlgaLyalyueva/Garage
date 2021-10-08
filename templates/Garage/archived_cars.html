@@ -26,6 +26,7 @@
                   <tr>
                       <th>Марка</th>
                       <th>Модель</th>
+                      <th>VIN-код</th>
                       <th>Год выпуска</th>
                       <th>Тип привода</th>
                       <th>Тип топлива</th>
@@ -37,6 +38,7 @@
                       <tr>
                           <td><a href="{%  url 'car_profile' car_id=car.id %}">{{ car.producer }}</a></td>
                           <td>{{ car.model }}</td>
+                          <td>{{ car.vin }}</td>
                           <td>{{ car.year }}</td>
                           <td>{{ car.get_transmission_display }}</td>
                           <td>{{ car.get_fuel_display }}</td>
