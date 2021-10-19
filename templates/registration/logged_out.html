@@ -1,0 +1,14 @@
+{% extends 'Garage/index.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="/static/registration/css/style.css">
+</head>
+<div class="login-wrap">
+	<div class="login-html">
+        <p>Выйти</p>
+
+        <a href="{% url 'login'%}">Нажмите сюда, чтобы войти снова.</a>
+    </div>
+</div>
+{% endblock %}

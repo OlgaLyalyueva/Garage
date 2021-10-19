@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'jinja2',
     'django.contrib.humanize',
+    'django_registration',
     'Garage',
 ]
 
@@ -143,3 +144,18 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings for user registration
+
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+
+LOGIN_REDIRECT_URL = '/cars/'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+
+# EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'olgalyalyueva@gmail.com'

@@ -22,7 +22,7 @@ def get_cars(request):
     cars = Car.objects.filter(user_id=user.id, archive=False)
     context = {
         'cars': cars,
-        'user': user.username
+        'user': user
     }
     if len(cars) > 0:
         for car in cars:
@@ -35,7 +35,8 @@ def get_cars(request):
     else:
         message = 'У вас нет добавленных автомобилей'
         context = {
-            'message': message
+            'message': message,
+            'user': user
         }
     return render(request, 'Garage/cars.html', context)
 
@@ -47,6 +48,7 @@ def get_archived_cars(request):
     if not cars:
         message = 'У вас нет автомобилей в папке архив'
     context = {
+        'user': request.user,
         'cars': cars,
         'message': message
     }
@@ -127,6 +129,7 @@ def add_car(request):
 
     form_car = CarForm()
     context = {
+        'user': request.user,
         'form_car': form_car,
         'errors': errors
     }
@@ -178,6 +181,7 @@ def update_car(request, car_id=None):
 
     form_car = CarForm()
     context = {
+        'user': request.user,
         'form_car': form_car,
         'car': car,
         'now': now,
@@ -200,7 +204,8 @@ def delete_car(request, car_id=None):
             )
         return redirect('cars')
 
-    context = {'car': car}
+    context = {'user': user,
+               'car': car}
     return render(request, 'Garage/delete_car.html', context)
 
 
@@ -215,6 +220,7 @@ def archive_car(request, car_id=None):
         return redirect('cars')
 
     context = {
+        'user': user,
         'car': car
     }
     return render(request, 'Garage/archive_car.html', context)
@@ -230,6 +236,7 @@ def unarchive_car(request, car_id=None):
         return redirect(f'/car/{car.id}')
 
     context = {
+        'user': request.user,
         'car': car
     }
     return render(request, 'Garage/unarchive_car.html', context)
