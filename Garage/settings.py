@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -153,9 +155,7 @@ LOGIN_REDIRECT_URL = '/cars/'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-
-# EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'olgalyalyueva@gmail.com'
