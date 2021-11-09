@@ -42,40 +42,11 @@
                         <input type="hidden" name="next" value="{{ next }}">
                     </div>
                     <div class="hr"></div>
-                    <div class="foot-lnk">
-                        <a href="{% url 'password_reset' %}">Забыли пароль?</a>
-                    </div>
+                    <div id="block1"><a href="{% url 'django_registration_register' %}">Зарегистрироваться?</a></div>
+                    <div id="block2"><a href="{% url 'password_reset' %}">Забыли пароль?</a></div>
                 </div>
             </form>
-			<div class="sign-up-htm">
-                <form class="contact-form" action="{% url 'django_registration_complete' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                    <div class="group">
-                        <label for="user" class="label">Имя пользователя</label>
-                        <input id="user" name="username" type="text" class="input">
-                    </div>
-                    <div class="group">
-                        <label for="pass" class="label">Пароль</label>
-                        <input id="pass" type="password" name="password" class="input" data-type="password">
-                    </div>
-                    <div class="group">
-                        <label for="pass" class="label">Повторите пароль</label>
-                        <input id="pass" type="password" class="input" data-type="password">
-                    </div>
-                    <div class="group">
-                        <label for="pass" class="label">Email</label>
-                        <input id="pass" type="text" class="input">
-                    </div>
-                    <div class="group">
-                        <input type="submit" class="button" value="Зарегистрироваться">
-                    </div>
-                    <div class="hr"></div>
-                    <div class="foot-lnk">
-                        <a for="tab-1">Уже участник?</a>
-                    </div>
-                </form>
-			</div>
-		</div>
+        </div>
 	</div>
   </div>
 {% endblock %}
