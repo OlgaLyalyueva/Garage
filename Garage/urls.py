@@ -51,8 +51,6 @@ urlpatterns = [
     path('repair/archive/<int:repair_id>', repair_views.archive_repair, name='archive_repair'),
     path('repair/unarchive/<int:repair_id>', repair_views.unarchive_repair, name='unarchive_repair'),
 
-    path('accounts/', include('django.contrib.auth.urls')),
-
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 
