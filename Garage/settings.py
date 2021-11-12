@@ -153,7 +153,6 @@ ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 LOGIN_REDIRECT_URL = '/cars/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
-AUTH_USER_EMAIL_UNIQUE = True
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
