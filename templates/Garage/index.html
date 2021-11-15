@@ -132,10 +132,13 @@
                                                     </ul>
                                                 </li>
                                                 <!-- eof pages -->
-                                                <li> <a href="services.html">Services</a>
+                                                <li> <a href="#">Архив</a>
                                                     <ul>
-                                                        <li> <a href="services.html">Services</a> </li>
-                                                        <li> <a href="service-single.html">Service Single</a> </li>
+                                                        <li> <a href="{% url 'archived_cars' %}">Автомобили</a> </li>
+                                                        <li> <a href="{% url 'archived_insurances' %}">Страховки</a> </li>
+                                                        <li> <a href="{% url 'archived_issues' %}">Проблемы с автомобилями</a> </li>
+                                                        <li> <a href="{% url 'archived_repairs' %}">Ремонты</a> </li>
+                                                        <li> <a href="{% url 'archived_improvements' %}">Улучшения</a> </li>
                                                     </ul>
                                                 </li>
                                                 <li> <a href="#">Features</a>

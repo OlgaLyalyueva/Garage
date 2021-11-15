@@ -21,7 +21,7 @@
             <div class="row">
                 <form class="contact-form" action="{% url 'update_repair' repair_id=repair.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'archive_repair' repair_id=repair.id %}">в архив
+                <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'archive_repairs' repair_id=repair.id %}">в архив
                     <span class="glyphicon glyphicon-inbox"></span>
                 </a>
                     <div class="col-sm-7 col-md-8 col-lg-9">
