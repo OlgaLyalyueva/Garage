@@ -9791,6 +9791,7 @@ body.active-side-header.slide-right .page_header_side {
 	position: relative;
 	clear: both;
 	max-width: 100%;
+	height: 525px;
 	overflow: hidden;
 }
 
@@ -12961,7 +12962,7 @@ widget_pages
 }
 
 .size_small {
-	font-size: 30px;
+	font-size: 35px;
 }
 
 /* background teaser */
@@ -14971,4 +14972,9 @@ a.color-icon.border-icon:hover {
 /* form of the car */
 .form-car p {
 	display: none;
+}
+
+#service p {
+	 margin: 0;
+    padding: 0;
 }

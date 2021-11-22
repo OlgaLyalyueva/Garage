@@ -5,10 +5,14 @@ from views import car_views, \
     insurance_views, \
     carissue_views, \
     improvement_views, \
-    repair_views
+    repair_views, \
+    views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('', views.main_view, name='main'),
+    path('about/', views.about, name='about'),
 
     path('cars/', car_views.get_cars, name='cars'),
     path('cars/archived/', car_views.get_archived_cars, name='archived_cars'),
