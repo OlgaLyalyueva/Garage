@@ -1,55 +1,57 @@
 {% extends 'Garage/index.html' %}
 {% load static %}
-{% block content %}
+{% block login %}
 <head>
     <link rel="stylesheet" href="/static/registration/css/style.css">
 </head>
-  <div class="login-wrap">
-	<div class="login-html">
-        <input id="tab-1" type="radio" name="tab" class="sign-up" checked><label for="tab-1" class="tab">Регистрация</label>
-		<input id="tab-2" type="radio" name="tab" class="sign-up" hidden><label for="tab-2" class="tab"></label>
-		<div class="login-form">
-			<div class="sign-up-html">
-                <form class="contact-form" action="" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                    <div class="group">
-                        <label for="user" class="label">Имя пользователя</label>
-                        <input id="user" name="username" type="text" required="" class="input">
-                        {% if form.errors.username %}
-                          <p>{{ form.errors.username }}</p>
-                        {% endif %}
+    <div id="box_wrapper" class="container">
+        <div class="login-wrap">
+            <div class="login-html">
+                <input id="tab-1" type="radio" name="tab" class="sign-up" checked><label for="tab-1" class="tab">Регистрация</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up" hidden><label for="tab-2" class="tab"></label>
+                <div class="login-form">
+                    <div class="sign-up-html">
+                        <form class="contact-form" action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <div class="group">
+                                <label for="user" class="label">Имя пользователя</label>
+                                <input id="user" name="username" type="text" required="" class="input">
+                                {% if form.errors.username %}
+                                  <p>{{ form.errors.username }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="group">
+                                <label for="pass1" class="label">Пароль</label>
+                                <input id="pass1" type="password" name="password1" autocomplete="new-password" required="" class="input" data-type="password">
+                                {% if not form.errors.username and form.errors.password1 %}
+                                  <p>{{ form.errors.password1 }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="group">
+                                <label for="pass2" class="label">Повторите пароль</label>
+                                <input id="pass2" type="password" name="password2" autocomplete="new-password" required="" class="input" data-type="password">
+                                {% if not form.errors.username and form.errors.password2 %}
+                                  <p>{{ form.errors.password2 }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="group">
+                                <label for="email" class="label">Email</label>
+                                <input id="email" type="email" name="email" required="" class="input">
+                                {% if not form.errors.username and not form.errors.password2 and form.errors.email%}
+                                  <p>{{ form.errors.email }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="group">
+                                <input type="submit" class="button" value="Зарегистрироваться">
+                            </div>
+                            <div class="hr"></div>
+                            <div class="foot-lnk">
+                                <a href="{% url 'login' %} ">Уже участник?</a>
+                            </div>
+                        </form>
                     </div>
-                    <div class="group">
-                        <label for="pass1" class="label">Пароль</label>
-                        <input id="pass1" type="password" name="password1" autocomplete="new-password" required="" class="input" data-type="password">
-                        {% if not form.errors.username and form.errors.password1 %}
-                          <p>{{ form.errors.password1 }}</p>
-                        {% endif %}
-                    </div>
-                    <div class="group">
-                        <label for="pass2" class="label">Повторите пароль</label>
-                        <input id="pass2" type="password" name="password2" autocomplete="new-password" required="" class="input" data-type="password">
-                        {% if not form.errors.username and form.errors.password2 %}
-                          <p>{{ form.errors.password2 }}</p>
-                        {% endif %}
-                    </div>
-                    <div class="group">
-                        <label for="email" class="label">Email</label>
-                        <input id="email" type="email" name="email" required="" class="input">
-                        {% if not form.errors.username and not form.errors.password2 and form.errors.email%}
-                          <p>{{ form.errors.email }}</p>
-                        {% endif %}
-                    </div>
-                    <div class="group">
-                        <input type="submit" class="button" value="Зарегистрироваться">
-                    </div>
-                    <div class="hr"></div>
-                    <div class="foot-lnk">
-                        <a href="{% url 'login' %} ">Уже участник?</a>
-                    </div>
-                </form>
-			</div>
-		</div>
-	</div>
-  </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
