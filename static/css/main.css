@@ -5594,7 +5594,7 @@ body.boxed {
 }
 
 .margin_0 {
-	margin: 0 !important;
+	margin: 50px !important;
 }
 
 .topmargin_0 {
@@ -6748,7 +6748,8 @@ body.boxed {
 }
 
 .logo img {
-	max-width: 200px;
+	max-width: 100px;
+	margin-left: 20px;
 }
 
 @media (min-width: 1600px) {
