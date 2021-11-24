@@ -6981,7 +6981,7 @@ body.boxed {
 
 .header_right_buttons {
 	white-space: nowrap;
-	padding: 0 15px;
+	padding: 0 0px;
 	text-align: right;
 	overflow: visible;
 }
