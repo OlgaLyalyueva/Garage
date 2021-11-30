@@ -1,7 +1,10 @@
 import datetime
+import os
 
 from django.db import models
 from django.contrib.auth.models import User
+
+from Garage import settings
 
 User._meta.get_field('email')._unique = True
 
@@ -150,3 +153,15 @@ class Repair(models.Model):
     class Meta:
         verbose_name = 'Ремонт'
         verbose_name_plural = 'Ремонты'
+
+
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_data/user_<id>(first_number)/user_id/car_id
+    user = User.objects.get(car__id=instance.car_id)
+    return os.path.join(settings.MEDIA_ROOT, str(user.id)[0], str(user.id), str(instance.car_id) + '.' + str(filename.split('.')[1]))
+
+
+class CarPhoto(models.Model):
+    id = models.AutoField(auto_created=True, primary_key=True)
+    image = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)

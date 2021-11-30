@@ -1,4 +1,4 @@
-from .models import Car, Body, Engine, Insurance, CarIssue, Improvement, Repair
+from .models import Car, Body, Engine, Insurance, CarIssue, Improvement, Repair, CarPhoto
 from django import forms
 
 
@@ -63,3 +63,9 @@ class RepairForm(forms.ModelForm):
             'date',
             'car'
         ]
+
+
+class UploadCarPhoto(forms.ModelForm):
+    class Meta:
+        model = CarPhoto
+        fields = ['image']

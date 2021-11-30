@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib import admin
 
@@ -22,6 +24,7 @@ urlpatterns = [
     path('car/delete/<int:car_id>', car_views.delete_car, name='delete_car'),
     path('car/archive/<int:car_id>', car_views.archive_car, name='archive_car'),
     path('car/unarchive/<int:car_id>', car_views.unarchive_car, name='unarchive_car'),
+    path('car/<int:car_id>/upload_image/', views.upload_photo, name='upload_image'),
 
     path('insurances/', insurance_views.get_insurances, name='insurances'),
     path('insurances/archived/', insurance_views.get_archived_insurances, name='archived_insurances'),
@@ -58,4 +61,4 @@ urlpatterns = [
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
