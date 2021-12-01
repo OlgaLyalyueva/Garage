@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.utils.datastructures import MultiValueDictKeyError
+
 from Garage.models import Car, CarPhoto
 from Garage.forms import UploadCarPhoto
 from django.shortcuts import get_object_or_404
@@ -13,8 +15,12 @@ def about(request):
 
 
 def add_image_to_model(request, car):
+    try:
+        image = request.FILES['image']
+    except MultiValueDictKeyError:
+        image = '/Users/olga/projects/Garage/user_data/default.png'
     car_photo = CarPhoto(
-        image=request.FILES['image'],
+        image=image,
         car=car
     )
     return car_photo
