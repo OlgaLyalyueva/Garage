@@ -183,12 +183,14 @@ def update_car(request, car_id=None):
             errors = form_car.errors
 
     form_car = CarForm()
+    image = get_car_image(car.id)
     context = {
         'user': request.user,
         'form_car': form_car,
         'car': car,
         'now': now,
-        'errors': errors
+        'errors': errors,
+        'image': image
     }
     return render(request, 'Garage/update_car.html', context)
 
