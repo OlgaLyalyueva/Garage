@@ -24,16 +24,17 @@
                 <!-- Car photo -->
                 <div class="col-sm-5 col-md-4 col-lg-3">
                     <div class="vertical-item content-padding rounded overflow_hidden with_background">
-                        <div class="item-media"> <img src="/static/images/team/01.jpg" alt="">
-                            <div class="media-links ds">
-                                <div class="bottom-links"> <a href="team-single.html" class="theme_button inverse">View profile</a> </div>
+                        {% if image %}
+                            <div class="item-media"> <img src="{{ image.image }}" alt="">
+                                <div class="media-links ds">
+                                    <div class="bottom-links"> <a href="{% url 'upload_image' car_id=car.id %}" class="theme_button inverse">Изменить фото</a> </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="item-content bottom_color_border">
-                            <h4 class="entry-title bottommargin_0"> <a href="{% url 'upload_image' car_id=car.id %}">Добавить фото</a> </h4>
-                            <p class="small-text highlight bottommargin_10">Director</p>
-                            <p class="social-links"> <a class="social-icon socicon-facebook" href="#" title="Facebook"></a> <a class="social-icon socicon-twitter" href="#" title="Twitter"></a> <a class="social-icon socicon-google" href="#" title="Twitter"></a> </p>
-                        </div>
+                        {% else %}
+                            <div class="item-content bottom_color_border">
+                                <h4 class="entry-title bottommargin_0"> <a href="{% url 'upload_image' car_id=car.id %}">Добавить фото</a> </h4>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 

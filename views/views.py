@@ -44,3 +44,11 @@ def upload_photo(request, car_id):
     context = {'form': form,
                'car': car}
     return render(request, 'Garage/upload_car_image.html', context)
+
+
+def get_car_image(car_id):
+    try:
+        car_image = CarPhoto.objects.get(car_id=car_id)
+    except CarPhoto.DoesNotExist:
+        car_image = None
+    return car_image

@@ -14,6 +14,7 @@ from Garage.forms import CarForm
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
+from views.views import get_car_image
 
 
 @login_required()
@@ -89,13 +90,15 @@ def get_car(request, car_id):
     except ObjectDoesNotExist:
         improvement = None
 
+    image = get_car_image(car_id)
     context = {
         'user': user,
         'car': car,
         'insurances': insurances,
         'repair': repair,
         'car_issue': car_issue,
-        'improvement': improvement
+        'improvement': improvement,
+        'image': image
     }
     return render(request, 'Garage/car_profile.html', context)
 
