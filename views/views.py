@@ -38,7 +38,7 @@ def upload_photo(request, car_id):
             except CarPhoto.DoesNotExist:
                 car_photo = add_image_to_model(request, car)
             car_photo.save()
-            return redirect(f'car/{{car.id}}/')
+            return redirect(f'/car/{car.id}')
     else:
         form = UploadCarPhoto()
     context = {'form': form,
