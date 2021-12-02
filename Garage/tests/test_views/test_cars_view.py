@@ -118,18 +118,6 @@ class TestCarsView(TestCase):
         self.assertEqual(cars[0].body, None)
         self.assertEqual(cars[0].engine, None)
 
-    def test_logged_in_user_receives_name_of_car_body(self):
-        c = Client()
-        c.login(username='second-testuser', password='1234567890')
-        response = c.get('/cars/')
-        self.assertEqual(response.context['body_name'], 'Test body name')
-
-    def test_logged_in_user_receives_name_of_car_engine(self):
-        c = Client()
-        c.login(username='second-testuser', password='1234567890')
-        response = c.get('/cars/')
-        self.assertEqual(response.context['engine_name'], 'Test engine name')
-
     def test_not_logged_in_user_redirects_to_login_page(self):
         c = Client()
         response = c.get('/cars/')

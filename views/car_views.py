@@ -1,4 +1,5 @@
 import datetime
+from django.template.defaulttags import register
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -9,7 +10,9 @@ from Garage.models import Car, \
     Insurance, \
     Repair, \
     CarIssue, \
-    Improvement
+    Improvement, \
+    CarPhoto
+
 from Garage.forms import CarForm
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
@@ -19,20 +22,20 @@ from views.views import get_car_image
 
 @login_required()
 def get_cars(request):
+    images = {}
     user = request.user
     cars = Car.objects.filter(user_id=user.id, archive=False)
-    context = {
-        'cars': cars,
-        'user': user
-    }
     if len(cars) > 0:
         for car in cars:
-            if car.body_id:
-                body_name = get_name_of_body(car.body_id)
-                context['body_name'] = body_name
-            if car.engine_id:
-                engine_name = get_name_of_engine(car.engine_id)
-                context['engine_name'] = engine_name
+            try:
+                images[car.id] = CarPhoto.objects.get(car_id=car.id).image
+            except CarPhoto.DoesNotExist:
+                pass
+        context = {
+            'images': images,
+            'cars': cars,
+            'user': user
+        }
     else:
         message = 'У вас нет добавленных автомобилей'
         context = {
