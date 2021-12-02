@@ -45,6 +45,11 @@ def get_cars(request):
     return render(request, 'Garage/cars.html', context)
 
 
+@register.filter
+def get_car_id_for_image(car, id):
+    return car.get(id)
+
+
 @login_required()
 def get_archived_cars(request):
     message = None
