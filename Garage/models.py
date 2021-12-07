@@ -163,5 +163,5 @@ def user_directory_path(instance, filename):
 
 class CarPhoto(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
-    image = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
+    image = models.ImageField(upload_to=user_directory_path, blank=True, null=True, verbose_name='Фото')
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
