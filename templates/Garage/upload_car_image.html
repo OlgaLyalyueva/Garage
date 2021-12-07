@@ -1,12 +1,7 @@
-{% extends 'Garage/index.html' %}
-{% load static %}
-
-{% block content %}
-  <form method="post" enctype="multipart/form-data">
+<div class="with_padding with_background rounded bottom_color_border">
+  <form action="{% url 'upload_image' car_id=car.id %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Загрузить</button>
+    <input type="submit" action="" class="btn" value="Загрузить">
   </form>
-
-  <p><a href="{% url 'car_profile' car_id=car.id %}">Return to home</a></p>
-{% endblock %}
+</div>

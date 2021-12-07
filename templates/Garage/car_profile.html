@@ -27,24 +27,25 @@
                         {% if image %}
                             <div class="item-media"> <img src="{{ image.image }}" alt="">
                                 <div class="media-links ds">
-                                    <div class="bottom-links"> <a href="{% url 'upload_image' car_id=car.id %}" class="theme_button inverse">Изменить фото</a> </div>
+                                    <div class="bottom-links"> <a data-toggle="modal" data-target="#AddOrUpdateCarPhoto" href="{% url 'upload_image' car_id=car.id %}" class="theme_button inverse">Изменить фото</a> </div>
                                 </div>
                             </div>
                         {% else %}
                             <div class="item-content bottom_color_border">
-                                <h4 class="entry-title bottommargin_0"> <a href="{% url 'upload_image' car_id=car.id %}">Добавить фото</a> </h4>
+                                <h4 class="entry-title bottommargin_0"> <a data-toggle="modal" data-target="#AddOrUpdateCarPhoto" href="{% url 'upload_image' car_id=car.id %}">Добавить фото</a> </h4>
                             </div>
                         {% endif %}
                     </div>
                 </div>
+                <!-- End Car Photo -->
 
                 <!-- Car description -->
                 {% if car.archive %}
-                    <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_car' car_id=car.id %}">вернуть из архива
+                    <a class="small-text" data-toggle="modal" data-target="#ArchivedCar" href="{% url 'unarchive_car' car_id=car.id %}">вернуть из архива
                         <span class="glyphicon glyphicon-inbox"></span>
                     </a>
                 {% else %}
-                    <a class="small-text" data-toggle="modal" data-target="#MyModal" href="{% url 'archive_car' car_id=car.id %}">в архив
+                    <a class="small-text" data-toggle="modal" data-target="#ArchivedCar" href="{% url 'archive_car' car_id=car.id %}">в архив
                         <span class="glyphicon glyphicon-inbox"></span>
                     </a>
                 {% endif %}
@@ -153,8 +154,16 @@
                             <a href="{% url 'add_improvement' %}" class="theme_button color1 min_width_button">Добавить текущее улучшение</a>
                         </div>
                     </div>
-                    <!-- Popup for remove car -->
-                    <div id ="MyModal" class="modal fade" role="dialog">
+                    <!-- Popup for add or update car photo -->
+                    <div id ="AddOrUpdateCarPhoto" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Popup -->
+                    <!-- Popup for archived car -->
+                    <div id ="ArchivedCar" class="modal fade" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
                             </div>
