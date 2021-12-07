@@ -23,7 +23,7 @@
             <a class="theme_button color1 min_width_button" href="{% url 'add_car' %}">Добавить автомобиль</a>
         {% else %}
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
-                {% if insurances %}
+                {% if repairs %}
                     <table>
                       <tr>
                           <th>Тип ремонта</th>
@@ -39,7 +39,7 @@
                             {% if repair %}
                                       {% for r in repair %}
                                       <tr>
-                                          <td><a href="{%  url 'update_insurance' insrnc_id=i.id %}">{{ r.type_of_repair }}</a></td>
+                                          <td><a href="{%  url 'update_repair' repair_id=r.id %}">{{ r.get_type_of_repair_display }}</a></td>
                                           <td>{{ r.name }}</td>
                                           <td>{{ r.description }}</td>
                                           <td>{{ r.note }}</td>
