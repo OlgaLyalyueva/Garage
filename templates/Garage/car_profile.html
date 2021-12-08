@@ -40,16 +40,7 @@
                 <!-- End Car Photo -->
 
                 <!-- Car description -->
-                {% if car.archive %}
-                    <a class="small-text" data-toggle="modal" data-target="#ArchivedCar" href="{% url 'unarchive_car' car_id=car.id %}">вернуть из архива
-                        <span class="glyphicon glyphicon-inbox"></span>
-                    </a>
-                {% else %}
-                    <a class="small-text" data-toggle="modal" data-target="#ArchivedCar" href="{% url 'archive_car' car_id=car.id %}">в архив
-                        <span class="glyphicon glyphicon-inbox"></span>
-                    </a>
-                {% endif %}
-                <div class="col-sm-7 col-md-8 col-lg-9">
+                <div class="col-sm-5 col-md-6 col-lg-7">
                     <p>Марка: {{ car.producer|title }}</p>
                     <p>Модель: {{ car.model|title }}</p>
                     <p style="display: {{ car.vin }}">VIN-код: {{ car.vin|upper }}</p>
@@ -65,8 +56,21 @@
                     <p style="display: {{ car.engine }}">Двигатель: {{ car.engine|title }}</p>
 
                     <a class="theme_button color1 min_width_button" href="{% url 'update_car' car_id=car.id %}">Изменить <span class="glyphicon glyphicon-pencil"> </span></a>
-
                     <!-- Nav tabs -->
+                </div>
+                <div class="col-sm-2 col-md-2 col-lg-2 text-right">
+                    {% if car.archive %}
+                        <a class="small-text" data-toggle="modal" data-target="#ArchivedCar" href="{% url 'unarchive_car' car_id=car.id %}">вернуть из архива
+                            <span class="glyphicon glyphicon-inbox"></span>
+                        </a>
+                    {% else %}
+                        <a class="small-text" data-toggle="modal" data-target="#ArchivedCar" href="{% url 'archive_car' car_id=car.id %}" >в архив
+                            <span class="glyphicon glyphicon-inbox"></span>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="col-sm-5 col-md-4 col-lg-3"></div>
+                <div class="col-sm-7 col-md-8 col-lg-9">
                     <ul class="nav nav-tabs topmargin_40" role="tablist">
                         <li><a href="#tab1" role="tab" data-toggle="tab">Страховка</a></li>
                         <li><a href="#tab2" role="tab" data-toggle="tab">Ремонт</a></li>
