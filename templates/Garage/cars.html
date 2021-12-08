@@ -25,13 +25,17 @@
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
                 {% for car in cars %}
                 <div class="isotope-item col-sm-6 col-md-4 col-lg-3">
-                    <div class="vertical-item content-padding rounded overflow_hidden with_background">
-                        <div class="item-media"> <img src="{{ images|get_car_id_for_image:car.id }}" alt=""> </div>
-                        <div class="item-content bottom_color_border">
-                            <h4> <a href="{% url "car_profile" car_id=car.id %}">{{ car.producer }} {{ car.model }}</a> </h4>
-                            <p>{{ car.year }}</p>
+                    <a href="{% url 'car_profile' car_id=car.id %}">
+                        <div class="vertical-item content-padding rounded overflow_hidden with_background">
+                                <div class="item-media">
+                                    <img src="{{ images|get_car_id_for_image:car.id }}" alt="">
+                                </div>
+                                <div class="item-content bottom_color_border">
+                                    <h4>{{ car.producer }} {{ car.model }}</h4>
+                                    <p>{{ car.year }}</p>
+                                </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
