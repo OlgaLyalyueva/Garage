@@ -100,23 +100,29 @@
                         </div>
                         <div class="tab-pane fade" id="tab2">
                             <h4>Ремонт:</h4>
-                            {% if repair %}
-                                {% for r in repair %}
-                                <p>Тип ремонта: {{ r.get_type_of_repair_display }}</p>
-                                <p>Название: {{ r.name }}</p>
-                                <p style="display: {{ r.description }}">Описание: {{ r.description }}</p>
-                                <p style="display: {{ r.note }}">Заметки: {{ r.note }}</p>
-                                <p style="display: {{ r.mileage }}">Пробег: {{ r.mileage }}</p>
-                                <p style="display: {{ r.price }}">Стоимость: {{ r.price|stringformat:".2f"|intcomma }}</p>
-                                <p>Дата: {{ r.date }}</p>
-                                <a href="{% url 'update_repair' repair_id=r.id %}" class="small-text highlight">Изменить</a>
-                                <p></p>
-                                <p></p>
-                                {% endfor %}
-                            {% else %}
-                                <p>У вас нет добавленных ремонтов</p>
-                            {% endif %}
-                            <a href="{% url 'add_repair' %}" class="theme_button color1 min_width_button">Добавить ремонт</a>
+                                <a href="{% url 'add_repair' %}" class="theme_button color1 min_width_button">Добавить ремонт</a>
+                                {% if repair %}
+                                    <table>
+                                      <tr>
+                                          <th>Тип ремонта</th>
+                                          <th>Название</th>
+                                          <th>Пробег</th>
+                                          <th>Стоимость</th>
+                                          <th>Дата</th>
+                                      </tr>
+                                          {% for r in repair %}
+                                          <tr>
+                                              <td><a href="{%  url 'update_repair' repair_id=r.id %}">{{ r.get_type_of_repair_display }}</a></td>
+                                              <td>{{ r.name }}</td>
+                                              <td>{{ r.mileage }}</td>
+                                              <td>{{ r.price }}</td>
+                                              <td>{{ r.date}}</td>
+                                          </tr>
+                                          {% endfor %}
+                                    </table>
+                                {% else %}
+                                    <p>У вас нет добавленных ремонтов</p>
+                                {% endif %}
                         </div>
                         <div class="tab-pane fade" id="tab3">
                             <h4>Проблемы с автомобилем:</h4>

@@ -1096,7 +1096,7 @@ input[type*="password"],
 
 @media (min-width: 400px) {
 	.tab-content {
-		padding: 40px 30px;
+		padding: 40px 20px;
 	}
 }
 
