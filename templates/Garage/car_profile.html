@@ -120,8 +120,6 @@
                                           </tr>
                                           {% endfor %}
                                     </table>
-                                {% else %}
-                                    <p>У вас нет добавленных ремонтов</p>
                                 {% endif %}
                         </div>
                         <div class="tab-pane fade" id="tab3">
@@ -150,27 +148,43 @@
                                         {% endif %}
                                     {% endfor %}
                                 </table>
-                            {% else %}
-                                <p>Нет текущих проблем с автомобилем</p>
                             {% endif %}
                         </div>
                         <div class="tab-pane fade" id="tab4">
                             <h4>Улучшения:</h4>
-                            {% if improvement %}
-                                {% for i in improvement %}
-                                <p>Название: {{ i.name }}</p>
-                                <p style="display: {{ i.description }}">Описание: {{ i.description }}</p>
-                                <p style="display: {{ i.price }}">Стоимость: {{ i.price|stringformat:".2f"|intcomma }}</p>
-                                <p>Состояние: {% if i.close %} не актуально {% else %} актуально {% endif %}</p>
-                                <p>Дата создания: {{ i.date }}</p>
-                                <a href="{% url 'update_improvement' impr_id=i.id %}" class="small-text highlight">Изменить</a>
-                                <p></p>
-                                <p></p>
-                                {% endfor %}
-                            {% else %}
-                                <p>Улучшений нет</p>
-                            {% endif %}
                             <a href="{% url 'add_improvement' %}" class="theme_button color1 min_width_button">Добавить текущее улучшение</a>
+                            {% if improvements %}
+                                <table>
+                                    <tr>
+                                        <th>Название</th>
+                                        <th>Описание</th>
+                                        <th>Состояние</th>
+                                        <th>Стоимость</th>
+                                    </tr>
+                                    {% for improvement in improvements %}
+                                        <tr>
+                                            <td><a href="{%  url 'update_improvement' impr_id=improvement.id %}">{{ improvement.name }}</a></td>
+                                            <td>{{ improvement.description}}</td>
+                                            <td>{% if improvement.close %} не актуально {% else %} актуально {% endif %}</td>
+                                            <td>{{ improvement.price }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            {% endif %}
+{#                            {% if improvement %}#}
+{#                                {% for i in improvement %}#}
+{#                                <p>Название: {{ i.name }}</p>#}
+{#                                <p style="display: {{ i.description }}">Описание: {{ i.description }}</p>#}
+{#                                <p style="display: {{ i.price }}">Стоимость: {{ i.price|stringformat:".2f"|intcomma }}</p>#}
+{#                                <p>Состояние: {% if i.close %} не актуально {% else %} актуально {% endif %}</p>#}
+{#                                <p>Дата создания: {{ i.date }}</p>#}
+{#                                <a href="{% url 'update_improvement' impr_id=i.id %}" class="small-text highlight">Изменить</a>#}
+{#                                <p></p>#}
+{#                                <p></p>#}
+{#                                {% endfor %}#}
+{#                            {% else %}#}
+{#                                <p>Улучшений нет</p>#}
+{#                            {% endif %}#}
                         </div>
                     </div>
                     <!-- Popup for add or update car photo -->

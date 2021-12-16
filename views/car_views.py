@@ -94,9 +94,9 @@ def get_car(request, car_id):
         car_issues = None
 
     try:
-        improvement = Improvement.objects.filter(car_id=car.id, archive=False)
+        improvements = Improvement.objects.filter(car_id=car.id, archive=False)
     except ObjectDoesNotExist:
-        improvement = None
+        improvements = None
 
     image = get_car_image(car_id)
     context = {
@@ -105,7 +105,7 @@ def get_car(request, car_id):
         'insurances': insurances,
         'repair': repair,
         'car_issues': car_issues,
-        'improvement': improvement,
+        'improvements': improvements,
         'image': image
     }
     return render(request, 'Garage/car_profile.html', context)

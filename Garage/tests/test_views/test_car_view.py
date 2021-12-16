@@ -139,10 +139,10 @@ class TestCarView(TestCase):
         c.login(username='testuser', password='1234567890')
         car = Car.objects.get(producer='Test Car with insurance, improvement, repair, car problems')
         response = c.get(f'/car/{car.id}')
-        self.assertEqual(response.context['improvement'][0].name, 'Test name')
-        self.assertFalse(response.context['improvement'][0].close)
-        self.assertEqual(response.context['improvement'][0].date, date.today())
-        self.assertFalse(response.context['improvement'][0].archive)
+        self.assertEqual(response.context['improvements'][0].name, 'Test name')
+        self.assertFalse(response.context['improvements'][0].close)
+        self.assertEqual(response.context['improvements'][0].date, date.today())
+        self.assertFalse(response.context['improvements'][0].archive)
 
     def test_logged_in_user_receives_two_repair_for_car(self):
         c = Client()
