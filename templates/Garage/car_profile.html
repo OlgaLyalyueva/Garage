@@ -126,24 +126,33 @@
                         </div>
                         <div class="tab-pane fade" id="tab3">
                             <h4>Проблемы с автомобилем:</h4>
-                            {% if car_issue %}
-                                {% for c in car_issue %}
-                                <p>Название: {{ c.name }}</p>
-                                <p style="display: {{ c.description }}">Описание: {{ c.description }}</p>
-                                {% if c.close %}
-                                    <p>Состояние: поломка устранена</p>
-                                {% else %}
-                                    <p>Состояние: поломка не устранена</p>
-                                {% endif %}
-                                <p>Дата создания: {{ c.date }}</p>
-                                <a href="{% url 'update_issue' issue_id=c.id %}" class="small-text highlight">Изменить</a>
-                                <p></p>
-                                <p></p>
-                                {% endfor %}
+                            <a href="{% url 'add_issue' %}" class="theme_button color1 min_width_button">Добавить текущую поломку</a>
+                            {% if car_issues %}
+                                <table>
+                                    <tr>
+                                        <th>Название</th>
+                                        <th>Описание</th>
+                                        <th>Дата создания</th>
+                                        <th>Состояние</th>
+                                    </tr>
+                                    {% for car_issue in car_issues %}
+                                        {% if car_issue %}
+                                            <tr>
+                                                <td><a href="{%  url 'update_issue' issue_id=car_issue.id %}">{{ car_issue.name }}</a></td>
+                                                <td>{{ car_issue.description }}</td>
+                                                <td>{{ car_issue.date }}</td>
+                                                {% if car_issue.close %}
+                                                    <td>поломка устранена</td>
+                                                {% else %}
+                                                    <td>поломка не устранена</td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
                             {% else %}
                                 <p>Нет текущих проблем с автомобилем</p>
                             {% endif %}
-                            <a href="{% url 'add_issue' %}" class="theme_button color1 min_width_button">Добавить текущую поломку</a>
                         </div>
                         <div class="tab-pane fade" id="tab4">
                             <h4>Улучшения:</h4>

@@ -89,9 +89,9 @@ def get_car(request, car_id):
         repair = None
 
     try:
-        car_issue = CarIssue.objects.filter(car_id=car.id, archive=False)
+        car_issues = CarIssue.objects.filter(car_id=car.id, archive=False)
     except ObjectDoesNotExist:
-        car_issue = None
+        car_issues = None
 
     try:
         improvement = Improvement.objects.filter(car_id=car.id, archive=False)
@@ -104,7 +104,7 @@ def get_car(request, car_id):
         'car': car,
         'insurances': insurances,
         'repair': repair,
-        'car_issue': car_issue,
+        'car_issues': car_issues,
         'improvement': improvement,
         'image': image
     }
