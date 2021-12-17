@@ -171,20 +171,6 @@
                                     {% endfor %}
                                 </table>
                             {% endif %}
-{#                            {% if improvement %}#}
-{#                                {% for i in improvement %}#}
-{#                                <p>Название: {{ i.name }}</p>#}
-{#                                <p style="display: {{ i.description }}">Описание: {{ i.description }}</p>#}
-{#                                <p style="display: {{ i.price }}">Стоимость: {{ i.price|stringformat:".2f"|intcomma }}</p>#}
-{#                                <p>Состояние: {% if i.close %} не актуально {% else %} актуально {% endif %}</p>#}
-{#                                <p>Дата создания: {{ i.date }}</p>#}
-{#                                <a href="{% url 'update_improvement' impr_id=i.id %}" class="small-text highlight">Изменить</a>#}
-{#                                <p></p>#}
-{#                                <p></p>#}
-{#                                {% endfor %}#}
-{#                            {% else %}#}
-{#                                <p>Улучшений нет</p>#}
-{#                            {% endif %}#}
                         </div>
                     </div>
                     <!-- Popup for add or update car photo -->
