@@ -42,21 +42,20 @@
                 {% endfor %}
             </div>
             <!-- PAGINATION BLOCK -->
-            {% if page_obj.previous_page_number > 1 %}
+            {% if page_obj.paginator.num_pages > 1 %}
                 <div class="container"
                     <div class="pagination" align="center">
                         <span class="step-links">
+                        <p></p>
                             {% if page_obj.has_previous %}
                                 <a href="?page=1">&laquo;</a>
                                 {% if page_obj.paginator.num_pages > 2 %}
                                     <a href="?page={{ page_obj.previous_page_number }}">назад</a>
                                 {% endif %}
                             {% endif %}
-
-                            <span class="current">
-                                {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-                            </span>
-
+                                <span class="current">
+                                    {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                                </span>
                             {% if page_obj.has_next %}
                                 {% if page_obj.paginator.num_pages > 2 %}
                                     <a href="?page={{ page_obj.next_page_number }}">вперед</a>
