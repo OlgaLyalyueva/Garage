@@ -100,14 +100,14 @@ class TestCarsView(TestCase):
         c = Client()
         c.login(username='second-testuser', password='1234567890')
         response = c.get('/cars/')
-        cars = response.context['cars']
+        cars = response.context['page_obj']
         self.assertEqual(len(cars), 2)
 
     def test_logged_in_user_receives_all_data_on_cars(self):
         c = Client()
         c.login(username='second-testuser', password='1234567890')
         response = c.get('/cars/')
-        cars = response.context['cars']
+        cars = response.context['page_obj']
         self.assertEqual(len(cars), 2)
         self.assertEqual(cars[0].producer, 'Test Tesla')
         self.assertEqual(cars[0].model, 'X')

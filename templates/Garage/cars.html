@@ -23,7 +23,7 @@
             <a class="theme_button color1 min_width_button" href="{% url 'add_car' %}">Добавить автомобиль</a>
         {% else %}
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
-                {% for car in cars %}
+                {% for car in page_obj %}
                 <div class="isotope-item col-sm-6 col-md-4 col-lg-3">
                     <a href="{% url 'car_profile' car_id=car.id %}">
                         <div class="vertical-item content-padding rounded overflow_hidden with_background">
@@ -39,6 +39,33 @@
                 </div>
                 {% endfor %}
             </div>
+            <!-- PAGINATION BLOCK -->
+            {% if page_obj.previous_page_number > 1 %}
+                <div class="container"
+                    <div class="pagination" align="center">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo;</a>
+                                {% if page_obj.paginator.num_pages > 2 %}
+                                    <a href="?page={{ page_obj.previous_page_number }}">назад</a>
+                                {% endif %}
+                            {% endif %}
+
+                            <span class="current">
+                                {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                            </span>
+
+                            {% if page_obj.has_next %}
+                                {% if page_obj.paginator.num_pages > 2 %}
+                                    <a href="?page={{ page_obj.next_page_number }}">вперед</a>
+                                {% endif %}
+                                <a href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            {% endif %}
+            <!-- END PAGINATION -->
         {% endif %}
     </div>
 </section>

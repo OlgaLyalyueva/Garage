@@ -3,6 +3,7 @@ from django.template.defaulttags import register
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 from Garage.models import Car, \
     Body, \
@@ -25,6 +26,9 @@ def get_cars(request):
     images = {}
     user = request.user
     cars = Car.objects.filter(user_id=user.id, archive=False)
+    paginator = Paginator(cars, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     if len(cars) > 0:
         for car in cars:
             try:
@@ -33,8 +37,8 @@ def get_cars(request):
                 pass
         context = {
             'images': images,
-            'cars': cars,
-            'user': user
+            'user': user,
+            'page_obj': page_obj
         }
     else:
         message = 'У вас нет добавленных автомобилей'
