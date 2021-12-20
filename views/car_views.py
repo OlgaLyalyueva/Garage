@@ -26,9 +26,7 @@ def get_cars(request):
     images = {}
     user = request.user
     cars = Car.objects.filter(user_id=user.id, archive=False)
-    paginator = Paginator(cars, 20)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = pagination(request, cars, 16)
     if len(cars) > 0:
         for car in cars:
             try:
@@ -257,3 +255,11 @@ def unarchive_car(request, car_id=None):
         'car': car
     }
     return render(request, 'Garage/unarchive_car.html', context)
+
+
+# function that gets elements and divides them into pages
+def pagination(request, objs, number_of_items_per_page):
+    paginator = Paginator(objs, number_of_items_per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return page_obj
