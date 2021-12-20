@@ -5224,6 +5224,7 @@ body.boxed {
 
 .bottom_color_border {
 	border-bottom: 3px solid #fab915;
+	height: 183px;
 }
 
 .top_color_border {
@@ -6487,6 +6488,8 @@ body.boxed {
 .item-media {
 	position: relative;
 	overflow: hidden;
+	max-height: 193px;
+	background: #c5c5c5;
 }
 
 .item-media img {
@@ -13171,6 +13174,10 @@ widget_pages
 	border: none;
 	overflow: hidden;
 	background-color: transparent;
+}
+
+.isotope-item {
+	height: 350px;
 }
 
 .isotope-item .thumbnail {
