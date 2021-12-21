@@ -173,21 +173,17 @@
                             {% endif %}
                         </div>
                     </div>
-                    <!-- Popup for add or update car photo -->
-                    <div id ="AddOrUpdateCarPhoto" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
+                    <!-- Popup for add or update the photo or archive the car -->
+                    {% with ids='AddOrUpdateCarPhoto ArchivedCar' %}
+                        {% for id in ids.split %}
+                        <div id ="{{ id }}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- End Popup -->
-                    <!-- Popup for archived car -->
-                    <div id ="ArchivedCar" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            </div>
-                        </div>
-                    </div>
+                        {% endfor %}
+                    {% endwith %}
                     <!-- End Popup -->
                 </div>
             </div>
