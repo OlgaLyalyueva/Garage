@@ -1,0 +1,22 @@
+{% if obj.paginator.num_pages > 1 %}
+    <div class="pagination" align="center">
+        <span class="step-links">
+        <p></p>
+            {% if obj.has_previous %}
+                <a href="?page=1#tab{{ tabnumber }}">&laquo;</a>
+                {% if obj.paginator.num_pages > 2 %}
+                    <a href="?page={{ obj.previous_page_number }}#tab{{ tabnumber }}">назад</a>
+                {% endif %}
+            {% endif %}
+                <span class="current">
+                    {{ obj.number }} из {{ obj.paginator.num_pages }}
+                </span>
+            {% if obj.has_next %}
+                {% if obj.paginator.num_pages > 2 %}
+                    <a href="?page={{ obj.next_page_number }}#tab{{ tabnumber }}">вперед</a>
+                {% endif %}
+                <a href="?page={{ obj.paginator.num_pages }}#tab{{ tabnumber }}"> &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}

@@ -25,7 +25,7 @@ from views.views import get_car_image
 def get_cars(request):
     images = {}
     user = request.user
-    cars = Car.objects.filter(user_id=user.id, archive=False)
+    cars = Car.objects.filter(user_id=user.id, archive=False).order_by('id')
     page_obj = pagination(request, cars, 16)
     if len(cars) > 0:
         for car in cars:
@@ -81,33 +81,36 @@ def get_car(request, car_id):
     user = request.user
     car = get_object_or_404(Car, id=car_id, user_id=user.id)
     try:
-        insurances = Insurance.objects.filter(car_id=car.id, archive=False)
+        insurances = Insurance.objects.filter(car_id=car.id, archive=False).order_by('id')
     except ObjectDoesNotExist:
         insurances = None
 
     try:
-        repair = Repair.objects.filter(car_id=car.id, archive=False)
+        repairs = Repair.objects.filter(car_id=car.id, archive=False).order_by('id')
+        page_obj_repairs = pagination(request, repairs, 5)
     except ObjectDoesNotExist:
-        repair = None
+        page_obj_repairs = 0
 
     try:
-        car_issues = CarIssue.objects.filter(car_id=car.id, archive=False)
+        car_issues = CarIssue.objects.filter(car_id=car.id, archive=False).order_by('id')
+        page_obj_car_issues = pagination(request, car_issues, 1)
     except ObjectDoesNotExist:
-        car_issues = None
+        page_obj_car_issues = 0
 
     try:
-        improvements = Improvement.objects.filter(car_id=car.id, archive=False)
+        improvements = Improvement.objects.filter(car_id=car.id, archive=False).order_by('id')
+        page_obj_improvements = pagination(request, improvements, 5)
     except ObjectDoesNotExist:
-        improvements = None
+        page_obj_improvements = 0
 
     image = get_car_image(car_id)
     context = {
         'user': user,
         'car': car,
         'insurances': insurances,
-        'repair': repair,
-        'car_issues': car_issues,
-        'improvements': improvements,
+        'page_obj_repairs': page_obj_repairs,
+        'page_obj_car_issues': page_obj_car_issues,
+        'page_obj_improvements': page_obj_improvements,
         'image': image
     }
     return render(request, 'Garage/car_profile.html', context)

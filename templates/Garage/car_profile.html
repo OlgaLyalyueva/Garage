@@ -101,7 +101,7 @@
                         <div class="tab-pane fade" id="tab2">
                             <h4>Ремонт:</h4>
                                 <a href="{% url 'add_repair' %}" class="theme_button color1 min_width_button">Добавить ремонт</a>
-                                {% if repair %}
+                                {% if page_obj_repairs.paginator.num_pages %}
                                     <table>
                                       <tr>
                                           <th>Тип ремонта</th>
@@ -110,7 +110,7 @@
                                           <th>Стоимость</th>
                                           <th>Дата</th>
                                       </tr>
-                                          {% for r in repair %}
+                                          {% for r in page_obj_repairs %}
                                           <tr>
                                               <td><a href="{%  url 'update_repair' repair_id=r.id %}">{{ r.get_type_of_repair_display }}</a></td>
                                               <td>{{ r.name }}</td>
@@ -120,12 +120,15 @@
                                           </tr>
                                           {% endfor %}
                                     </table>
+                                    <!-- PAGINATION BLOCK -->
+                                    {% include "Garage/pagination.html" with obj=page_obj_repairs tabnumber='2'%}
+                                    <!-- END PAGINATION -->
                                 {% endif %}
                         </div>
                         <div class="tab-pane fade" id="tab3">
                             <h4>Проблемы с автомобилем:</h4>
                             <a href="{% url 'add_issue' %}" class="theme_button color1 min_width_button">Добавить текущую поломку</a>
-                            {% if car_issues %}
+                            {% if page_obj_car_issues.paginator.num_pages %}
                                 <table>
                                     <tr>
                                         <th>Название</th>
@@ -133,7 +136,7 @@
                                         <th>Дата создания</th>
                                         <th>Состояние</th>
                                     </tr>
-                                    {% for car_issue in car_issues %}
+                                    {% for car_issue in page_obj_car_issues %}
                                         {% if car_issue %}
                                             <tr>
                                                 <td><a href="{%  url 'update_issue' issue_id=car_issue.id %}">{{ car_issue.name }}</a></td>
@@ -148,12 +151,15 @@
                                         {% endif %}
                                     {% endfor %}
                                 </table>
+                                <!-- PAGINATION BLOCK -->
+                                {% include "Garage/pagination.html" with obj=page_obj_car_issues  tabnumber='3'%}
+                                <!-- END PAGINATION -->
                             {% endif %}
                         </div>
                         <div class="tab-pane fade" id="tab4">
                             <h4>Улучшения:</h4>
                             <a href="{% url 'add_improvement' %}" class="theme_button color1 min_width_button">Добавить текущее улучшение</a>
-                            {% if improvements %}
+                            {% if page_obj_improvements.paginator.num_pages %}
                                 <table>
                                     <tr>
                                         <th>Название</th>
@@ -161,7 +167,7 @@
                                         <th>Состояние</th>
                                         <th>Стоимость</th>
                                     </tr>
-                                    {% for improvement in improvements %}
+                                    {% for improvement in page_obj_improvements %}
                                         <tr>
                                             <td><a href="{%  url 'update_improvement' impr_id=improvement.id %}">{{ improvement.name }}</a></td>
                                             <td>{{ improvement.description}}</td>
@@ -170,18 +176,21 @@
                                         </tr>
                                     {% endfor %}
                                 </table>
+                                <!-- PAGINATION BLOCK -->
+                                {% include "Garage/pagination.html" with obj=page_obj_improvements  tabnumber='4'%}
+                                <!-- END PAGINATION -->
                             {% endif %}
                         </div>
                     </div>
-                    <!-- Popup for add or update the photo or archive the car -->
+                    <!-- Popup for add or update the car photo or archive the car -->
                     {% with ids='AddOrUpdateCarPhoto ArchivedCar' %}
                         {% for id in ids.split %}
-                        <div id ="{{ id }}" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+                            <div id ="{{ id }}" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         {% endfor %}
                     {% endwith %}
                     <!-- End Popup -->
