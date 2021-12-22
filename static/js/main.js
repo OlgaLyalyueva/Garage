@@ -435,7 +435,12 @@ function windowLoadInit() {
 	}
 	//bootstrap tab - show first tab 
 	jQuery('.nav-tabs').each(function() {
-		jQuery(this).find('a').first().tab('show');
+		if ($(location).attr('hash')) {
+			// console.log('12312312' + $(location).attr('hash').replace(/^#+$/g, ''));
+			jQuery(this).find('a[href*="' + $(location).attr('hash') + '"]').first().tab('show');
+		} else {
+			jQuery(this).find('a').first().tab('show');
+		}
 	});
 	jQuery('.tab-content').each(function() {
 		jQuery(this).find('.tab-pane').first().addClass('fade in');
