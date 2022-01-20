@@ -1,4 +1,4 @@
-<div class="with_padding with_background rounded bottom_color_border">
+<div class="with_padding with_background rounded bottom_color_border_pop_up">
     <form action="{% url 'unarchive_car' car_id=car.id %}" method="POST">
     {% csrf_token %}
         <h4>Вы уверены что хотите вернуть из архива данные об автомобиле?</h4>

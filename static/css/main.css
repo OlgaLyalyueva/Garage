@@ -5227,6 +5227,11 @@ body.boxed {
 	height: 183px;
 }
 
+.bottom_color_border_pop_up {
+	border-bottom: 3px solid #fab915;
+	height: 220px;
+}
+
 .top_color_border {
 	border-top: 3px solid #fab915;
 }
