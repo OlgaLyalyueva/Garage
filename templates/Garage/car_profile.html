@@ -171,7 +171,7 @@
                                         <tr>
                                             <td><a href="{%  url 'update_improvement' impr_id=improvement.id %}">{{ improvement.name }}</a></td>
                                             <td>{{ improvement.description}}</td>
-                                            <td>{% if improvement.close %} не актуально {% else %} актуально {% endif %}</td>
+                                            <td>{% if improvement.close %} выполнено {% else %} актуально {% endif %}</td>
                                             <td>{{ improvement.price }}</td>
                                         </tr>
                                     {% endfor %}

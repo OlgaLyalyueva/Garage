@@ -37,7 +37,7 @@
                             <input type="float" aria-required="false" size="30" value="{{ improvement.price|stringformat:".2f" }}" name="price" class="contact-form-price" placeholder="Стоимость" title="стоимость">
                             <p>Состояние улучшения:</p>
                                 <p>
-                                    <input type="checkbox" aria-required="false" size="30" name="close" class="contact-form-close" title="статус улучшения"{% if improvement.close %} checked{% endif %}> устранено
+                                    <input type="checkbox" aria-required="false" size="30" name="close" class="contact-form-close" title="статус улучшения"{% if improvement.close %} checked{% endif %}> выполнено
                                 </p>
                             {% if cars %}
                                     <p class="contact-form">
