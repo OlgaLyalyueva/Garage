@@ -33,7 +33,7 @@
                     {% for improvement in improvements %}
                         {% for i in improvement %}
                           <tr>
-                              <td><a data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_improvement' impr_id=i.id %}">{{ i.name }}</a></td>
+                              <td>{{ i.name }} <a data-toggle="modal" data-target="#UnarchiveImprovement" href="{% url 'unarchive_improvement' impr_id=i.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
                               <td>{{ i.description }}</td>
                               <td>{{ i.date }}</td>
                               <td>{{ i.price }}</td>
@@ -45,7 +45,7 @@
             </div>
         {% endif %}
         <!-- Popup -->
-        <div id ="MyModal" class="modal fade" role="dialog">
+        <div id ="UnarchiveImprovement" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                 </div>
