@@ -36,7 +36,7 @@
                   </tr>
                     {% for car in cars %}
                       <tr>
-                          <td><a href="{%  url 'car_profile' car_id=car.id %}">{{ car.producer }}</a></td>
+                          <td>{{ car.producer }} <a data-toggle="modal" data-target="#UnarchiveCar" href="{% url 'unarchive_car' car_id=car.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
                           <td>{{ car.model }}</td>
                           <td>{{ car.vin }}</td>
                           <td>{{ car.year }}</td>
@@ -50,6 +50,14 @@
                 </table>
             </div>
         {% endif %}
+        <!-- Popup for unarchive the car -->
+        <div id ="UnarchiveCar" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
+        <!-- End Popup -->
     </div>
 </section>
 {% endblock %}
