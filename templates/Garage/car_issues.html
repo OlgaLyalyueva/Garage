@@ -34,15 +34,15 @@
                       </tr>
                         {% for car_issue in car_issues %}
                             {% if car_issue %}
-                                      {% for c_i in car_issue %}
-                                      <tr>
-                                          <td><a href="{%  url 'update_issue' issue_id=c_i.id %}">{{ c_i.name }}</a></td>
-                                          <td>{{ c_i.description }}</td>
-                                          <td>{{ c_i.date }}</td>
-                                          <td>{{ c_i.close }}</td>
-                                          <td>{{ c_i.car }}</td>
-                                      </tr>
-                                      {% endfor %}
+                                  {% for c_i in car_issue %}
+                                  <tr>
+                                      <td><a href="{%  url 'update_issue' issue_id=c_i.id %}">{{ c_i.name }}</a></td>
+                                      {% if c_i.description %}<td>{{ c_i.description }}</td>{% else %}<td></td>{% endif %}
+                                      <td>{{ c_i.date }}</td>
+                                      {% if c_i.close is False %}<td>поломка не устранена</td>{% else %}<td>поломка устранена</td>{% endif %}
+                                      <td>{{ c_i.car }}</td>
+                                  </tr>
+                                  {% endfor %}
                             {% endif %}
                         {% endfor %}
                     </table>

@@ -41,10 +41,10 @@
                                       <tr>
                                           <td><a href="{%  url 'update_repair' repair_id=r.id %}">{{ r.get_type_of_repair_display }}</a></td>
                                           <td>{{ r.name }}</td>
-                                          <td>{{ r.description }}</td>
-                                          <td>{{ r.note }}</td>
-                                          <td>{{ r.mileage }}</td>
-                                          <td>{{ r.price }}</td>
+                                          {% if r.description %}<td>{{ r.description }}</td>{% else %}<td></td>{% endif %}
+                                          {% if r.note %}<td>{{ r.note }}</td>{% else %}<td></td>{% endif %}
+                                          {% if r.mileage %}<td>{{ r.mileage }}</td>{% else %}<td></td>{% endif %}
+                                          {% if r.price %}<td>{{ r.price }}</td>{% else %}<td></td>{% endif %}
                                           <td>{{ r.date}}</td>
                                           <td>{{ r.car }}</td>
                                       </tr>
