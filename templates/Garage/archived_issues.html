@@ -32,12 +32,12 @@
                   </tr>
                     {% for item in issues %}
                         {% for i in item %}
-                          <tr>
-                              <td><a data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_issue' issue_id=i.id %}">{{ i.name }}</a></td>
-                              <td>{{ i.description }}</td>
-                              <td>{{ i.date }}</td>
-                              <td>{{ i.close }}</td>
-                              <td>{{ i.car }}</td>
+                            <tr>
+                                <td>{{ i.name }} <a data-toggle="modal" data-target="#UnarchiveIssue" href="{% url 'unarchive_issue' issue_id=i.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
+                                <td>{{ i.description }}</td>
+                                <td>{{ i.date }}</td>
+                                <td>{{ i.close }}</td>
+                                <td>{{ i.car }}</td>
                           </tr>
                         {% endfor %}
                     {% endfor %}
@@ -45,12 +45,12 @@
             </div>
         {% endif %}
         <!-- Popup -->
-                    <div id ="MyModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            </div>
-                        </div>
-                    </div>
+        <div id ="UnarchiveIssue" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
         <!-- End Popup -->
     </div>
 </section>
