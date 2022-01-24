@@ -41,7 +41,7 @@
                               <td>{{ i.start_date }}</td>
                               <td>{{ i.end_date }}</td>
                               <td>{{ i.price }}</td>
-                              <td>{{ i.car }}</td>
+                              <td><a href="{% url 'car_profile' car_id=i.car_id %}">{{ i.car }}</a></td>
                           </tr>
                         {% endfor %}
                     {% endfor %}
