@@ -38,13 +38,13 @@
                       <tr>
                           <td>{{ car.producer }} <a data-toggle="modal" data-target="#UnarchiveCar" href="{% url 'unarchive_car' car_id=car.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
                           <td>{{ car.model }}</td>
-                          <td>{{ car.vin }}</td>
+                          {% if car.vin %}<td>{{ car.vin }}</td>{% else %}<td></td>{% endif %}
                           <td>{{ car.year }}</td>
                           <td>{{ car.get_transmission_display }}</td>
                           <td>{{ car.get_fuel_display }}</td>
                           <td>{{ car.get_drive_system_display }}</td>
-                          <td>{{ car.mileage }}</td>
-                          <td>{{ car.price }}</td>
+                          {% if car.mileage %}<td>{{ car.mileage }}</td>{% else %}<td></td>{% endif %}
+                          {% if car.price %}<td>{{ car.price }}</td>{% else %}<td></td>{% endif %}
                       </tr>
                     {% endfor %}
                 </table>
