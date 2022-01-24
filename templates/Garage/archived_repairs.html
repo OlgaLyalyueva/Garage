@@ -36,7 +36,7 @@
                     {% for repair in repairs %}
                         {% for r in repair %}
                           <tr>
-                              <td><a data-toggle="modal" data-target="#MyModal" href="{% url 'unarchive_repair' repair_id=r.id %}">{{ r.get_type_of_repair_display }}</a></td>
+                              <td>{{ r.get_type_of_repair_display }} <a data-toggle="modal" data-target="#UnarchiveRepair" href="{% url 'unarchive_repair' repair_id=r.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
                               <td>{{ r.name }}</td>
                               {% if r.description %}<td>{{ r.description }}</td>{% else %}<td></td>{% endif %}
                               {% if r.note %}<td>{{ r.note }}</td>{% else %}<td></td>{% endif %}
@@ -51,7 +51,7 @@
             </div>
         {% endif %}
         <!-- Popup -->
-        <div id ="MyModal" class="modal fade" role="dialog">
+        <div id ="UnarchiveRepair" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                 </div>
