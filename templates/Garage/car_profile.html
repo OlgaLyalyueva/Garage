@@ -81,7 +81,9 @@
                                 <p>Номер страхового плана: {{ insurance.policy_number }}</p>
                                 <p>Дата начала: {{ insurance.start_date }}</p>
                                 <p>Дата окончания: {{ insurance.end_date }}</p>
-                                <p>Описание: {{ insurance.description }}</p>
+                                {% if insurance.description != '' %}
+                                    <p>Описание: {{ insurance.description }}</p>
+                                {% endif %}
                                 <p style="display: {{ insurance.price }}">Стоимость: {{ insurance.price|stringformat:".2f"|intcomma }}</p>
                                 <a href="{% url 'update_insurance' insrnc_id=insurance.id %}" class="small-text highlight">Изменить</a>
                                     <p></p>
@@ -108,8 +110,8 @@
                                           <tr>
                                               <td><a href="{%  url 'update_repair' repair_id=r.id %}">{{ r.get_type_of_repair_display }}</a></td>
                                               <td>{{ r.name }}</td>
-                                              <td>{{ r.mileage }}</td>
-                                              <td>{{ r.price }}</td>
+                                              {% if r.mileage %}<td>{{ r.mileage }}</td>{% else %}<td></td>{% endif %}
+                                              {% if r.price %}<td>{{ r.price }}</td>{% else %}<td></td>{% endif %}
                                               <td>{{ r.date}}</td>
                                           </tr>
                                           {% endfor %}
@@ -134,7 +136,7 @@
                                         {% if car_issue %}
                                             <tr>
                                                 <td><a href="{%  url 'update_issue' issue_id=car_issue.id %}">{{ car_issue.name }}</a></td>
-                                                <td>{{ car_issue.description }}</td>
+                                                {% if car_issue.description %}<td>{{ car_issue.description }}</td>{% else %}<td></td>{% endif %}
                                                 <td>{{ car_issue.date }}</td>
                                                 {% if car_issue.close %}
                                                     <td>поломка устранена</td>
@@ -164,9 +166,9 @@
                                     {% for improvement in page_obj_improvements %}
                                         <tr>
                                             <td><a href="{%  url 'update_improvement' impr_id=improvement.id %}">{{ improvement.name }}</a></td>
-                                            <td>{{ improvement.description}}</td>
+                                            {% if improvement.description %}<td>{{ improvement.description}}</td>{% else %}<td></td>{% endif %}
                                             <td>{% if improvement.close %} выполнено {% else %} актуально {% endif %}</td>
-                                            <td>{{ improvement.price }}</td>
+                                            {% if improvement.price %}<td>{{ improvement.price }}</td>{% else %}<td></td>{% endif %}
                                         </tr>
                                     {% endfor %}
                                 </table>
