@@ -15,6 +15,7 @@ urlpatterns = [
 
     path('', views.main_view, name='main'),
     path('about/', views.about, name='about'),
+    path('contacts/', views.contacts, name='contacts'),
 
     path('cars/', car_views.get_cars, name='cars'),
     path('cars/archived/', car_views.get_archived_cars, name='archived_cars'),
