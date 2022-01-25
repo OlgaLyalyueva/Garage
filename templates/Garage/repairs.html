@@ -22,6 +22,7 @@
             <p>{{ message }}</p>
             <a class="theme_button color1 min_width_button" href="{% url 'add_car' %}">Добавить автомобиль</a>
         {% else %}
+            <a class="theme_button color1 min_width_button" href="{% url 'add_repair' %}">Добавить ремонт</a>
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
                 {% if repairs %}
                     <table>
