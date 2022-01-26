@@ -4,7 +4,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.core.mail import BadHeaderError, send_mail
 
 from Garage.models import Car, CarPhoto
-from Garage.forms import UploadCarPhoto
+from Garage.forms import UploadCarPhotoForm
 from django.shortcuts import get_object_or_404
 from Garage.settings import EMAIL_HOST_USER
 
@@ -32,7 +32,7 @@ def add_image_to_model(request, car):
 def upload_photo(request, car_id):
     car = get_object_or_404(Car, id=car_id, user_id=request.user.id)
     if request.method == 'POST':
-        form = UploadCarPhoto(request.POST, request.FILES)
+        form = UploadCarPhotoForm(request.POST, request.FILES)
         if form.is_valid():
             try:
                 car_photo = CarPhoto.objects.get(car_id=car_id)
@@ -43,7 +43,7 @@ def upload_photo(request, car_id):
             car_photo.save()
             return redirect(f'/car/{car.id}')
     else:
-        form = UploadCarPhoto()
+        form = UploadCarPhotoForm()
     context = {'form': form,
                'car': car}
     return render(request, 'Garage/upload_car_image.html', context)

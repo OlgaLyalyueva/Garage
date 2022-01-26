@@ -65,7 +65,7 @@ class RepairForm(forms.ModelForm):
         ]
 
 
-class UploadCarPhoto(forms.ModelForm):
+class UploadCarPhotoForm(forms.ModelForm):
     class Meta:
         model = CarPhoto
         fields = ['image']
