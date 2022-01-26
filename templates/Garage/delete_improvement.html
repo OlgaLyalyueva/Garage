@@ -1,0 +1,8 @@
+<div class="with_padding with_background rounded bottom_color_border_pop_up">
+    <form action="{% url 'delete_improvement' impr_id=improvement.id %}" method="POST">
+    {% csrf_token %}
+        <h4>Вы уверены что хотите удалить данные?</h4>
+        <a href="{% url 'update_improvement' impr_id=improvement.id %}" data-dismiss="modal" class="theme_button color1 min_width_button">Нет</a>
+        <input class="btn btn-danger" type="submit" value="Да, удалить" onclick="goBack()">
+    </form>
+</div>
