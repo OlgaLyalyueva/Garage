@@ -6493,7 +6493,7 @@ body.boxed {
 .item-media {
 	position: relative;
 	overflow: hidden;
-	max-height: 193px;
+	height: 180px;
 	background: #c5c5c5;
 }
 

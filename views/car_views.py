@@ -32,7 +32,7 @@ def get_cars(request):
             try:
                 images[car.id] = CarPhoto.objects.get(car_id=car.id).image
             except CarPhoto.DoesNotExist:
-                pass
+                images[car.id] = '/static/images/Garage_logo.png'
         context = {
             'images': images,
             'user': user,
