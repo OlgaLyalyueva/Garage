@@ -262,7 +262,10 @@ def unarchive_car(request, car_id=None):
 
 # function that gets elements and divides them into pages
 def pagination(request, objs, number_of_items_per_page):
-    paginator = Paginator(objs, number_of_items_per_page)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    if len(objs) != 0:
+        paginator = Paginator(objs, number_of_items_per_page)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+    else:
+        page_obj = None
     return page_obj
