@@ -82,7 +82,9 @@
                             {% if insurances %}
                                 {% for insurance in insurances %}
                                 <p>Тип страхового плана: {{ insurance.type }}</p>
-                                <p>Номер страхового плана: {{ insurance.policy_number }}</p>
+                                {% if insurance.policy_number != '' %}
+                                    <p>Номер страхового плана: {{ insurance.policy_number }}</p>
+                                {% endif %}
                                 <p>Дата начала: {{ insurance.start_date }}</p>
                                 <p>Дата окончания: {{ insurance.end_date }}</p>
                                 {% if insurance.description != '' %}
