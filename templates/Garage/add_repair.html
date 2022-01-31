@@ -19,6 +19,15 @@
     <section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
         <div class="container">
             <div class="row">
+                {% if errors %}
+                    {% for k, v in errors.items %}
+                        {% if k == 'mileage' %}
+                            <p>Поле пробег: указанное значение слишком длинное</p>
+                        {% else %}
+                            <p>Поле {{ k }}: {{ v|last|lower }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 <form class="contact-form" action="{% url 'add_repair' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                     <div class="col-sm-7 col-md-8 col-lg-9">
@@ -36,7 +45,7 @@
                             <input type="text" aria-required="false" size="30" value name="description" class="contact-form-description" placeholder="Описание" title="Описание">
                             <input type="text" aria-required="false"  size="30" value name="note" class="contact-form-note" placeholder="Заметки" title="Заметки">
                         </p>
-                        <p>
+                        <p class="contact-form">
                             <input type="number" aria-required="false" size="30" value name="mileage" class="contact-form-mileage" placeholder="Пробег" title="Пробег">
                             <input type="number" step="0.01" aria-required="false" size="30" value name="price" class="contact-form-price" placeholder="Стоимость" title="Стоимость">
                         </p>
