@@ -180,5 +180,57 @@ class TestAddInsurance(TestCase):
         }
         response = c.post("/insurance/add/", data=data)
         self.assertEqual(Insurance.objects.count(), 0)
-        self.assertEqual(len(response.context['errors']), 2)
+        self.assertEqual(len(response.context['errors']), 3)
+        self.assertTemplateUsed(response, 'Garage/add_insurance.html')
+
+
+    def test_logged_in_user_gets_error_messages_if_start_date_later_than_end_date(self):
+        c.login(username=username, password=password)
+        user = User.objects.get(username=username)
+
+        car = Car.objects.create(
+            producer='Test Add Insurance',
+            model='First car',
+            year=2021,
+            transmission='типтроник',
+            fuel=3,
+            drive_system=1,
+            user=user
+        )
+
+        data = {
+            'type': 'Test type',
+            'start_date': datetime.date(2022, 1, 1),
+            'end_date': datetime.date(2021, 12, 25),
+            'car': car.id
+        }
+        response = c.post("/insurance/add/", data=data)
+        self.assertEqual(Insurance.objects.count(), 0)
+        self.assertEqual(len(response.context['errors']), 1)
+        self.assertTemplateUsed(response, 'Garage/add_insurance.html')
+
+
+    def test_logged_in_user_gets_error_messages_if_start_date_is_equal_to_end_date(self):
+        c.login(username=username, password=password)
+        user = User.objects.get(username=username)
+
+        car = Car.objects.create(
+            producer='Test Add Insurance',
+            model='First car',
+            year=2021,
+            transmission='типтроник',
+            fuel=3,
+            drive_system=1,
+            user=user
+        )
+
+        data = {
+            'type': 'Test type',
+            'start_date': datetime.date(2022, 1, 1),
+            'end_date': datetime.date(2022, 1, 1),
+            'car': car.id
+        }
+        response = c.post("/insurance/add/", data=data)
+        self.assertEqual(Insurance.objects.count(), 0)
+        self.assertEqual(len(response.context['errors']), 1)
         self.assertTemplateUsed(response, 'Garage/add_insurance.html')

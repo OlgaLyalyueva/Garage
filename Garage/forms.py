@@ -26,12 +26,14 @@ class InsuranceForm(forms.ModelForm):
         fields = '__all__'
 
     def clean(self):
-        start_date = self.cleaned_data['start_date']
-        end_date = self.cleaned_data['end_date']
-
-        if end_date <= start_date:
-            raise forms.ValidationError("Дата окончания страховки должна быть позже даты начала страховки")
-        return super(InsuranceForm, self).clean()
+        try:
+            start_date = self.cleaned_data['start_date']
+            end_date = self.cleaned_data['end_date']
+            if end_date <= start_date:
+                raise forms.ValidationError("Дата окончания страховки должна быть позже даты начала страховки")
+            return super(InsuranceForm, self).clean()
+        except KeyError:
+            raise forms.ValidationError("Укажате даты начала и окончания страховки")
 
 
 class AddIssueForm(forms.ModelForm):
