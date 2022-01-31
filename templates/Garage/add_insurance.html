@@ -19,6 +19,11 @@
     <section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
         <div class="container">
             <div class="row">
+                {% if errors %}
+                    {% for error in errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
                 <form class="contact-form" action="{% url 'add_insurance' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                     <div class="col-sm-7 col-md-8 col-lg-9">

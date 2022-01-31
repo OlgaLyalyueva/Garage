@@ -65,7 +65,7 @@ def add_insurance(request):
             car_id = form_insrnc.data['car']
             return redirect(f'/car/{car_id}')
         else:
-            errors = form_insrnc.errors
+            errors = form_insrnc.errors.values()
 
     form_insrnc = InsuranceForm()
     context = {
