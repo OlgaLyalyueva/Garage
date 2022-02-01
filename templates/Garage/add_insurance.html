@@ -28,16 +28,16 @@
                 {% csrf_token %}
                     <div class="col-sm-7 col-md-8 col-lg-9">
                         <p class="contact-form">
-                            <input type="text" required size="30" value name="type" class="contact-form-producer" placeholder="Тип страховки">
-                            <input type="text" aria-required="true" size="30" value name="description" class="contact-form-producer" placeholder="Описание">
+                            <input type="text" required size="30" value="{{ form_insrnc.data.type }}" name="type" class="contact-form-producer" placeholder="Тип страховки">
+                            <input type="text" aria-required="true" size="30" value="{{ form_insrnc.data.description }}" name="description" class="contact-form-producer" placeholder="Описание">
                         </p>
                         <p class="contact-form">
-                            <input type="text" aria-required="false" size="30" value name="policy_number" class="contact-form-year" placeholder="Номер полиса">
+                            <input type="text" aria-required="false" size="30" value="{{ form_insrnc.data.policy_number }}" name="policy_number" class="contact-form-year" placeholder="Номер полиса">
                             <input type="date" required size="30" value name="start_date" class="contact-form-mileage" placeholder="Дата начала">
                             <input type="date" required size="30" value name="end_date" class="contact-form-mileage" placeholder="Дата окончания">
                         </p>
                         <p>
-                            <input type="number" step="0.01" aria-required="false" size="30" value name="price" class="contact-form-price" placeholder="Стоимость">
+                            <input type="number" step="0.01" aria-required="false" size="30" value="{{ form_insrnc.data.price }}" name="price" class="contact-form-price" placeholder="Стоимость">
                             {% if cars %}
                                     <p class="contact-form">
                                         <label for="car">Выбери автомобиль который был застрахован:</label>

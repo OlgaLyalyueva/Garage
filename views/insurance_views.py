@@ -57,7 +57,10 @@ def get_archived_insurances(request):
 def add_insurance(request):
     user = request.user
     cars = get_list_or_404(Car, user_id=user.id, archive=False)
-    errors = None
+    context = {'user': user,
+               'cars': cars
+               }
+
     if request.method == 'POST':
         form_insrnc = InsuranceForm(request.POST)
         if form_insrnc.is_valid():
@@ -67,13 +70,12 @@ def add_insurance(request):
         else:
             errors = form_insrnc.errors.values()
 
+            context['errors'] = errors
+            context['form_insrnc'] = form_insrnc
+            return render(request, 'Garage/add_insurance.html', context)
+
     form_insrnc = InsuranceForm()
-    context = {
-        'user': user,
-        'cars': cars,
-        'form_insrnc': form_insrnc,
-        'errors': errors
-    }
+    context['form_insrnc'] = form_insrnc
     return render(request, 'Garage/add_insurance.html', context)
 
 
