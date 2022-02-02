@@ -24,33 +24,32 @@
         {% else %}
             <a class="theme_button color1 min_width_button" href="{% url 'add_insurance' %}">Добавить страховку</a>
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
-                {% if insurances %}
+                {% if page_obj_insrncs.paginator.num_pages %}
                     <table>
-                      <tr>
-                          <th>Тип</th>
-                          <th>Описание</th>
-                          <th>Номер</th>
-                          <th>Дата начала</th>
-                          <th>Дата окончания</th>
-                          <th>Стоимость</th>
-                          <th>Автомобиль</th>
-                      </tr>
-                        {% for insurance in insurances %}
-                            {% if insurance %}
-                                      {% for i in insurance %}
-                                      <tr>
-                                          <td><a href="{%  url 'update_insurance' insrnc_id=i.id %}">{{ i.type }}</a></td>
-                                          <td>{{ i.description}}</td>
-                                          <td>{{ i.policy_number }}</td>
-                                          <td>{{ i.start_date}}</td>
-                                          <td>{{ i.end_date }}</td>
-                                          {% if i.price %}<td>{{ i.price }}</td>{% else %}<td></td>{% endif %}
-                                          <td>{{ i.car }}</td>
-                                      </tr>
-                                      {% endfor %}
-                            {% endif %}
+                        <tr>
+                            <th>Тип</th>
+                            <th>Описание</th>
+                            <th>Номер</th>
+                            <th>Дата начала</th>
+                            <th>Дата окончания</th>
+                            <th>Стоимость</th>
+                            <th>Автомобиль</th>
+                        </tr>
+                        {% for i in page_obj_insrncs %}
+                            <tr>
+                                <td><a href="{%  url 'update_insurance' insrnc_id=i.id %}">{{ i.type }}</a></td>
+                                <td>{{ i.description}}</td>
+                                <td>{{ i.policy_number }}</td>
+                                <td>{{ i.start_date}}</td>
+                                <td>{{ i.end_date }}</td>
+                                {% if i.price %}<td>{{ i.price }}</td>{% else %}<td></td>{% endif %}
+                                <td>{{ i.car }}</td>
+                            </tr>
                         {% endfor %}
                     </table>
+                    <!-- PAGINATION BLOCK -->
+                        {% include "Garage/pagination.html" with obj=page_obj_insrncs  tabnumber='5'%}
+                    <!-- END PAGINATION -->
                 {% else %}
                     <p>У вас нет добавленных страховок</p>
                 {% endif %}

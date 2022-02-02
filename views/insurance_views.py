@@ -6,22 +6,23 @@ from django.contrib.auth.decorators import login_required
 from Garage.models import Car, Insurance
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from Garage.forms import InsuranceForm
+from views.views import pagination
 
 
 @login_required()
 def get_insurances(request):
-    insurances = {}
+    insurances = []
     user = request.user
     cars = Car.objects.filter(user_id=user.id, archive=False)
     if cars:
         for car in cars:
-            insurances[car.id] = list(Insurance.objects.filter(car_id=car.id, archive=False))
-            if insurances[car.id] == []:
-                insurances.pop(car.id)
+            if list(Insurance.objects.filter(car_id=car.id, archive=False)) != []:
+                insurances.append(list(Insurance.objects.filter(car_id=car.id, archive=False)))
+        page_obj_insrncs = pagination(request, sum(insurances, []), 10)
         context = {
             'user': user,
             'cars': cars,
-            'insurances': list(insurances.values())
+            'page_obj_insrncs': page_obj_insrncs
         }
         return render(request, 'Garage/insurances.html', context)
 
