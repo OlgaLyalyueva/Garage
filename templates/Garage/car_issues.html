@@ -22,7 +22,7 @@
             <p>{{ message }}</p>
             <a class="theme_button color1 min_width_button" href="{% url 'add_car' %}">Добавить автомобиль</a>
         {% else %}
-            <a class="theme_button color1 min_width_button" href="{% url 'add_issue' %}">Добавить текущую поломку</a>
+            <a class="theme_button color1 min_width_button" href="{% url 'add_issue' %}">Добавить поломку</a>
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
                 {% if car_issues %}
                     <table>

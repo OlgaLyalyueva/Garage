@@ -130,7 +130,7 @@
                         </div>
                         <div class="tab-pane fade" id="tab3">
                             <h4>Проблемы с автомобилем:</h4>
-                            <a href="{% url 'add_issue' %}" class="theme_button color1 min_width_button">Добавить текущую поломку</a>
+                            <a href="{% url 'add_issue' %}" class="theme_button color1 min_width_button">Добавить поломку</a>
                             {% if page_obj_car_issues.paginator.num_pages %}
                                 <table>
                                     <tr>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="tab-pane fade" id="tab4">
                             <h4>Улучшения:</h4>
-                            <a href="{% url 'add_improvement' %}" class="theme_button color1 min_width_button">Добавить текущее улучшение</a>
+                            <a href="{% url 'add_improvement' %}" class="theme_button color1 min_width_button">Добавить улучшение</a>
                             {% if page_obj_improvements.paginator.num_pages %}
                                 <table>
                                     <tr>
