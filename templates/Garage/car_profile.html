@@ -79,26 +79,27 @@
                     <div class="tab-content big-padding top-color-border bottommargin_40">
                         <div class="tab-pane fade" id="tab1">
                             <h4>Страховка:</h4>
-                            {% if insurances %}
-                                {% for insurance in insurances %}
-                                <p>Тип страхового плана: {{ insurance.type }}</p>
-                                {% if insurance.policy_number != '' %}
-                                    <p>Номер страхового плана: {{ insurance.policy_number }}</p>
-                                {% endif %}
-                                <p>Дата начала: {{ insurance.start_date }}</p>
-                                <p>Дата окончания: {{ insurance.end_date }}</p>
-                                {% if insurance.description != '' %}
-                                    <p>Описание: {{ insurance.description }}</p>
-                                {% endif %}
-                                <p style="display: {{ insurance.price }}">Стоимость: {{ insurance.price|stringformat:".2f"|intcomma }}</p>
-                                <a href="{% url 'update_insurance' insrnc_id=insurance.id %}" class="small-text highlight">Изменить</a>
-                                    <p></p>
-                                    <p></p>
-                                {% endfor %}
-                            {% else %}
-                                <p>У вас нет добавленных страховых планов</p>
-                            {% endif %}
                             <a href="{% url 'add_insurance' %}" class="theme_button color1 min_width_button">Добавить страховку</a>
+                            {% if page_obj_insurances.paginator.num_pages %}
+                                {% for insurance in page_obj_insurances %}
+                                    <p>Тип страхового плана: {{ insurance.type }}</p>
+                                    {% if insurance.policy_number != '' %}
+                                        <p>Номер страхового плана: {{ insurance.policy_number }}</p>
+                                    {% endif %}
+                                    <p>Дата начала: {{ insurance.start_date }}</p>
+                                    <p>Дата окончания: {{ insurance.end_date }}</p>
+                                    {% if insurance.description != '' %}
+                                        <p>Описание: {{ insurance.description }}</p>
+                                    {% endif %}
+                                    <p style="display: {{ insurance.price }}">Стоимость: {{ insurance.price|stringformat:".2f"|intcomma }}</p>
+                                    <a href="{% url 'update_insurance' insrnc_id=insurance.id %}" class="small-text highlight">Изменить</a>
+                                        <p></p>
+                                        <p></p>
+                                {% endfor %}
+                                <!-- PAGINATION BLOCK -->
+                                    {% include "Garage/pagination.html" with obj=page_obj_insurances tabnumber='1'%}
+                                <!-- END PAGINATION -->
+                            {% endif %}
                         </div>
                         <div class="tab-pane fade" id="tab2">
                             <h4>Ремонт:</h4>

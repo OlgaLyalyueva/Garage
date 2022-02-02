@@ -3,7 +3,6 @@ from django.template.defaulttags import register
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.paginator import Paginator
 
 from Garage.models import Car, \
     Body, \
@@ -18,7 +17,7 @@ from Garage.forms import CarForm
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
-from views.views import get_car_image
+from views.views import get_car_image, pagination
 
 
 @login_required()
@@ -82,8 +81,9 @@ def get_car(request, car_id):
     car = get_object_or_404(Car, id=car_id, user_id=user.id)
     try:
         insurances = Insurance.objects.filter(car_id=car.id, archive=False).order_by('id')
+        page_obj_insurances = pagination(request, insurances, 3)
     except ObjectDoesNotExist:
-        insurances = None
+        page_obj_insurances = 0
 
     try:
         repairs = Repair.objects.filter(car_id=car.id, archive=False).order_by('id')
@@ -93,7 +93,7 @@ def get_car(request, car_id):
 
     try:
         car_issues = CarIssue.objects.filter(car_id=car.id, archive=False).order_by('id')
-        page_obj_car_issues = pagination(request, car_issues, 1)
+        page_obj_car_issues = pagination(request, car_issues, 5)
     except ObjectDoesNotExist:
         page_obj_car_issues = 0
 
@@ -107,7 +107,7 @@ def get_car(request, car_id):
     context = {
         'user': user,
         'car': car,
-        'insurances': insurances,
+        'page_obj_insurances': page_obj_insurances,
         'page_obj_repairs': page_obj_repairs,
         'page_obj_car_issues': page_obj_car_issues,
         'page_obj_improvements': page_obj_improvements,
@@ -258,14 +258,3 @@ def unarchive_car(request, car_id=None):
         'car': car
     }
     return render(request, 'Garage/unarchive_car.html', context)
-
-
-# function that gets elements and divides them into pages
-def pagination(request, objs, number_of_items_per_page):
-    if len(objs) != 0:
-        paginator = Paginator(objs, number_of_items_per_page)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-    else:
-        page_obj = None
-    return page_obj

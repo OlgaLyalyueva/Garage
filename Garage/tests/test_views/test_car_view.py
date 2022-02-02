@@ -127,12 +127,12 @@ class TestCarView(TestCase):
         c.login(username='testuser', password='1234567890')
         car = Car.objects.get(producer='Test Car with insurance, improvement, repair, car problems')
         response = c.get(f'/car/{car.id}')
-        self.assertEqual(response.context['insurances'][0].type, 'Test ОСАГО')
-        self.assertEqual(response.context['insurances'][0].policy_number, 'AP456789')
-        self.assertEqual(response.context['insurances'][0].start_date, date(2021, 1, 1))
-        self.assertEqual(response.context['insurances'][0].end_date, date(2021, 12, 31))
-        self.assertEqual(response.context['insurances'][0].price, 599.43)
-        self.assertFalse(response.context['insurances'][0].archive)
+        self.assertEqual(response.context['page_obj_insurances'][0].type, 'Test ОСАГО')
+        self.assertEqual(response.context['page_obj_insurances'][0].policy_number, 'AP456789')
+        self.assertEqual(response.context['page_obj_insurances'][0].start_date, date(2021, 1, 1))
+        self.assertEqual(response.context['page_obj_insurances'][0].end_date, date(2021, 12, 31))
+        self.assertEqual(response.context['page_obj_insurances'][0].price, 599.43)
+        self.assertFalse(response.context['page_obj_insurances'][0].archive)
 
     def test_logged_in_user_receives_improvement_for_car(self):
         c = Client()

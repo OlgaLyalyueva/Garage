@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils.datastructures import MultiValueDictKeyError
+from django.core.paginator import Paginator
 
 from django.core.mail import BadHeaderError, send_mail
 
@@ -84,3 +85,14 @@ def send_email(request):
         # to get proper validation errors.
         error_message = 'Убедитесь, что все поля формы заполнены'
         return error_message
+
+
+# function that gets elements and divides them into pages
+def pagination(request, objs, number_of_items_per_page):
+    if len(objs) != 0:
+        paginator = Paginator(objs, number_of_items_per_page)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+    else:
+        page_obj = None
+    return page_obj
