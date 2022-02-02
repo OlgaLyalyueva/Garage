@@ -82,12 +82,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <form class="contact-form columns_padding_5" method="POST" action="" enctype="multipart/form-data">
+                    <form class="contact-form columns_padding_5" method="POST" action="#message" enctype="multipart/form-data">
                     {% csrf_token %}
                         <div class="row">
                             <h3 class="section_header text-center"> Связаться с нами </h3>
                             {% if message %}
-                                <p>{{ message }}</p>
+                                <p id="message">{{ message }}</p>
                             {% endif %}
                             <div class="col-sm-6">
                                 <p class="form-group"> <label for="name">Full Name <span class="required">*</span></label> <i class="fa fa-user highlight" aria-hidden="true"></i> <input type="text" aria-required="true" size="50" value="" name="name" id="name" class="form-control" placeholder="ФИО"></p>
@@ -100,7 +100,9 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <p class="contact-form-submit text-center topmargin_10"> <button type="submit" id="contact_form_submit" name="contact_submit" class="theme_button color1">Отправить</button> </p>
+                                <p class="contact-form-submit text-center topmargin_10">
+                                    <button type="submit" id="contact_form_submit" name="contact_submit" class="theme_button color1">Отправить</button>
+                                </p>
                             </div>
                         </div>
                     </form>
