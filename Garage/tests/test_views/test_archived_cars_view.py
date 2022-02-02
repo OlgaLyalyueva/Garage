@@ -97,13 +97,13 @@ class TestCarsArchivedView(TestCase):
     def test_logged_in_user_receives_archived_cars(self):
         c.login(username='second-testuser', password=password)
         response = c.get('/cars/archived/')
-        cars = response.context['cars']
+        cars = response.context['page_obj_cars']
         self.assertEqual(len(cars), 2)
 
     def test_logged_in_user_receives_all_data_on_cars(self):
         c.login(username='second-testuser', password=password)
         response = c.get('/cars/archived/')
-        cars = response.context['cars']
+        cars = response.context['page_obj_cars']
         self.assertEqual(len(cars), 2)
         self.assertEqual(cars[0].producer, 'Test Honda')
         self.assertEqual(cars[0].model, 'CRV')

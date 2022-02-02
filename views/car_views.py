@@ -54,12 +54,13 @@ def get_car_id_for_image(car, id):
 @login_required()
 def get_archived_cars(request):
     message = None
-    cars = Car.objects.filter(user_id=request.user.id, archive=True)
+    cars = Car.objects.filter(user_id=request.user.id, archive=True).order_by('id')
+    page_obj_cars = pagination(request, cars, 10)
     if not cars:
         message = 'У вас нет автомобилей в папке архив'
     context = {
         'user': request.user,
-        'cars': cars,
+        'page_obj_cars': page_obj_cars,
         'message': message
     }
     return render(request, 'Garage/archived_cars.html', context)

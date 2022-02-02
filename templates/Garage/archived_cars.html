@@ -34,7 +34,7 @@
                       <th>Пробег</th>
                       <th>Стоимость</th>
                   </tr>
-                    {% for car in cars %}
+                    {% for car in page_obj_cars %}
                       <tr>
                           <td>{{ car.producer }} <a data-toggle="modal" data-target="#UnarchiveCar" href="{% url 'unarchive_car' car_id=car.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
                           <td>{{ car.model }}</td>
@@ -48,6 +48,9 @@
                       </tr>
                     {% endfor %}
                 </table>
+                <!-- PAGINATION BLOCK -->
+                    {% include "Garage/pagination.html" with obj=page_obj_cars  tabnumber='11'%}
+                <!-- END PAGINATION -->
             </div>
         {% endif %}
         <!-- Popup for unarchive the car -->
