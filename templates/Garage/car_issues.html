@@ -24,7 +24,7 @@
         {% else %}
             <a class="theme_button color1 min_width_button" href="{% url 'add_issue' %}">Добавить поломку</a>
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
-                {% if car_issues %}
+                {% if page_obj.paginator.num_pages %}
                     <table>
                       <tr>
                           <th>Название</th>
@@ -33,20 +33,19 @@
                           <th>Состояние</th>
                           <th>Автомобиль</th>
                       </tr>
-                        {% for car_issue in car_issues %}
-                            {% if car_issue %}
-                                  {% for c_i in car_issue %}
-                                  <tr>
-                                      <td><a href="{%  url 'update_issue' issue_id=c_i.id %}">{{ c_i.name }}</a></td>
-                                      {% if c_i.description %}<td>{{ c_i.description }}</td>{% else %}<td></td>{% endif %}
-                                      <td>{{ c_i.date }}</td>
-                                      {% if c_i.close is False %}<td>поломка не устранена</td>{% else %}<td>поломка устранена</td>{% endif %}
-                                      <td>{{ c_i.car }}</td>
+                        {% for c_i in page_obj %}
+                              <tr>
+                                  <td><a href="{%  url 'update_issue' issue_id=c_i.id %}">{{ c_i.name }}</a></td>
+                                  {% if c_i.description %}<td>{{ c_i.description }}</td>{% else %}<td></td>{% endif %}
+                                  <td>{{ c_i.date }}</td>
+                                  {% if c_i.close is False %}<td>поломка не устранена</td>{% else %}<td>поломка устранена</td>{% endif %}
+                                  <td>{{ c_i.car }}</td>
                                   </tr>
-                                  {% endfor %}
-                            {% endif %}
                         {% endfor %}
                     </table>
+                    <!-- PAGINATION BLOCK -->
+                        {% include "Garage/pagination.html" with obj=page_obj tabnumber='6'%}
+                    <!-- END PAGINATION -->
                 {% else %}
                     <p>У вас нет существующих проблем с автомобилем</p>
                 {% endif %}

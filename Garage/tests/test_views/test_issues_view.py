@@ -69,7 +69,7 @@ class TestCarIssues(TestCase):
         response = c.get('/issues/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['cars']), 1)
-        self.assertEqual(len(response.context['car_issues']), 1)
+        self.assertEqual(len(response.context['page_obj']), 1)
 
     def test_logged_in_user_receives_all_issues_data(self):
         user = User.objects.get(username=username)
@@ -111,15 +111,15 @@ class TestCarIssues(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Car.objects.count(), 2)
         self.assertEqual(CarIssue.objects.count(), 2)
-        car_issues = response.context['car_issues']
-        self.assertEqual(car_issues[0][0].name, first_car_issue.name)
-        self.assertEqual(car_issues[0][0].close, first_car_issue.close)
-        self.assertEqual(car_issues[0][0].date, first_car_issue.date)
-        self.assertEqual(car_issues[0][0].car_id, first_car_issue.car_id)
-        self.assertEqual(car_issues[0][0].description, first_car_issue.description)
+        car_issues = response.context['page_obj']
+        self.assertEqual(car_issues.object_list[0].name, first_car_issue.name)
+        self.assertEqual(car_issues.object_list[0].close, first_car_issue.close)
+        self.assertEqual(car_issues.object_list[0].date, first_car_issue.date)
+        self.assertEqual(car_issues.object_list[0].car_id, first_car_issue.car_id)
+        self.assertEqual(car_issues.object_list[0].description, first_car_issue.description)
 
-        self.assertEqual(car_issues[1][0].name, second_car_issue.name)
-        self.assertEqual(car_issues[1][0].close, second_car_issue.close)
-        self.assertEqual(car_issues[1][0].date, second_car_issue.date)
-        self.assertEqual(car_issues[1][0].car_id, second_car_issue.car_id)
-        self.assertEqual(car_issues[1][0].description, second_car_issue.description)
+        self.assertEqual(car_issues.object_list[1].name, second_car_issue.name)
+        self.assertEqual(car_issues.object_list[1].close, second_car_issue.close)
+        self.assertEqual(car_issues.object_list[1].date, second_car_issue.date)
+        self.assertEqual(car_issues.object_list[1].car_id, second_car_issue.car_id)
+        self.assertEqual(car_issues.object_list[1].description, second_car_issue.description)

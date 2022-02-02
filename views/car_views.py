@@ -25,7 +25,7 @@ def get_cars(request):
     images = {}
     user = request.user
     cars = Car.objects.filter(user_id=user.id, archive=False).order_by('id')
-    page_obj = pagination(request, cars, 16)
+    page_obj = pagination(request, cars, 12)
     if len(cars) > 0:
         for car in cars:
             try:

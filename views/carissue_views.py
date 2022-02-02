@@ -6,6 +6,7 @@ from django.shortcuts import render, get_list_or_404, redirect, get_object_or_40
 
 from Garage.models import Car, CarIssue
 from Garage.forms import AddIssueForm, UpdateIssueForm
+from views.views import pagination
 
 
 @login_required()
@@ -16,17 +17,21 @@ def get_carissues(request):
     car_issues = []
     if cars:
         for car in cars:
-            if CarIssue.objects.filter(car_id=car.id, archive=False):
-                car_issues.append(CarIssue.objects.filter(car_id=car.id, archive=False))
+            if list(CarIssue.objects.filter(car_id=car.id, archive=False)) != []:
+                car_issues.append(list(CarIssue.objects.filter(car_id=car.id, archive=False)))
+        page_obj = pagination(request, sum(car_issues, []), 10)
+
+        context = {
+            'user': user,
+            'cars': cars,
+            'page_obj': page_obj,
+            'message': message
+        }
     else:
         message = 'У вас нет добавленных автомобилей'
-
-    context = {
-        'user': user,
-        'cars': cars,
-        'car_issues': car_issues,
-        'message': message
-    }
+        context = {
+            'message': message
+        }
     return render(request, 'Garage/car_issues.html', context)
 
 
