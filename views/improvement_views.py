@@ -1,27 +1,26 @@
-import datetime
-
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 
 from Garage.models import Car, Improvement
 from Garage.forms import AddImprovementForm, UpdateImprovementForm
+from views.views import pagination
 
 
 @login_required()
 def get_improvements(request):
-    improvements = {}
+    improvements = []
     user = request.user
     cars = Car.objects.filter(user_id=user.id, archive=False)
     if cars:
         for car in cars:
-            improvements[car.id] = list(Improvement.objects.filter(car_id=car.id, archive=False))
-            if improvements[car.id] == []:
-                improvements.pop(car.id)
+            if list(Improvement.objects.filter(car_id=car.id, archive=False)) != []:
+                improvements.append(list(Improvement.objects.filter(car_id=car.id, archive=False)))
+        page_obj_improvements = pagination(request, sum(improvements, []), 10)
         context = {
             'user': user,
             'cars': cars,
-            'improvements': list(improvements.values())
+            'page_obj_improvements': page_obj_improvements
         }
         return render(request, 'Garage/improvements.html', context)
 

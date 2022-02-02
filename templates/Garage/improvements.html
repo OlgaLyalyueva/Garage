@@ -24,7 +24,7 @@
         {% else %}
             <a class="theme_button color1 min_width_button" href="{% url 'add_improvement' %}">Добавить улучшение</a>
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
-                {% if improvements %}
+                {% if page_obj_improvements.paginator.num_pages %}
                     <table>
                       <tr>
                           <th>Название</th>
@@ -33,20 +33,19 @@
                           <th>Стоимость</th>
                           <th>Автомобиль</th>
                       </tr>
-                        {% for improvement in improvements %}
-                            {% if improvement %}
-                                      {% for i in improvement %}
-                                      <tr>
-                                          <td><a href="{%  url 'update_improvement' impr_id=i.id %}">{{ i.name }}</a></td>
-                                          {% if i.description %}<td>{{ i.description}}</td>{% else %}<td></td>{% endif %}
-                                          {% if i.close %}<td>выполнено</td>{% else %}<td>актуально</td>{% endif %}
-                                          {% if i.price %}<td>{{ i.price }}</td>{% else %}<td></td>{% endif %}
-                                          <td>{{ i.car }}</td>
-                                      </tr>
-                                      {% endfor %}
-                            {% endif %}
-                        {% endfor %}
+                          {% for i in page_obj_improvements %}
+                              <tr>
+                                  <td><a href="{%  url 'update_improvement' impr_id=i.id %}">{{ i.name }}</a></td>
+                                  {% if i.description %}<td>{{ i.description}}</td>{% else %}<td></td>{% endif %}
+                                  {% if i.close %}<td>выполнено</td>{% else %}<td>актуально</td>{% endif %}
+                                  {% if i.price %}<td>{{ i.price }}</td>{% else %}<td></td>{% endif %}
+                                  <td>{{ i.car }}</td>
+                              </tr>
+                          {% endfor %}
                     </table>
+                    <!-- PAGINATION BLOCK -->
+                        {% include "Garage/pagination.html" with obj=page_obj_improvements  tabnumber='10'%}
+                    <!-- END PAGINATION -->
                 {% else %}
                     <p>У вас нет добавленных улучшений</p>
                 {% endif %}
