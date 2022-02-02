@@ -101,8 +101,8 @@ class TestRepairs(TestCase):
         self.assertEqual(response.status_code, 200)
         cars = response.context['cars']
         self.assertEqual(len(cars), 1)
-        repairs = response.context['repairs']
-        self.assertEqual(len(repairs[0]), 2)
+        repairs = response.context['page_obj_repairs']
+        self.assertEqual(len(repairs.object_list), 2)
 
 
     def test_repairs_are_sent_to_archive_if_car_is_moved_to_archive(self):
@@ -140,8 +140,8 @@ class TestRepairs(TestCase):
             car=car
         )
         response = c.get('/repairs/')
-        repairs = response.context['repairs']
-        self.assertEqual(len(repairs[0]), 2)
+        repairs = response.context['page_obj_repairs']
+        self.assertEqual(len(repairs.object_list), 2)
         car.archive = True
         car.save()
         response = c.get('/repairs/')

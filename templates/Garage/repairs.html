@@ -24,7 +24,7 @@
         {% else %}
             <a class="theme_button color1 min_width_button" href="{% url 'add_repair' %}">Добавить ремонт</a>
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
-                {% if repairs %}
+                {% if page_obj_repairs.paginator.num_pages %}
                     <table>
                       <tr>
                           <th>Тип ремонта</th>
@@ -36,23 +36,22 @@
                           <th>Дата</th>
                           <th>Автомобиль</th>
                       </tr>
-                        {% for repair in repairs %}
-                            {% if repair %}
-                                      {% for r in repair %}
-                                      <tr>
-                                          <td><a href="{%  url 'update_repair' repair_id=r.id %}">{{ r.get_type_of_repair_display }}</a></td>
-                                          <td>{{ r.name }}</td>
-                                          {% if r.description %}<td>{{ r.description }}</td>{% else %}<td></td>{% endif %}
-                                          {% if r.note %}<td>{{ r.note }}</td>{% else %}<td></td>{% endif %}
-                                          {% if r.mileage %}<td>{{ r.mileage }}</td>{% else %}<td></td>{% endif %}
-                                          {% if r.price %}<td>{{ r.price }}</td>{% else %}<td></td>{% endif %}
-                                          <td>{{ r.date}}</td>
-                                          <td>{{ r.car }}</td>
-                                      </tr>
-                                      {% endfor %}
-                            {% endif %}
+                        {% for r in page_obj_repairs %}
+                              <tr>
+                                  <td><a href="{%  url 'update_repair' repair_id=r.id %}">{{ r.get_type_of_repair_display }}</a></td>
+                                  <td>{{ r.name }}</td>
+                                  {% if r.description %}<td>{{ r.description }}</td>{% else %}<td></td>{% endif %}
+                                  {% if r.note %}<td>{{ r.note }}</td>{% else %}<td></td>{% endif %}
+                                  {% if r.mileage %}<td>{{ r.mileage }}</td>{% else %}<td></td>{% endif %}
+                                  {% if r.price %}<td>{{ r.price }}</td>{% else %}<td></td>{% endif %}
+                                  <td>{{ r.date}}</td>
+                                  <td>{{ r.car }}</td>
+                              </tr>
                         {% endfor %}
                     </table>
+                    <!-- PAGINATION BLOCK -->
+                        {% include "Garage/pagination.html" with obj=page_obj_repairs  tabnumber='7'%}
+                    <!-- END PAGINATION -->
                 {% else %}
                     <p>У вас нет добавленных ремонтов</p>
                 {% endif %}

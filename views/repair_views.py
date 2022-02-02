@@ -4,22 +4,23 @@ from django.shortcuts import get_list_or_404, redirect, render, get_object_or_40
 
 from Garage.forms import RepairForm
 from Garage.models import Repair, Car
+from views.views import pagination
 
 
 @login_required()
 def get_repairs(request):
-    repairs = {}
+    repairs = []
     user = request.user
     cars = Car.objects.filter(user_id=user.id, archive=False)
     if cars:
         for car in cars:
-            repairs[car.id] = list(Repair.objects.filter(car_id=car.id, archive=False))
-            if repairs[car.id] == []:
-                repairs.pop(car.id)
+            if list(Repair.objects.filter(car_id=car.id, archive=False)) != []:
+                repairs.append(list(Repair.objects.filter(car_id=car.id, archive=False)))
+        page_obj_repairs = pagination(request, sum(repairs, []), 10)
         context = {
             'user': user,
             'cars': cars,
-            'repairs': list(repairs.values())
+            'page_obj_repairs': page_obj_repairs
         }
         return render(request, 'Garage/repairs.html', context)
 
