@@ -22,6 +22,7 @@
             <p>{{ message }}</p>
         {% else %}
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
+            {% if page_obj_cars.paginator.num_pages %}
                 <table>
                   <tr>
                       <th>Марка</th>
@@ -51,6 +52,7 @@
                 <!-- PAGINATION BLOCK -->
                     {% include "Garage/pagination.html" with obj=page_obj_cars  tabnumber='11'%}
                 <!-- END PAGINATION -->
+            {% endif %}
             </div>
         {% endif %}
         <!-- Popup for unarchive the car -->
