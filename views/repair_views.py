@@ -36,19 +36,20 @@ def get_repairs(request):
 def get_archived_repairs(request):
     message = None
     repairs = []
+    context = {}
     cars = Car.objects.filter(user_id=request.user.id)
     if cars:
         for car in cars:
-            if Repair.objects.filter(car_id=car.id, archive=True):
-                repairs.append(Repair.objects.filter(car_id=car.id, archive=True))
-        if not repairs:
+            if list(Repair.objects.filter(car_id=car.id, archive=True)) != []:
+                repairs.append(list(Repair.objects.filter(car_id=car.id, archive=True)))
+        if repairs:
+            page_obj_repairs = pagination(request, sum(repairs, []), 10)
+            context['page_obj_repairs'] = page_obj_repairs
+        else:
             message = 'У вас нет добавленных ремонтов в папке архив'
     else:
         message = 'У вас нет автомобилей и ремонтов'
-    context = {
-        'repairs': repairs,
-        'message': message
-    }
+    context['message'] =  message
     return render(request, 'Garage/archived_repairs.html', context)
 
 
