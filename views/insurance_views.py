@@ -38,19 +38,20 @@ def get_insurances(request):
 def get_archived_insurances(request):
     message = None
     insrnc = []
+    context = {}
     cars = Car.objects.filter(user_id=request.user.id)
     if cars:
         for car in cars:
-            if Insurance.objects.filter(car_id=car.id, archive=True):
-                insrnc.append(Insurance.objects.filter(car_id=car.id, archive=True))
-        if not insrnc:
+            if list(Insurance.objects.filter(car_id=car.id, archive=True)) != []:
+                insrnc.append(list(Insurance.objects.filter(car_id=car.id, archive=True)))
+        if insrnc:
+            page_obj_insurances = pagination(request, sum(insrnc, []), 10)
+            context['page_obj_insurances'] = page_obj_insurances
+        else:
             message = 'У вас нет страховок в папке архив'
     else:
         message = 'У вас нет автомобилей и страховок'
-    context = {
-        'insrnc': insrnc,
-        'message': message
-    }
+    context['message'] = message
     return render(request, 'Garage/archived_insurances.html', context)
 
 
