@@ -22,26 +22,29 @@
             <p>{{ message }}</p>
         {% else %}
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
+            {% if page_obj_improvements.paginator.num_pages %}
                 <table>
-                  <tr>
-                      <th>Название</th>
-                      <th>Описание</th>
-                      <th>Дата</th>
-                      <th>Стоимость</th>
-                      <th>Автомобиль</th>
-                  </tr>
-                    {% for improvement in improvements %}
-                        {% for i in improvement %}
-                          <tr>
-                              <td>{{ i.name }} <a data-toggle="modal" data-target="#UnarchiveImprovement" href="{% url 'unarchive_improvement' impr_id=i.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
-                              {% if i.description %}<td>{{ i.description }}</td>{% else %}<td></td>{% endif %}
-                              <td>{{ i.date }}</td>
-                              {% if i.price %}<td>{{ i.price }}</td>{% else %}<td></td>{% endif %}
-                              <td><a href="{% url 'car_profile' car_id=i.car_id %}">{{ i.car }}</a></td>
-                          </tr>
-                        {% endfor %}
+                    <tr>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Дата</th>
+                        <th>Стоимость</th>
+                        <th>Автомобиль</th>
+                    </tr>
+                    {% for i in page_obj_improvements %}
+                        <tr>
+                            <td>{{ i.name }} <a data-toggle="modal" data-target="#UnarchiveImprovement" href="{% url 'unarchive_improvement' impr_id=i.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
+                            {% if i.description %}<td>{{ i.description }}</td>{% else %}<td></td>{% endif %}
+                            <td>{{ i.date }}</td>
+                            {% if i.price %}<td>{{ i.price }}</td>{% else %}<td></td>{% endif %}
+                            <td><a href="{% url 'car_profile' car_id=i.car_id %}">{{ i.car }}</a></td>
+                        </tr>
                     {% endfor %}
                 </table>
+                <!-- PAGINATION BLOCK -->
+                    {% include "Garage/pagination.html" with obj=page_obj_improvements  tabnumber='17'%}
+                <!-- END PAGINATION -->
+            {% endif %}
             </div>
         {% endif %}
         <!-- Popup -->

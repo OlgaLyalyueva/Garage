@@ -36,19 +36,20 @@ def get_improvements(request):
 def get_archived_improvements(request):
     message = None
     improvements = []
+    context = {}
     cars = Car.objects.filter(user_id=request.user.id)
     if cars:
         for car in cars:
-            if Improvement.objects.filter(car_id=car.id, archive=True):
-                improvements.append(Improvement.objects.filter(car_id=car.id, archive=True))
-        if not improvements:
+            if list(Improvement.objects.filter(car_id=car.id, archive=True)) != []:
+                improvements.append(list(Improvement.objects.filter(car_id=car.id, archive=True)))
+        if improvements:
+            page_obj_improvements = pagination(request, sum(improvements, []), 10)
+            context['page_obj_improvements'] = page_obj_improvements
+        else:
             message = 'У вас нет добавленных улучшений в папке архив'
     else:
         message = 'У вас нет добавленных автомобилей'
-    context = {
-        'improvements': improvements,
-        'message': message
-    }
+    context['message'] = message
     return render(request, 'Garage/archived_improvements.html', context)
 
 
