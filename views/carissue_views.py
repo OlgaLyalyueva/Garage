@@ -39,19 +39,20 @@ def get_carissues(request):
 def get_archived_issues(request):
     message = None
     issues = []
+    context = {}
     cars = Car.objects.filter(user_id=request.user.id)
     if cars:
         for car in cars:
-            if CarIssue.objects.filter(car_id=car.id, archive=True):
-                issues.append(CarIssue.objects.filter(car_id=car.id, archive=True))
-        if not issues:
+            if list(CarIssue.objects.filter(car_id=car.id, archive=True)) != []:
+                issues.append(list(CarIssue.objects.filter(car_id=car.id, archive=True)))
+        if issues:
+            page_obj_issues = pagination(request, sum(issues, []), 10)
+            context['page_obj_issues'] = page_obj_issues
+        else:
             message = 'У вас нет добавленных поломок в папке архив'
     else:
         message = 'У вас нет добавленных автомобилей'
-    context = {
-        'issues': issues,
-        'message': message
-    }
+    context['message'] = message
     return render(request, 'Garage/archived_issues.html', context)
 
 

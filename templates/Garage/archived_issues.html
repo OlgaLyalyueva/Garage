@@ -22,32 +22,35 @@
             <p>{{ message }}</p>
         {% else %}
             <div class="isotope_container isotope row masonry-layout columns_margin_bottom_20">
+            {% if page_obj_issues.paginator.num_pages %}
                 <table>
-                  <tr>
-                      <th>Название</th>
-                      <th>Описание</th>
-                      <th>Дата</th>
-                      <th>Состояние</th>
-                      <th>Автомобиль</th>
-                  </tr>
-                    {% for item in issues %}
-                        {% for i in item %}
-                            <tr>
-                                <td>{{ i.name }} <a data-toggle="modal" data-target="#UnarchiveIssue" href="{% url 'unarchive_issue' issue_id=i.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
-                                {% if i.description %}<td>{{ i.description }}</td>{% else %}<td></td>{% endif %}
-                                <td>{{ i.date }}</td>
-                                {% if i.close is False %}
-                                    <td>Поломка не устранена</td>
-                                {% elif i.close is True %}
-                                    <td>Поломка устранена</td>
-                                {% else %}
-                                    <td></td>
-                                {% endif %}
-                                <td><a href="{% url 'car_profile' car_id=i.car_id %}">{{ i.car }}</a></td>
-                          </tr>
-                        {% endfor %}
+                    <tr>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Дата</th>
+                        <th>Состояние</th>
+                        <th>Автомобиль</th>
+                    </tr>
+                    {% for i in page_obj_issues %}
+                        <tr>
+                            <td>{{ i.name }} <a data-toggle="modal" data-target="#UnarchiveIssue" href="{% url 'unarchive_issue' issue_id=i.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
+                            {% if i.description %}<td>{{ i.description }}</td>{% else %}<td></td>{% endif %}
+                            <td>{{ i.date }}</td>
+                            {% if i.close is False %}
+                                <td>Поломка не устранена</td>
+                            {% elif i.close is True %}
+                                <td>Поломка устранена</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            <td><a href="{% url 'car_profile' car_id=i.car_id %}">{{ i.car }}</a></td>
+                        </tr>
                     {% endfor %}
                 </table>
+                <!-- PAGINATION BLOCK -->
+                    {% include "Garage/pagination.html" with obj=page_obj_issues  tabnumber='13'%}
+                <!-- END PAGINATION -->
+            {% endif %}
             </div>
         {% endif %}
         <!-- Popup -->
