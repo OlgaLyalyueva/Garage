@@ -1,5 +1,6 @@
 import datetime
 import os
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -14,7 +15,7 @@ class Car(models.Model):
     vin = models.CharField(max_length=17, blank=True, null=True, verbose_name='VIN-код')
     producer = models.CharField(max_length=300, verbose_name='Марка')
     model = models.CharField(max_length=300, verbose_name='Модель')
-    year = models.IntegerField(verbose_name='Год')
+    year = models.IntegerField(verbose_name='Год', validators=[MinValueValidator(1800), MaxValueValidator(datetime.date.today().year)])
     transmission = models.CharField(choices=[
         ('ручная/механика', 'Ручная/Механика'),
         ('автомат', 'Автомат'),
