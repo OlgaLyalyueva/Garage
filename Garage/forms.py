@@ -3,6 +3,8 @@ from django import forms
 
 
 class CarForm(forms.ModelForm):
+    vin = forms.CharField(max_length=17, min_length=17)
+
     class Meta:
         model = Car
         fields = ['producer', 'model', 'year', 'vin', 'transmission', 'fuel', 'drive_system', 'mileage', 'price']
@@ -33,7 +35,7 @@ class InsuranceForm(forms.ModelForm):
                 raise forms.ValidationError("Дата окончания страховки должна быть позже даты начала страховки")
             return super(InsuranceForm, self).clean()
         except KeyError:
-            raise forms.ValidationError("Укажате даты начала и окончания страховки")
+            raise forms.ValidationError("Укажите даты начала и окончания страховки")
 
 
 class AddIssueForm(forms.ModelForm):
