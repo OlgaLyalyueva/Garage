@@ -22,11 +22,7 @@
             <div class="row">
                 <form class="contact-form" action="{% url 'add_car' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                    <!-- Add car photo -->
-                    {% if errors %}
-                        <p>{{ errors }}</p>
-                    {% endif %}
-                    <!-- Car photo -->
+{#                    <!-- Add car photo -->#}
 {#                    <div class="col-sm-5 col-md-4 col-lg-3">#}
 {#                        <div class="vertical-item content-padding rounded overflow_hidden with_background">#}
 {#                            <div class="item-media"> <img src="/static/images/team/01.jpg" alt="">#}
@@ -41,7 +37,7 @@
 {#                            </div>#}
 {#                        </div>#}
 {#                    </div>#}
-                    <!-- end Car photo -->
+{#                    <!-- end Car photo -->#}
                     <div class="col-sm-7 col-md-8 col-lg-9">
                         <p class="contact-form">
                             <input type="text" required="true" size="30" value name="producer" class="contact-form-producer" placeholder="Марка">
@@ -49,10 +45,13 @@
                         </p>
                         <p>
                             <input type="text" aria-required="false" min="17" max="17" size="30" value name="vin" class="contact-form-vin" placeholder="VIN-код">
+                               {{ errors.vin }}
                         </p>
                         <p class="contact-form">
                             <input type="number" required="true" size="30" value name="year" class="contact-form-year" placeholder="Год">
+                                {{ errors.year }}
                             <input type="number" aria-required="false" size="30" value name="mileage" class="contact-form-mileage" placeholder="Пробег">
+                                {{ errors.mileage }}
                         </p>
                         <p class="contact-form">
                             <label for="transmission">Выбери тип КПП:</label>
@@ -89,10 +88,13 @@
                             </select>
 
                             <input type="number" aria-required="false" size="30" value name="price" class="contact-form-price" placeholder="Стоимость">
+                                {{ errors.price }}
                         </p>
                         <p class="contact-form">
                             <input type="text" aria-required="false" size="30" value name="body" class="contact-form-body" placeholder="Тип кузова">
+                                {{ errors.body }}
                             <input type="text" aria-required="false" size="30" value name="engine" class="contact-form--engine" placeholder="Тип двигателя">
+                                {{ errors.engine }}
                         </p>
                         <input type="submit" value="Сохранить" class="btn-default">
                         <a class="theme_button color1 min_width_button" href="{% url 'cars' %}">Отменить</a>

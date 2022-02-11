@@ -701,6 +701,10 @@ input[type=radio] {
 	color: #fab915;
 }
 
+.errorlist li {
+	color: red;
+}
+
 /* inline input with button */
 .button-on-input {
 	position: relative;

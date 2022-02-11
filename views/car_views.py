@@ -119,7 +119,7 @@ def get_car(request, car_id):
 
 @login_required
 def add_car(request):
-    errors = None
+    context = {}
     if request.method == 'POST':
         form_car = CarForm(request.POST)
         if form_car.is_valid():
@@ -135,21 +135,16 @@ def add_car(request):
             car.user = request.user
             car.save()
 
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                f'{car.producer} {car.model}, была успешно создана!'
-            )
             return redirect(f'/car/{car.id}')
         else:
             errors = form_car.errors
+            form_car = form_car.data
+            context['errors'] = errors
+            context['form_car'] = form_car
+            return render(request, 'Garage/add_car.html', context)
 
     form_car = CarForm()
-    context = {
-        'user': request.user,
-        'form_car': form_car,
-        'errors': errors
-    }
+    context['form_car'] = form_car
     return render(request, 'Garage/add_car.html', context)
 
 
