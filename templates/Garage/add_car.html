@@ -7,11 +7,8 @@
                 <div class="col-sm-12 text-center">
                     <h2>Добавить машину</h2>
                     <ol class="breadcrumb greylinks">
-                        <li> <a href="#">
-                    Главная
-                </a> </li>
-                        <li> <a href="{% url "add_car" %}">Машины</a> </li>
-                        <li class="active">Добавить машину</li>
+                        <li>Список</li>
+                        <li> <a href="{% url "cars" %}">Машины</a> </li>
                     </ol>
                 </div>
             </div>
@@ -43,7 +40,7 @@
                             <input type="text" required="true" size="30" value name="producer" class="contact-form-producer" placeholder="Марка">
                             <input type="text" required="true" size="30" value name="model" class="contact-form-model" placeholder="Модель">
                         </p>
-                        <p>
+                        <p class="contact-form">
                             <input type="text" aria-required="false" min="17" max="17" size="30" value name="vin" class="contact-form-vin" placeholder="VIN-код">
                                {{ errors.vin }}
                         </p>

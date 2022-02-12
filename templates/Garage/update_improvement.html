@@ -7,9 +7,8 @@
                 <div class="col-sm-12 text-center">
                     <h2>Изменить улучшение</h2>
                     <ol class="breadcrumb greylinks">
-                        <li> <a href="#">
-                    Главная
-                </a> </li>
+                        <li>Опции</li>
+                        <li class="active"> <a href="{% url "car_profile" car_id=car.id %}">Машина</a> </li>
                         <li class="active">Изменить улучшение</li>
                     </ol>
                 </div>
@@ -40,16 +39,17 @@
                                     <input type="checkbox" aria-required="false" size="30" name="close" class="contact-form-close" title="статус улучшения"{% if improvement.close %} checked{% endif %}> выполнено
                                 </p>
                             {% if cars %}
-                                    <p class="contact-form">
-                                        <label for="car">Выбери автомобиль:</label>
-                                        <select name="car" id="car_id" value="{{ car.id }}" title="застрахованный автомобиль">
-                                            {% if car %}
+                                <p class="contact-form">
+                                    <label for="car">Выбери автомобиль:</label>
+                                    <select name="car" id="car_id" value="{{ car.id }}" title="застрахованный автомобиль">
+                                        {% if car %}
+                                            <option value="{{ car.id }}">{{ car.producer }}, {{ car.model }}</option>
+                                            {% for car in cars %}
                                                 <option value="{{ car.id }}">{{ car.producer }}, {{ car.model }}</option>
-                                                {% for car in cars %}
-                                                    <option value="{{ car.id }}">{{ car.producer }}, {{ car.model }}</option>
-                                                {% endfor %}
-                                            {% endif %}
-                                        </select>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </p>
                             {% endif %}
                         </p>
                         <input type="submit" value="Сохранить" class="btn-default">
