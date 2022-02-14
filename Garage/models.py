@@ -120,7 +120,7 @@ class Improvement(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название проблемы')
     description = models.CharField(blank=True, null=True, max_length=1000, verbose_name='Описание')
     close = models.BooleanField(default=False, verbose_name='Состояние')
-    price = models.FloatField(blank=True, null=True, verbose_name='Стоимость')
+    price = models.FloatField(blank=True, null=True, validators=[MaxValueValidator(1000000)], verbose_name='Стоимость')
     archive = models.BooleanField(default=False)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
 

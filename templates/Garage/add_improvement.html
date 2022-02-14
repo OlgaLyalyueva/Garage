@@ -26,6 +26,7 @@
                         </p>
                         <p>
                             <input type="number" step="0.01" aria-required="false" size="30" value name="price" class="contact-form-price" placeholder="Стоимость" title="Стоимость">
+                                {{ errors.price }}
                             {% if cars %}
                                     <p class="contact-form">
                                         <label for="car">Выбери автомобиль:</label>
@@ -34,6 +35,7 @@
                                                 <option value="{{ car.id }}">{{ car.producer }}, {{ car.model }}</option>
                                             {% endfor %}
                                         </select>
+                                    </p>
                             {% endif %}
                         </p>
                         <input type="submit" value="Сохранить" class="btn-default">
