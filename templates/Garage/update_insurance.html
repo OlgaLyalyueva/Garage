@@ -25,10 +25,10 @@
                     <div class="col-sm-7 col-md-8 col-lg-9">
                         <p class="contact-form">
                             <input type="text" required="true" size="30" value="{{ insrnc.type }}" name="type" class="contact-form-producer" placeholder="Тип страховки" title="тип страховки">
-                            <input type="text" aria-required="true" size="30" value="{{ insrnc.description }}" name="description" class="contact-form-producer" placeholder="Описание" title="описание">
+                            <input type="text" aria-required="false" size="30" value="{{ insrnc.description }}" name="description" class="contact-form-producer" placeholder="Описание" title="описание">
                         </p>
                         <p class="contact-form">
-                            <input type="text" required="true" size="30" value="{{ insrnc.policy_number }}" name="policy_number" class="contact-form-year" placeholder="Номер полиса" title="номер полиса">
+                            <input type="text" aria-required="false" size="30" value="{{ insrnc.policy_number }}" name="policy_number" class="contact-form-year" placeholder="Номер полиса" title="номер полиса">
                             <input type="date" required="true" size="30" value="{{ insrnc.start_date | date:"Y-m-d" }}" name="start_date" class="contact-form-mileage" placeholder="Дата начала" title="дата начала страховки">
                             <input type="date" required="true" size="30" value="{{ insrnc.end_date | date:"Y-m-d" }}" name="end_date" class="contact-form-mileage" placeholder="Дата окончания" title="дата окончания страховки">
                         </p>
