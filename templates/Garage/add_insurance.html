@@ -17,11 +17,6 @@
     <section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
         <div class="container">
             <div class="row">
-                {% if errors %}
-                    {% for error in errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                {% endif %}
                 <form class="contact-form" action="{% url 'add_insurance' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                     <div class="col-sm-7 col-md-8 col-lg-9">
@@ -33,9 +28,11 @@
                             <input type="text" aria-required="false" size="30" value="{{ form_insrnc.data.policy_number }}" name="policy_number" class="contact-form-year" placeholder="Номер полиса">
                             <input type="date" required size="30" value name="start_date" class="contact-form-mileage" placeholder="Дата начала">
                             <input type="date" required size="30" value name="end_date" class="contact-form-mileage" placeholder="Дата окончания">
+                                {{ form_insrnc.non_field_errors }}
                         </p>
                         <p>
-                            <input type="number" step="0.01" aria-required="false" size="30" value="{{ form_insrnc.data.price }}" name="price" class="contact-form-price" placeholder="Стоимость">
+                            <input type="float" step="0.01" aria-required="false" size="30" value="{{ form_insrnc.data.price }}" name="price" class="contact-form-price" placeholder="Стоимость">
+                                {{ errors.price }}
                             {% if cars %}
                                     <p class="contact-form">
                                         <label for="car">Выбери автомобиль который был застрахован:</label>
