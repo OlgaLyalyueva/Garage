@@ -33,7 +33,8 @@
                             {% endif %}
                         </p>
                         <p>
-                            <input type="float" aria-required="false" size="30" value="{{ improvement.price|stringformat:".2f" }}" name="price" class="contact-form-price" placeholder="Стоимость" title="стоимость">
+                            <input type="float" step="0.01" aria-required="false" size="30" value="{{ improvement.price|stringformat:".2f" }}" name="price" class="contact-form-price" placeholder="Стоимость" title="стоимость">
+                                {{ errors.price }}
                             <p>Состояние улучшения:</p>
                                 <p>
                                     <input type="checkbox" aria-required="false" size="30" name="close" class="contact-form-close" title="статус улучшения"{% if improvement.close %} checked{% endif %}> выполнено
