@@ -34,7 +34,7 @@
                             <td>{{ i.name }} <a data-toggle="modal" data-target="#UnarchiveImprovement" href="{% url 'unarchive_improvement' impr_id=i.id %}"><span class="glyphicon glyphicon-open small-text alignright"></span></a></td>
                             {% if i.description %}<td>{{ i.description }}</td>{% else %}<td></td>{% endif %}
                             <td>{{ i.date }}</td>
-                            {% if i.price %}<td>{{ i.price }}</td>{% else %}<td></td>{% endif %}
+                            {% if i.price %}<td>{{ i.price|floatformat:2 }}</td>{% else %}<td></td>{% endif %}
                             <td><a href="{% url 'car_profile' car_id=i.car_id %}">{{ i.car }}</a></td>
                         </tr>
                     {% endfor %}
