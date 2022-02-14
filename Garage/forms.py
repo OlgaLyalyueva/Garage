@@ -3,7 +3,7 @@ from django import forms
 
 
 class CarForm(forms.ModelForm):
-    vin = forms.CharField(max_length=17, min_length=17)
+    vin = forms.CharField(max_length=17, min_length=17, required=False)
 
     class Meta:
         model = Car
