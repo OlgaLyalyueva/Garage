@@ -40,11 +40,12 @@
                 <div class="col-sm-5 col-md-6 col-lg-7">
                     <p>Марка: {{ car.producer|title }}</p>
                     <p>Модель: {{ car.model|title }}</p>
-                    <p style="display: {{ car.vin }}">VIN-код: {{ car.vin|upper }}</p>
+                    {% if car.vin %}
+                        <p>VIN-код: {{ car.vin|upper }}</p>
+                    {% endif %}
                     <p>Год выпуска: {{ car.year }}</p>
                     <p style="display: {{ car.engine }}">Тип кузова: {{ car.body|title }}</p>
                     <p>Тип привода: {{ car.get_transmission_display }}</p>
-                    <!-- Интерпритировать цифры в текст -->
                     <p>Тип топлива: {{ car.get_fuel_display }}</p>
                     <p>Тип коробки: {{ car.get_drive_system_display }}</p>
                     <p style="display: {{ car.mileage }}">Пробег: {{ car.mileage|intcomma }}</p>
