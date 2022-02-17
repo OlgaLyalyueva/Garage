@@ -37,19 +37,19 @@
                         </div>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-9">
-                     {% if errors %}
-                        <p>{{ errors }}</p>
-                    {% endif %}
                         <p class="contact-form">
                             <input type="text" required="true" size="30" value="{{ car.producer }}" name="producer" class="contact-form-producer" placeholder="Марка" title="марка автомобиля">
                             <input type="text" required="true" size="30" value="{{ car.model }}" name="model" class="contact-form-model" placeholder="Модель" title="модель">
                         </p>
                         <p>
                             <input type="text" aria-required="false" min="17" max="17" size="30" value="{{ car.vin }}" name="vin" class="contact-form-vin" placeholder="VIN-код">
+                                {{ errors.vin }}
                         </p>
                         <p class="contact-form">
-                            <input type="number" required="true" size="30" min=1900 max={{ now.year }} value="{{ car.year }}" name="year" class="contact-form-year" placeholder="Год" title="год выпуска">
+                            <input type="number" required="true" size="30" value="{{ car.year }}" name="year" class="contact-form-year" placeholder="Год" title="год выпуска">
+                                {{ errors.year }}
                             <input type="number" aria-required="false" size="30" value="{{ car.mileage }}" name="mileage" class="contact-form-mileage" placeholder="Пробег" title="пробег">
+                                {{ errors.mileage }}
                         </p>
                         <p class="contact-form">
                             <label for="transmission">Выбери тип КПП:</label>

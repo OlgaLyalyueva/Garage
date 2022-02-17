@@ -41,7 +41,7 @@ class Car(models.Model):
         (2, 'Передний'),
         (3, 'Задний')
     ], verbose_name='Тип привода')
-    mileage = models.IntegerField(blank=True, null=True, verbose_name='Пробег')
+    mileage = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(1), MaxValueValidator(10000000)], verbose_name='Пробег')
     price = models.FloatField(blank=True, null=True, verbose_name='Стоимость')
     archive = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
