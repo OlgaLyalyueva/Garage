@@ -87,7 +87,11 @@ def update_insurance(request, insrnc_id=None):
     insrnc = get_object_or_404(Insurance, id=insrnc_id, archive=False)
     car = get_object_or_404(Car, id=insrnc.car_id, user_id=user.id, archive=False)
     cars = Car.objects.filter(user_id=user.id, archive=False)
-    errors = None
+    context = {}
+    context['insrnc'] = insrnc
+    context['car'] = car
+    context['cars'] = cars
+
     if request.method == 'POST':
         form_insrnc = InsuranceForm(request.POST, instance=insrnc)
         datetime.datetime.strptime(form_insrnc.data['start_date'], "%Y-%m-%d").date()
@@ -98,14 +102,12 @@ def update_insurance(request, insrnc_id=None):
             return redirect(f'/car/{car_id}')
         else:
             errors = form_insrnc.errors
+            context['errors'] = errors
+            context['form_insrnc'] = form_insrnc
+            return render(request, 'Garage/update_insurance.html', context)
+
     form_insrc = InsuranceForm()
-    context = {
-        'cars': cars,
-        'car': car,
-        'insrnc': insrnc,
-        'form_insrc': form_insrc,
-        'errors': errors
-    }
+    context['form_insrc'] = form_insrc
     return render(request, 'Garage/update_insurance.html', context)
 
 

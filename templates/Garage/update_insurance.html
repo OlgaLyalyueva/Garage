@@ -31,9 +31,11 @@
                             <input type="text" aria-required="false" size="30" value="{{ insrnc.policy_number }}" name="policy_number" class="contact-form-year" placeholder="Номер полиса" title="номер полиса">
                             <input type="date" required="true" size="30" value="{{ insrnc.start_date | date:"Y-m-d" }}" name="start_date" class="contact-form-mileage" placeholder="Дата начала" title="дата начала страховки">
                             <input type="date" required="true" size="30" value="{{ insrnc.end_date | date:"Y-m-d" }}" name="end_date" class="contact-form-mileage" placeholder="Дата окончания" title="дата окончания страховки">
+                                {{ form_insrnc.non_field_errors }}
                         </p>
                         <p class="contact-form">
                             <input type="number" aria-required="false" size="30" value="{{ insrnc.price|stringformat:".2f" }}" name="price" class="contact-form-price" placeholder="Стоимость" title="стоимость">
+                                {{ errors.price }}
                             {% if cars %}
                                 <p>
                                     <label for="car">Выбери автомобиль который был застрахован:</label>
