@@ -26,8 +26,8 @@
                         </p>
                         <p class="contact-form">
                             <input type="text" aria-required="false" size="30" value="{{ form_insrnc.data.policy_number }}" name="policy_number" class="contact-form-year" placeholder="Номер полиса">
-                            <input type="date" required size="30" value name="start_date" class="contact-form-mileage" placeholder="Дата начала">
-                            <input type="date" required size="30" value name="end_date" class="contact-form-mileage" placeholder="Дата окончания">
+                            <input type="date" required size="30" value="{{ form_insrnc.data.start_date }}" name="start_date" class="contact-form-mileage" placeholder="Дата начала">
+                            <input type="date" required size="30" value="{{ form_insrnc.data.end_date }}" name="end_date" class="contact-form-mileage" placeholder="Дата окончания">
                                 {{ form_insrnc.non_field_errors }}
                         </p>
                         <p>
