@@ -22,7 +22,7 @@
                     <a class="small-text" data-toggle="modal" data-target="#ArchivedCarIssue" href="{% url 'archive_issue' issue_id=issue.id %}">в архив
                         <span class="glyphicon glyphicon-inbox"></span>
                     </a>
-                    <p class="col-sm-7 col-md-8 col-lg-9">
+                    <div class="col-sm-7 col-md-8 col-lg-9">
                         <p class="contact-form">
                             <input type="text" required="true" size="30" value="{{ issue.name }}" name="name" class="contact-form-name" placeholder="Название поломки" title="название поломки">
                             {% if issue.description %}
@@ -56,7 +56,12 @@
                         <input type="submit" value="Сохранить" class="btn-default">
 
                         <button type="button" class="theme_button min_width_button btn-danger" data-toggle="modal" data-target="#DeleteCarIssue" href="{% url 'delete_issue' issue_id=issue.id %}">Удалить <span class="glyphicon glyphicon-trash"> </span></button>
-                        <input class="theme_button color1 min_width_button" type="button" value="Отменить" onclick="goBack()">
+                        {% if errors %}
+                            <a href="{% url 'car_issues' %}" class="theme_button color1 min_width_button"> Отмена </a>
+                        {% else %}
+                            <input class="theme_button color1 min_width_button" type="button" value="Отменить" onclick="goBack()">
+                        {% endif %}
+                    </div>
                 </form>
 
                 <!-- Popup for sending insurance to the archive -->
