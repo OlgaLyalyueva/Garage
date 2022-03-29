@@ -32,7 +32,7 @@ steps:
     image: docker
     commands:
       - docker build -t registry.dntsk.dev/garage:latest .
-      - docker push registry.dntsk.dev/garage:latest
+#      - docker push registry.dntsk.dev/garage:latest
     volumes:
       - name: cache
         path: /root/.cache/pip
@@ -44,7 +44,7 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /garage/docker/drone/cache
+      path: /opt/docker/drone/garage_cache
   - name: docker_sock
     host:
       path: /var/run/docker.sock
@@ -59,26 +59,3 @@ trigger:
 
 depends_on:
   - test
-
-#---
-#kind: pipeline
-#type: docker
-#name: deploy
-#
-#steps:
-#  - name: deploy_staging
-#    image: appleboy/drone-ssh
-#    settings:
-#      host:
-#        from_secret: ssh_host
-#      username:
-#        from_secret: ssh_username
-#      key:
-#        from_secret: ssh_key
-#      port: 22
-#      script:
-#        - cd /opt
-#        - docker-compose pull garage_staging
-#        - docker-compose up -d garage_staging
-#    when:
-#      branch: staging
