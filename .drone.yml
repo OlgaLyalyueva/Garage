@@ -32,7 +32,7 @@ steps:
     image: docker
     commands:
       - docker build -t registry.dntsk.dev/garage:latest .
-#      - docker push registry.dntsk.dev/garage:latest
+      - docker push registry.dntsk.dev/garage:latest
     volumes:
       - name: cache
         path: /root/.cache/pip

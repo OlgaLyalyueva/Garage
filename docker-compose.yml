@@ -4,6 +4,7 @@ services:
 
   postgres:
     image: postgres
+    container_name: postgres-dev
     restart: always
     environment:
       POSTGRES_PASSWORD: example
