@@ -15,7 +15,7 @@ RUN pip install --upgrade pip && \
 
 COPY . /garage
 
-#RUN  chmod 755 ./start.sh
+RUN chmod 755 /garage/start.sh
 
 CMD ["./start.sh"]
 EXPOSE 8000
