@@ -10,10 +10,10 @@ SECRET_KEY = os.getenv(SECRET_KEY,
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Garage',
-        'USER': 'garage_s',
+        'NAME': os.getenv('PG_DB_NAME'),
+        'USER': os.getenv('PG_USER'),
         'PASSWORD': os.getenv('PG_PASSWORD'),
         'HOST': os.getenv('PG_HOST'),
-        'PORT': os.getenv('PG_PORT', default=15432),
+        'PORT': os.getenv('PG_PORT', default=5432),
     }
 }

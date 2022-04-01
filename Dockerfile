@@ -14,5 +14,5 @@ RUN pip install --upgrade pip && \
     pip install --no-cache -r /garage/requirements.txt
 
 COPY . /garage
-CMD sleep 10 && python manage.py runserver 0.0.0.0:8000
+CMD sleep 10 && python manage.py runserver --settings=Garage.settings_${ENV:=staging} 0.0.0.0:8000
 EXPOSE 8000
