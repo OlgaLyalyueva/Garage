@@ -11,8 +11,9 @@ ENV LIBRARY_PATH=/lib:/usr/lib
 
 COPY requirements.txt /garage/requirements.txt
 RUN pip install --upgrade pip && \
-    pip install --no-cache -r /garage/requirements.txt
+    pip install --no-cache -r /garage/requirements.txt && \
+    chmod 755 ./start.sh
 
 COPY . /garage
-CMD sleep 10 && python manage.py runserver --settings=Garage.settings_${ENV:=staging} 0.0.0.0:8000
+CMD ["./start.sh"]
 EXPOSE 8000
