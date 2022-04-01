@@ -18,10 +18,6 @@ services:
     POSTGRES_PASSWORD: example
     POSTGRES_DB: garage
 
-
-
-
-
 ---
 kind: pipeline
 type: docker
