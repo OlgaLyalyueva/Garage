@@ -11,9 +11,11 @@ ENV LIBRARY_PATH=/lib:/usr/lib
 
 COPY requirements.txt /garage/requirements.txt
 RUN pip install --upgrade pip && \
-    pip install --no-cache -r /garage/requirements.txt && \
-    chmod 755 ./start.sh
+    pip install --no-cache -r /garage/requirements.txt
 
 COPY . /garage
+
+RUN  chmod 755 ./start.sh
+
 CMD ["./start.sh"]
 EXPOSE 8000
