@@ -57,7 +57,7 @@
             <div class="fw-messages-wrap ls with_padding"></div>
         </div>
         <!-- eof .modal -->
-        {% if request.get_full_path != '/accounts/login/' and request.get_full_path != '/accounts/register/' and request.get_full_path != '/accounts/password_reset/'%}
+        {% if 'accounts' not in request.get_full_path|split:"/" %}
         <!-- wrappers for visual page editor and boxed version of template -->
         <div id="canvas" class="boxed">
             <div id="box_wrapper" class="container">
@@ -217,10 +217,10 @@
 		</div>
 		<!-- eof #box_wrapper -->
 	    </div>
-	<!-- eof #canvas -->
-    {% else %}
-        {% block login %} {% endblock %}
-    {% endif %}
+        <!-- eof #canvas -->
+        {% else %}
+            {% block login %} {% endblock %}
+        {% endif %}
 	<script src="/static/js/compressed.js"></script>
 	<script src="/static/js/main.js"></script>
 </body>

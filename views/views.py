@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.utils.datastructures import MultiValueDictKeyError
 from django.core.paginator import Paginator
+from django.template.defaulttags import register
 
 from django.core.mail import BadHeaderError, send_mail
 
@@ -96,3 +97,8 @@ def pagination(request, objs, number_of_items_per_page):
     else:
         page_obj = None
     return page_obj
+
+
+@register.filter
+def split(data, separetor):
+    return data.split(f'{separetor}')
