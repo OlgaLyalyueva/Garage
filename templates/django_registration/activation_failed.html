@@ -4,12 +4,14 @@
 <head>
     <link rel="stylesheet" href="/static/registration/css/style.css">
 </head>
-    <div class="login-wrap">
-        <div class="login-html">
-            <h4 align="center">Ошибка активации</h4>
-            <p>Извините, срок действия активационной ссылки истек.</p>
-            <div class="hr"></div>
-            <div align="center"><a href="{% url 'django_registration_register' %}">Зарегистрироваться?</a></div>
+    <div id="box_wrapper" class="container">
+        <div class="login-wrap">
+            <div class="login-html">
+                <h4 align="center">Ошибка активации</h4>
+                <p>Извините, срок действия активационной ссылки истек</p>
+                <div class="hr"></div>
+                <div align="center"><a href="{% url 'django_registration_register' %}">Зарегистрироваться?</a></div>
+            </div>
         </div>
     </div>
 {% endblock %}
