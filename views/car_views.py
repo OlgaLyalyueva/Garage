@@ -144,7 +144,7 @@ def add_car(request):
             return render(request, 'Garage/add_car.html', context)
 
     form_car = CarForm()
-    context['form_car'] = form_car
+    context['form_car'] = form_car.data
     return render(request, 'Garage/add_car.html', context)
 
 
