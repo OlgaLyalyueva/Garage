@@ -71,17 +71,15 @@
                         </p>
                         <p class="contact-form">
                             <label for="fuel">Выбери тип топлива:</label>
-                            <select name="fuel" id="fuel" required>
-                              <option hidden disabled selected value> Тип топлава </option>
-                              <option value=1>Бензин</option>
-                              <option value=2>Дизель</option>
-                              <option value=3>Газ</option>
-                              <option value=4>Газ/Бензин</option>
-                              <option value=5>Гибрид</option>
-                              <option value=6>Электро</option>
-                              <option value=7>Газ метан</option>
-                              <option value=8>Газ пропан-бутан</option>
-                              <option value=9>Другое</option>
+                            <select id="fuel" name="fuel" title="Тип топлива" required>
+                                {% if selected_fuel_value %}
+                                    <option value="{{ form_car.fuel }}">{{ selected_fuel_value }}</option>
+                                {% else %}
+                                    <option hidden disabled selected value>Тип топлива</option>
+                                {% endif %}
+                                {% for k, v in fuel.items %}
+                                    <option value="{{ k }}">{{ v }}</option>
+                                {% endfor %}
                             </select>
 
                             <input type="number" aria-required="false" size="30" value="{{ form_car.price }}" name="price" class="contact-form-price" placeholder="Стоимость">

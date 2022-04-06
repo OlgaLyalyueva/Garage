@@ -9,6 +9,18 @@ from Garage import settings
 
 User._meta.get_field('email')._unique = True
 
+FUEL_CHOICES=[
+        (1, 'Бензин'),
+        (2, 'Дизель'),
+        (3, 'Газ'),
+        (4, 'Газ/Бензин'),
+        (5, 'Гибрид'),
+        (6, 'Электро'),
+        (7, 'Газ метан'),
+        (8, 'Газ пропан-бутан'),
+        (9, 'Другое')
+    ]
+
 
 class Car(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
@@ -25,17 +37,7 @@ class Car(models.Model):
     ], max_length=20, verbose_name='КПП')
     body = models.ForeignKey('Body', on_delete=models.CASCADE, null=True)
     engine = models.ForeignKey('Engine', on_delete=models.CASCADE, null=True)
-    fuel = models.PositiveIntegerField(choices=[
-        (1, 'Бензин'),
-        (2, 'Дизель'),
-        (3, 'Газ'),
-        (4, 'Газ/Бензин'),
-        (5, 'Гибрид'),
-        (6, 'Электро'),
-        (7, 'Газ метан'),
-        (8, 'Газ пропан-бутан'),
-        (9, 'Другое')
-    ], verbose_name='Топливо')
+    fuel = models.PositiveIntegerField(choices=FUEL_CHOICES, verbose_name='Топливо')
     drive_system = models.PositiveSmallIntegerField(choices=[
         (1, 'Полный'),
         (2, 'Передний'),

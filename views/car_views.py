@@ -120,6 +120,7 @@ def get_car(request, car_id):
 @login_required
 def add_car(request):
     context = {}
+    context['fuel'] = dict((k, v) for k, v in Car.fuel.field.choices)
     if request.method == 'POST':
         form_car = CarForm(request.POST)
         if form_car.is_valid():
@@ -141,6 +142,8 @@ def add_car(request):
             form_car = form_car.data
             context['errors'] = errors
             context['form_car'] = form_car
+            if int(form_car['fuel']) in [i for i in context['fuel'].keys()]:
+                context['selected_fuel_value'] = context['fuel'][int(form_car['fuel'])]
             return render(request, 'Garage/add_car.html', context)
 
     form_car = CarForm()
