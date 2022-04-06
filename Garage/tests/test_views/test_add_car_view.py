@@ -103,8 +103,9 @@ class TestAddCar(TestCase):
         user = User.objects.get(username='testuser')
         data = {
             'producer': 'Test car',
+            'fuel': 2,
             'user': user
         }
         response = c.post("/car/add/", data=data)
         self.assertEqual(Car.objects.count(), 0)
-        self.assertEqual(len(response.context['errors']), 5)
+        self.assertEqual(len(response.context['errors']), 4)
