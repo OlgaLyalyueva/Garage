@@ -14,9 +14,15 @@
                             <div class="intro-layer to_animate" data-animation="fadeInUp">
                                 <p>для ваших транспортных средств.</p>
                             </div>
-                            <div class="intro-layer to_animate" data-animation="fadeInUp">
-                                <div class="slide_buttons"> <a href="{% url 'login' %}" class="theme_button color1">Начать</a></div>
-                            </div>
+                                <div class="intro-layer to_animate" data-animation="fadeInUp">
+                                    <div class="slide_buttons">
+                                        {% if not user.is_authenticated %}
+                                            <a href="{% url 'login' %}"class="theme_button color1">Начать</a>
+                                        {% else %}
+                                            <a href="{% url 'cars' %}"class="theme_button color1">Начать</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
                         </div>
                         <!-- eof .slide_description -->
                     </div>
