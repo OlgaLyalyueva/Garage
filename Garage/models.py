@@ -9,7 +9,7 @@ from Garage import settings
 
 User._meta.get_field('email')._unique = True
 
-FUEL_CHOICES=[
+FUEL_CHOICES = [
         (1, 'Бензин'),
         (2, 'Дизель'),
         (3, 'Газ'),
@@ -21,6 +21,19 @@ FUEL_CHOICES=[
         (9, 'Другое')
     ]
 
+DRIVE_SYSTEM_CHOICES = [
+        (1, 'Полный'),
+        (2, 'Передний'),
+        (3, 'Задний')
+    ]
+
+TRANSMISSION_CHOICES = [
+        (1, 'Ручная/Механика'),
+        (2, 'Автомат'),
+        (3, 'Типтроник'),
+        (4, 'Робот'),
+        (5, 'Вариатор')
+    ]
 
 class Car(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
@@ -28,21 +41,11 @@ class Car(models.Model):
     producer = models.CharField(max_length=300, verbose_name='Марка')
     model = models.CharField(max_length=300, verbose_name='Модель')
     year = models.IntegerField(verbose_name='Год', validators=[MinValueValidator(1800), MaxValueValidator(datetime.date.today().year)])
-    transmission = models.CharField(choices=[
-        ('ручная/механика', 'Ручная/Механика'),
-        ('автомат', 'Автомат'),
-        ('типтроник', 'Типтроник'),
-        ('робот', 'Робот'),
-        ('вариатор', 'Вариатор')
-    ], max_length=20, verbose_name='КПП')
+    transmission = models.CharField(choices=TRANSMISSION_CHOICES, max_length=20, verbose_name='КПП')
     body = models.ForeignKey('Body', on_delete=models.CASCADE, null=True)
     engine = models.ForeignKey('Engine', on_delete=models.CASCADE, null=True)
     fuel = models.PositiveIntegerField(choices=FUEL_CHOICES, verbose_name='Топливо')
-    drive_system = models.PositiveSmallIntegerField(choices=[
-        (1, 'Полный'),
-        (2, 'Передний'),
-        (3, 'Задний')
-    ], verbose_name='Тип привода')
+    drive_system = models.PositiveSmallIntegerField(choices=DRIVE_SYSTEM_CHOICES, verbose_name='Тип привода')
     mileage = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(1), MaxValueValidator(10000000)], verbose_name='Пробег')
     price = models.FloatField(blank=True, null=True, verbose_name='Стоимость')
     archive = models.BooleanField(default=False)

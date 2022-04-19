@@ -121,6 +121,8 @@ def get_car(request, car_id):
 def add_car(request):
     context = {}
     context['fuel'] = dict((k, v) for k, v in Car.fuel.field.choices)
+    context['drive_system'] = dict((k, v) for k, v in Car.drive_system.field.choices)
+    context['transmission'] = dict((k, v) for k, v in Car.transmission.field.choices)
     if request.method == 'POST':
         form_car = CarForm(request.POST)
         if form_car.is_valid():
@@ -142,13 +144,20 @@ def add_car(request):
             form_car = form_car.data
             context['errors'] = errors
             context['form_car'] = form_car
-            if int(form_car['fuel']) in [i for i in context['fuel'].keys()]:
-                context['selected_fuel_value'] = context['fuel'][int(form_car['fuel'])]
+            context['selected_fuel'] = get_selected_element_for_drop_down(form_car, 'fuel', context)
+            context['selected_drive_system'] = get_selected_element_for_drop_down(form_car, 'drive_system', context)
+            context['selected_transmission'] = get_selected_element_for_drop_down(form_car, 'transmission', context)
             return render(request, 'Garage/add_car.html', context)
 
     form_car = CarForm()
     context['form_car'] = form_car.data
     return render(request, 'Garage/add_car.html', context)
+
+
+def get_selected_element_for_drop_down(form, name_of_field, context):
+    if int(form[name_of_field]) in context[name_of_field].keys():
+        selected_value = context[name_of_field][int(form[name_of_field])]
+        return selected_value
 
 
 def add_body(body_name):

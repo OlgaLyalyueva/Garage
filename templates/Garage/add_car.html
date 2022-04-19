@@ -53,27 +53,33 @@
                         <p class="contact-form">
                             <label for="transmission">Выбери тип КПП:</label>
                             <select name="transmission" id="transmission" required>
-                              <option hidden disabled selected value> Тип КПП </option>
-                              <option value="ручная/механика">Ручная/Механика</option>
-                              <option value="автомат">Автомат</option>
-                              <option value="типтроник">Типтроник</option>
-                              <option value="робот">Робот</option>
-                              <option value="вариатор">Вариатор</option>
+                                {% if form_car.transmission %}
+                                    <option value="{{ form_car.transmission }}">{{ selected_transmission }}</option>
+                                {% else %}
+                                    <option hidden disabled selected value> Тип КПП </option>
+                                {% endif %}
+                                {% for k, v in transmission.items %}
+                                    <option value="{{ k }}">{{ v }}</option>
+                                {% endfor %}
                             </select>
 
                             <label for="drive_system">Выбери тип привода:</label>
                             <select name="drive_system" id="drive_system" required>
-                              <option hidden disabled selected value> Тип привода </option>
-                              <option value=1>Полный</option>
-                              <option value=2>Передний</option>
-                              <option value=3>Задний</option>
+                              {% if form_car.fuel %}
+                                    <option value="{{ form_car.drive_system }}">{{ selected_drive_system }}</option>
+                                {% else %}
+                                    <option hidden disabled selected value> Тип привода </option>
+                                {% endif %}
+                                {% for k, v in drive_system.items %}
+                                    <option value="{{ k }}">{{ v }}</option>
+                                {% endfor %}
                             </select>
                         </p>
                         <p class="contact-form">
                             <label for="fuel">Выбери тип топлива:</label>
                             <select id="fuel" name="fuel" title="Тип топлива" required>
-                                {% if selected_fuel_value %}
-                                    <option value="{{ form_car.fuel }}">{{ selected_fuel_value }}</option>
+                                {% if form_car.fuel %}
+                                    <option value="{{ form_car.fuel }}">{{ selected_fuel }}</option>
                                 {% else %}
                                     <option hidden disabled selected value>Тип топлива</option>
                                 {% endif %}
