@@ -44,7 +44,7 @@ class TestCarsView(TestCase):
             producer='Test Tesla',
             model='X',
             year=2019,
-            transmission='автомат',
+            transmission=2,
             fuel=6,
             drive_system=2,
             user=second_user
@@ -54,7 +54,7 @@ class TestCarsView(TestCase):
             producer='Test Honda',
             model='CRV',
             year=2000,
-            transmission='типтроник',
+            transmission=3,
             fuel=1,
             drive_system=2,
             body_id=body.id,
@@ -66,7 +66,7 @@ class TestCarsView(TestCase):
             producer='Test Mazda in Archive',
             model='X6',
             year=2017,
-            transmission='автомат',
+            transmission=2,
             fuel=5,
             drive_system=1,
             archive=True,
@@ -112,7 +112,7 @@ class TestCarsView(TestCase):
         self.assertEqual(cars[0].producer, 'Test Tesla')
         self.assertEqual(cars[0].model, 'X')
         self.assertEqual(cars[0].year, 2019)
-        self.assertEqual(cars[0].transmission, 'автомат')
+        self.assertEqual(cars[0].transmission, 2)
         self.assertEqual(cars[0].fuel, 6)
         self.assertEqual(cars[0].drive_system, 2)
         self.assertEqual(cars[0].body, None)

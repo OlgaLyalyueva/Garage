@@ -28,7 +28,7 @@ class TestArchiveInsurance(TestCase):
             producer='Test Archive Insurance',
             model='First car',
             year=2021,
-            transmission='типтроник',
+            transmission=3,
             fuel=3,
             drive_system=1,
             user=user

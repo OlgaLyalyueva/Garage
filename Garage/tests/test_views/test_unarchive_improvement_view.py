@@ -26,7 +26,7 @@ class TestUnarchiveImprovement(TestCase):
             producer='Test Unarchive Improvement',
             model='car',
             year=2019,
-            transmission='другое',
+            transmission=9,
             fuel=1,
             drive_system=3,
             archive=True,

@@ -22,7 +22,7 @@ class TestCarModel(TestCase):
             producer='Suzuki',
             model='Модель',
             year=2006,
-            transmission='автомат',
+            transmission=2,
             fuel=1,
             drive_system=1,
             user=user
@@ -63,7 +63,7 @@ class TestCarModel(TestCase):
         self.assertEqual(car.producer, 'Suzuki')
         self.assertEqual(car.model, 'Модель')
         self.assertEqual(car.year, 2006)
-        self.assertEqual(car.transmission, 'автомат')
+        self.assertEqual(car.transmission, 2)
         self.assertEqual(car.fuel, 1)
         self.assertEqual(car.drive_system, 1)
         self.assertTrue(car.user_id)

@@ -25,7 +25,7 @@ class TestUpdateCar(TestCase):
             producer='Test update producer',
             model='Test update model',
             year=1999,
-            transmission='типтроник',
+            transmission=3,
             fuel=9,
             drive_system=2,
             user=user
@@ -60,7 +60,7 @@ class TestUpdateCar(TestCase):
             'producer': 'New producer',
             'model': 'New model',
             'year': 1999,
-            'transmission': 'автомат',
+            'transmission': 2,
             'fuel': 2,
             'drive_system': 3,
             'body': '',
@@ -73,7 +73,7 @@ class TestUpdateCar(TestCase):
         self.assertEqual(update_car.producer, 'New producer')
         self.assertEqual(update_car.model, 'New model')
         self.assertEqual(update_car.year, 1999)
-        self.assertEqual(update_car.transmission, 'автомат')
+        self.assertEqual(update_car.transmission, 2)
         self.assertEqual(update_car.fuel, 2)
         self.assertEqual(update_car.drive_system, 3)
         self.assertEqual(update_car.mileage, None)

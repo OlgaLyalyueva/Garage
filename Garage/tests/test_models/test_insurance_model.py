@@ -25,7 +25,7 @@ class TestInsurance(TestCase):
             producer='Nissan',
             model='X-trail',
             year=2010,
-            transmission='автомат',
+            transmission=2,
             fuel=2,
             drive_system=1,
             user=user

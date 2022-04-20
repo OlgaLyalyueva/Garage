@@ -47,7 +47,7 @@ class TestAddImprovement(TestCase):
             producer='Test Add Improvement',
             model='First car',
             year=2000,
-            transmission='автомат',
+            transmission=2,
             fuel=1,
             drive_system=3,
             user=user
@@ -64,7 +64,7 @@ class TestAddImprovement(TestCase):
             producer='Test Add Improvement',
             model='First car',
             year=2000,
-            transmission='автомат',
+            transmission=2,
             fuel=1,
             drive_system=3,
             user=user
@@ -82,7 +82,7 @@ class TestAddImprovement(TestCase):
             producer='Test Add Improvement',
             model='First car',
             year=2000,
-            transmission='автомат',
+            transmission=2,
             fuel=1,
             drive_system=3,
             user=user
@@ -99,7 +99,7 @@ class TestAddImprovement(TestCase):
             producer='Test Add Improvement',
             model='First car',
             year=2000,
-            transmission='автомат',
+            transmission=2,
             fuel=1,
             drive_system=3,
             user=user
@@ -132,7 +132,7 @@ class TestAddImprovement(TestCase):
             producer='Test Add Improvement',
             model='First car',
             year=2000,
-            transmission='автомат',
+            transmission=2,
             fuel=1,
             drive_system=3,
             user=user
@@ -162,7 +162,7 @@ class TestAddImprovement(TestCase):
             producer='Test Add Improvement',
             model='First car',
             year=2000,
-            transmission='автомат',
+            transmission=2,
             fuel=1,
             drive_system=3,
             user=user

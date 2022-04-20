@@ -28,7 +28,7 @@ class TestUpdateImprovement(TestCase):
             producer='Test Update Improvement',
             model='First car',
             year=1990,
-            transmission='газ пропан-бутан',
+            transmission=8,
             fuel=1,
             drive_system=2,
             user=user

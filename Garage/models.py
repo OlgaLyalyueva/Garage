@@ -41,7 +41,7 @@ class Car(models.Model):
     producer = models.CharField(max_length=300, verbose_name='Марка')
     model = models.CharField(max_length=300, verbose_name='Модель')
     year = models.IntegerField(verbose_name='Год', validators=[MinValueValidator(1800), MaxValueValidator(datetime.date.today().year)])
-    transmission = models.CharField(choices=TRANSMISSION_CHOICES, max_length=20, verbose_name='КПП')
+    transmission = models.PositiveSmallIntegerField(choices=TRANSMISSION_CHOICES, verbose_name='КПП')
     body = models.ForeignKey('Body', on_delete=models.CASCADE, null=True)
     engine = models.ForeignKey('Engine', on_delete=models.CASCADE, null=True)
     fuel = models.PositiveIntegerField(choices=FUEL_CHOICES, verbose_name='Топливо')

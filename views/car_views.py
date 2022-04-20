@@ -3,6 +3,7 @@ from django.template.defaulttags import register
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils.datastructures import MultiValueDictKeyError
 
 from Garage.models import Car, \
     Body, \
@@ -155,9 +156,13 @@ def add_car(request):
 
 
 def get_selected_element_for_drop_down(form, name_of_field, context):
-    if int(form[name_of_field]) in context[name_of_field].keys():
-        selected_value = context[name_of_field][int(form[name_of_field])]
-        return selected_value
+    try:
+        if int(form[name_of_field]) in context[name_of_field].keys():
+            selected_value = context[name_of_field][int(form[name_of_field])]
+            return selected_value
+    except MultiValueDictKeyError:
+        return None
+
 
 
 def add_body(body_name):

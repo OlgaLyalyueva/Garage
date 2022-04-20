@@ -26,7 +26,7 @@ class TestUnarchiveIssue(TestCase):
             producer='Test Unarchive Issue',
             model='car',
             year=2016,
-            transmission='типтроник',
+            transmission=3,
             fuel=1,
             drive_system=3,
             user=user

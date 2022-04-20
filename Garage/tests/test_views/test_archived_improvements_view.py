@@ -49,7 +49,7 @@ class TestImprovementsArchivedView(TestCase):
             producer='Test Infinity',
             model='RX',
             year=2020,
-            transmission='автомат',
+            transmission=2,
             fuel=2,
             drive_system=1,
             user=second_user
@@ -59,7 +59,7 @@ class TestImprovementsArchivedView(TestCase):
             producer='Test Kia',
             model='Rio',
             year=2010,
-            transmission='автомат',
+            transmission=2,
             fuel=2,
             drive_system=2,
             archive=True,
@@ -70,7 +70,7 @@ class TestImprovementsArchivedView(TestCase):
             producer='Test Jeep',
             model='Renegade',
             year=2017,
-            transmission='механика',
+            transmission=1,
             fuel=5,
             drive_system=1,
             user=third_user

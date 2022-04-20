@@ -39,7 +39,7 @@ class TestAddRepair(TestCase):
             producer='Test Add Repair',
             model='First car',
             year=1845,
-            transmission='механика',
+            transmission=1,
             fuel=1,
             drive_system=1,
             user=user
@@ -55,7 +55,7 @@ class TestAddRepair(TestCase):
             producer='Test Add Repair',
             model='First car',
             year=1845,
-            transmission='механика',
+            transmission=1,
             fuel=1,
             drive_system=1,
             user=user
@@ -74,7 +74,7 @@ class TestAddRepair(TestCase):
             producer='Test Add Repair',
             model='First car',
             year=1845,
-            transmission='механика',
+            transmission=1,
             fuel=1,
             drive_system=1,
             user=user
@@ -111,7 +111,7 @@ class TestAddRepair(TestCase):
             producer='Test Add Repair',
             model='First car',
             year=1845,
-            transmission='механика',
+            transmission=1,
             fuel=1,
             drive_system=1,
             user=user
@@ -145,7 +145,7 @@ class TestAddRepair(TestCase):
             producer='Test Add Repair',
             model='First car',
             year=1845,
-            transmission='механика',
+            transmission=1,
             fuel=1,
             drive_system=1,
             user=user

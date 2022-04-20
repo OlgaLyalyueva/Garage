@@ -51,7 +51,7 @@ class TestCarIssuesArchivedView(TestCase):
             producer='Test Land Rover',
             model='Discovery Sport',
             year=2016,
-            transmission='автомат',
+            transmission=2,
             fuel=2,
             drive_system=1,
             user=second_user
@@ -61,7 +61,7 @@ class TestCarIssuesArchivedView(TestCase):
             producer='Test Nissan',
             model='X-Trail',
             year=2010,
-            transmission='автомат',
+            transmission=2,
             fuel=2,
             drive_system=2,
             archive=True,
@@ -72,7 +72,7 @@ class TestCarIssuesArchivedView(TestCase):
             producer='Test Audi',
             model='Q7',
             year=2020,
-            transmission='автомат',
+            transmission=2,
             fuel=5,
             drive_system=1,
             user=third_user

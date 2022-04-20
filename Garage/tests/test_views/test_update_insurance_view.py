@@ -28,7 +28,7 @@ class TestUpdateInsurance(TestCase):
             producer='Test Update Insurance',
             model='First car',
             year=2021,
-            transmission='типтроник',
+            transmission=3,
             fuel=3,
             drive_system=1,
             user=user
@@ -106,7 +106,7 @@ class TestUpdateInsurance(TestCase):
             producer='Test Select Second car for Update Insurance',
             model='Second car',
             year=2006,
-            transmission='автомат',
+            transmission=2,
             fuel=3,
             drive_system=1,
             user=user

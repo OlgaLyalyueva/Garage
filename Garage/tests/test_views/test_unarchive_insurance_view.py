@@ -28,7 +28,7 @@ class TestUnarchiveInsurance(TestCase):
             producer='Test Unarchive Insurance',
             model='car',
             year=1899,
-            transmission='другое',
+            transmission=9,
             fuel=1,
             drive_system=3,
             archive=True,

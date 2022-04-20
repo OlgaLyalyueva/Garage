@@ -25,7 +25,7 @@ class TestImprovement(TestCase):
             producer='Land Rower',
             model='Discovery Sport',
             year=2013,
-            transmission='автомат',
+            transmission=2,
             fuel=2,
             drive_system=2,
             user=user

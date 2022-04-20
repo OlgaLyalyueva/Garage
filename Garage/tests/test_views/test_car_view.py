@@ -30,7 +30,7 @@ class TestCarView(TestCase):
             producer='Test Car with insurance, improvement, repair, car problems',
             model='X car',
             year=1999,
-            transmission='автомат',
+            transmission=2,
             fuel=5,
             drive_system=2,
             user=user
@@ -40,7 +40,7 @@ class TestCarView(TestCase):
             producer='Test car',
             model='CRV',
             year=2000,
-            transmission='типтроник',
+            transmission=3,
             fuel=9,
             drive_system=2,
             user=user

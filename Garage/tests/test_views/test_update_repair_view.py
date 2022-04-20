@@ -28,7 +28,7 @@ class TestUpdateRepair(TestCase):
             producer='Test Update Repair',
             model='First car',
             year=2021,
-            transmission='робот',
+            transmission=4,
             fuel=2,
             drive_system=1,
             user=user

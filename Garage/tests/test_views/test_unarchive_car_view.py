@@ -25,7 +25,7 @@ class TestUnarchiveCar(TestCase):
             producer='Test Unarchive Car',
             model='car',
             year=2003,
-            transmission='другое',
+            transmission=9,
             fuel=6,
             drive_system=2,
             archive=True,
